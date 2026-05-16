@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Flávia RicaMente – Assessora de Investimentos</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
+</head>
+
+<body>
+  <svg class="svg-sprite" aria-hidden="true">
+    <symbol id="icon-wallet" viewBox="0 0 24 24">
+      <path d="M19 7V6a2 2 0 0 0-2-2H5a3 3 0 0 0 0 6h14a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H5a3 3 0 0 1-3-3V7" />
+      <path d="M16 14h.01" />
+    </symbol>
+    <symbol id="icon-shield" viewBox="0 0 24 24">
+      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z" />
+      <path d="m9 12 2 2 4-4" />
+    </symbol>
+    <symbol id="icon-trend" viewBox="0 0 24 24">
+      <path d="M3 17 9 11l4 4 7-7" />
+      <path d="M14 8h6v6" />
+    </symbol>
+    <symbol id="icon-landmark" viewBox="0 0 24 24">
+      <path d="M3 21h18" />
+      <path d="M5 21V10" />
+      <path d="M9 21V10" />
+      <path d="M15 21V10" />
+      <path d="M19 21V10" />
+      <path d="M2 10h20L12 3 2 10Z" />
+    </symbol>
+    <symbol id="icon-brain" viewBox="0 0 24 24">
+      <path d="M9 3a3 3 0 0 0-3 3 3 3 0 0 0-2 5.2A3.5 3.5 0 0 0 7.5 17H9" />
+      <path d="M15 3a3 3 0 0 1 3 3 3 3 0 0 1 2 5.2A3.5 3.5 0 0 1 16.5 17H15" />
+      <path d="M9 3v18" />
+      <path d="M15 3v18" />
+      <path d="M9 9H7" />
+      <path d="M15 9h2" />
+    </symbol>
+    <symbol id="icon-leaf" viewBox="0 0 24 24">
+      <path d="M11 20A7 7 0 0 1 4 13c0-6 8-10 16-9-1 8-5 16-11 16Z" />
+      <path d="M9 15c2-2 5-4 9-5" />
+    </symbol>
+    <symbol id="icon-award" viewBox="0 0 24 24">
+      <path d="M12 15a6 6 0 1 0 0-12 6 6 0 0 0 0 12Z" />
+      <path d="m9 14-1 7 4-2 4 2-1-7" />
+    </symbol>
+    <symbol id="icon-lock" viewBox="0 0 24 24">
+      <rect x="4" y="11" width="16" height="10" rx="2" />
+      <path d="M8 11V7a4 4 0 0 1 8 0v4" />
+    </symbol>
+    <symbol id="icon-gem" viewBox="0 0 24 24">
+      <path d="M6 3h12l4 6-10 12L2 9l4-6Z" />
+      <path d="M2 9h20" />
+      <path d="m8 9 4 12 4-12" />
+      <path d="m6 3 2 6" />
+      <path d="m18 3-2 6" />
+    </symbol>
+    <symbol id="icon-message" viewBox="0 0 24 24">
+      <path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 8.7 8.7 0 0 1-4-.9L3 21l1.4-4.2A8.4 8.4 0 1 1 21 11.5Z" />
+    </symbol>
+    <symbol id="icon-camera" viewBox="0 0 24 24">
+      <path d="M14.5 4 16 7h3a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h3l1.5-3h5Z" />
+      <circle cx="12" cy="13" r="3" />
+    </symbol>
+    <symbol id="icon-play" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="10" />
+      <path d="m10 8 6 4-6 4V8Z" />
+    </symbol>
+  </svg>
+
+  <!-- NAV -->
+  <nav id="navbar">
+    <div class="nav-inner">
+      <a href="#hero" class="logo">
+        <img src="image/logo-flavia.png" alt="Flávia RicaMente" class="logo-img" />
+      </a>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#sobre">Sobre</a></li>
+        <li><a href="#metodo">Método</a></li>
+        <li><a href="#cursos">Cursos</a></li>
+        <li><a href="#workshops">Workshops</a></li>
+        <li><a href="#depoimentos">Depoimentos</a></li>
+        <li><a href="#contato" class="nav-cta">Fale Comigo</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-bg">
+      <div class="hero-orb hero-orb-1"></div>
+      <div class="hero-orb hero-orb-2"></div>
+      <div class="hero-grain"></div>
+    </div>
+    <div class="hero-content">
+      <p class="hero-eyebrow reveal">Assessora de Investimentos · +20 anos de mercado</p>
+      <h1 class="hero-title reveal">
+        Invista com<br /><em>Inteligência.</em><br />Viva com Liberdade.
+      </h1>
+      <p class="hero-subtitle reveal">
+        O elo entre <strong>Desapegar e Prosperar</strong>.<br />
+        Sua independência financeira começa aqui.
+      </p>
+      <div class="hero-actions reveal">
+        <a href="#cursos" class="btn btn-gold">Conhecer o Curso</a>
+        <a href="#sobre" class="btn btn-outline">Minha História</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOBRE -->
+  <section id="sobre">
+    <div class="container sobre-grid">
+      <div class="sobre-img-wrap reveal-left">
+        <div class="sobre-img-frame">
+          <div class="sobre-img-placeholder">
+            <img src="image/foto-flavia-web-2x.jpg" srcset="image/foto-flavia-web.jpg 1200w, image/foto-flavia-web-2x.jpg 1800w, image/foto-flavia.jpg 3967w" sizes="(max-width: 640px) 360px, (max-width: 968px) 360px, 430px" alt="Flávia RicaMente" class="sobre-img" />
+          </div>
+        </div>
+        <div class="sobre-badge">
+          <span class="badge-num">+20</span>
+          <span class="badge-txt">anos no mercado financeiro</span>
+        </div>
+      </div>
+      <div class="sobre-text reveal-right">
+        <p class="section-label">Sobre Mim</p>
+        <h2>Independência<br /><em>conquistada.</em><br />Propósito compartilhado.</h2>
+        <p>
+          Conquistei minha Independência Financeira aos 33 anos, e tenho como propósito
+          de vida multiplicar essa semente da Saúde Financeira — quebrar as barreiras que
+          impedem qualquer pessoa de saber Investir de forma Independente.
+        </p>
+        <p>
+          Fui mãe aos 17 anos e imersa no Mercado Financeiro há mais de 15 anos, já passei por
+          grandes Instituições Nacionais e Internacionais. Hoje atuo como Mentora de Inteligência
+          Financeira e Assessora de Investimentos na maior corretora do país.
+        </p>
+        <p>
+          Enfrentei diversos desafios — até ameaças ao meu plano financeiro — porque não sabia que
+          carregava uma Mentalidade de escassez. Após muitos tropeços e auto-sabotagens, nasceu essa
+          jornada de contribuir para que mais pessoas conheçam a paz financeira.
+        </p>
+        <blockquote class="sobre-quote">
+          "Quem aprende não depende."
+          <cite>— Flávia RicaMente</cite>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- MÉTODO -->
+  <section id="metodo">
+    <div class="metodo-bg">
+      <div class="metodo-orb"></div>
+    </div>
+    <div class="container">
+      <div class="section-header reveal">
+        <p class="section-label">O Método</p>
+        <h2>Simples. Seguro.<br /><em>Transformador.</em></h2>
+        <p class="section-sub">
+          Sem se paralisar por excesso de informação. Com direção, clareza e propósito.
+        </p>
+      </div>
+      <div class="pilares-grid">
+        <div class="pilar reveal">
+          <div class="pilar-icon"><svg>
+              <use href="#icon-wallet"></use>
+            </svg></div>
+          <h3>Plano de Gastos</h3>
+          <p>Entenda para onde vai cada centavo e faça sua grana sobrar todo mês com um plano de gastos eficiente.</p>
+        </div>
+        <div class="pilar reveal">
+          <div class="pilar-icon"><svg>
+              <use href="#icon-shield"></use>
+            </svg></div>
+          <h3>Reserva de Emergência</h3>
+          <p>Monte sua reserva de forma prática e segura, garantindo proteção financeira para qualquer imprevisto.</p>
+        </div>
+        <div class="pilar reveal">
+          <div class="pilar-icon"><svg>
+              <use href="#icon-trend"></use>
+            </svg></div>
+          <h3>Renda Fixa</h3>
+          <p>Comece a investir com segurança em produtos de Renda Fixa, evoluindo no seu ritmo e com confiança.</p>
+        </div>
+        <div class="pilar reveal">
+          <div class="pilar-icon"><svg>
+              <use href="#icon-landmark"></use>
+            </svg></div>
+          <h3>Carteira de Investimentos</h3>
+          <p>Monte sua carteira com Ações, Fundos Imobiliários e dividendos para ganhos automáticos todo mês.</p>
+        </div>
+        <div class="pilar reveal">
+          <div class="pilar-icon"><svg>
+              <use href="#icon-brain"></use>
+            </svg></div>
+          <h3>Mentalidade Rica</h3>
+          <p>Descubra e transforme crenças limitantes sobre dinheiro que sabotam seu crescimento financeiro.</p>
+        </div>
+        <div class="pilar reveal">
+          <div class="pilar-icon"><svg>
+              <use href="#icon-leaf"></use>
+            </svg></div>
+          <h3>Independência Financeira</h3>
+          <p>Alcance o momento onde os rendimentos dos seus investimentos cobrem todos os seus custos mensais.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CURSOS -->
+  <section id="cursos">
+    <div class="container">
+      <div class="section-header reveal">
+        <p class="section-label">Cursos</p>
+        <h2>Cursos para<br /><em>investir melhor.</em></h2>
+        <p class="section-sub">
+          Escolha o caminho ideal para organizar sua vida financeira e começar a investir com direção.
+        </p>
+      </div>
+
+      <div class="curso-destaque reveal">
+        <div class="curso-badge-top"><svg>
+            <use href="#icon-award"></use>
+          </svg> Mais Completo</div>
+        <div class="curso-grid">
+          <div class="curso-info">
+            <h3>Investidor de Propósito</h3>
+            <p class="curso-tagline">
+              Um passo a passo <strong>SIMPLES</strong> e direto para <strong>QUALQUER pessoa</strong>,
+              independente do ponto que está, fazer sua grana sobrar, começar a investir de forma prática
+              e evoluir nos produtos de Renda Fixa.
+            </p>
+            <ul class="curso-lista">
+              <li><span class="check">✦</span> 100% online — acesse de onde quiser, no seu ritmo</li>
+              <li><span class="check">✦</span> Plataforma Hotmart com acesso imediato</li>
+              <li><span class="check">✦</span> Comunidade exclusiva no Facebook (acesso vitalício)</li>
+              <li><span class="check">✦</span> Renda Fixa, Ações e Fundos Imobiliários</li>
+              <li><span class="check">✦</span> Método testado por centenas de alunos</li>
+              <li><span class="check">✦</span> Para qualquer renda, idade ou profissão</li>
+            </ul>
+            <div class="garantia-box">
+              <div class="garantia-icon"><svg>
+                  <use href="#icon-lock"></use>
+                </svg></div>
+              <div>
+                <strong>Garantia de 12 dias</strong>
+                <p>Não gostou? Devolvo 100% do seu dinheiro, sem questionamentos.</p>
+              </div>
+            </div>
+            <a href="https://hotmart.com/pt-br/marketplace/produtos/flavia-ricamente/Y12982149X" target="_blank" class="btn btn-gold btn-lg">
+              Conhecer na Hotmart
+            </a>
+            <p class="curso-disclaimer">
+              *Não se trata de recomendação de Investimentos e sim, de Educação em Investir.
+            </p>
+          </div>
+          <div class="curso-detalhes">
+            <div class="modulo-card">
+              <span class="modulo-num">01</span>
+              <div>
+                <h4>Fundamentos Financeiros</h4>
+                <p>Mentalidade, diagnóstico financeiro e plano de gastos inteligente</p>
+              </div>
+            </div>
+            <div class="modulo-card">
+              <span class="modulo-num">02</span>
+              <div>
+                <h4>Reserva de Emergência</h4>
+                <p>Como construir, onde guardar e como proteger seu patrimônio</p>
+              </div>
+            </div>
+            <div class="modulo-card">
+              <span class="modulo-num">03</span>
+              <div>
+                <h4>Renda Fixa na Prática</h4>
+                <p>Tesouro Direto, CDBs, LCIs, LCAs e muito mais com exemplos reais</p>
+              </div>
+            </div>
+            <div class="modulo-card">
+              <span class="modulo-num">04</span>
+              <div>
+                <h4>Bolsa de Valores</h4>
+                <p>Como escolher Ações e Fundos Imobiliários de forma simples e segura</p>
+              </div>
+            </div>
+            <div class="modulo-card">
+              <span class="modulo-num">05</span>
+              <div>
+                <h4>Independência Financeira</h4>
+                <p>Monte sua carteira e receba ganhos automáticos todo mês</p>
+              </div>
+            </div>
+            <div class="modulo-card modulo-bonus">
+              <span class="modulo-num">🎁</span>
+              <div>
+                <h4>Bônus Exclusivos</h4>
+                <p>Planilhas, lives, mentorias em grupo e suporte contínuo</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="curso-destaque curso-simples reveal">
+        <div class="curso-badge-top">Curso Express</div>
+        <div class="curso-grid">
+          <div class="curso-info">
+            <h3>Investir &eacute; Simples</h3>
+            <p class="curso-tagline">
+              Um curso pr&aacute;tico para quem quer fazer a grana sobrar, montar um plano de gastos,
+              come&ccedil;ar a investir em Renda Fixa e construir a pr&oacute;pria reserva de emerg&ecirc;ncia.
+            </p>
+            <ul class="curso-lista">
+              <li><span class="check">&bull;</span> Curso express e pr&aacute;tico</li>
+              <li><span class="check">&bull;</span> Planilha de gastos simples</li>
+              <li><span class="check">&bull;</span> Reserva de emerg&ecirc;ncia passo a passo</li>
+              <li><span class="check">&bull;</span> Ferramentas aplic&aacute;veis de forma imediata</li>
+              <li><span class="check">&bull;</span> Conte&uacute;do acess&iacute;vel para quem est&aacute; come&ccedil;ando</li>
+            </ul>
+            <a href="https://hotmart.com/pt-br/marketplace/produtos/investir-e-simples/A48728436I" target="_blank" class="btn btn-gold btn-lg">
+              Conhecer na Hotmart
+            </a>
+            <p class="curso-disclaimer">
+              Chega de informa&ccedil;&atilde;o solta: aprenda com uma dire&ccedil;&atilde;o segura. Quem aprende n&atilde;o depende.
+            </p>
+          </div>
+          <div class="curso-detalhes">
+            <div class="modulo-card">
+              <span class="modulo-num">01</span>
+              <div>
+                <h4>Primeiros Passos</h4>
+                <p>Introdu&ccedil;&atilde;o, Roda da Vida, Roda da Grana e mentalidade do investidor</p>
+              </div>
+            </div>
+            <div class="modulo-card">
+              <span class="modulo-num">02</span>
+              <div>
+                <h4>Organiza&ccedil;&atilde;o Financeira</h4>
+                <p>Reserva de emerg&ecirc;ncia, plano de gastos e fontes de renda</p>
+              </div>
+            </div>
+            <div class="modulo-card">
+              <span class="modulo-num">03</span>
+              <div>
+                <h4>Come&ccedil;ando a Investir</h4>
+                <p>Cadastro na corretora, tour na plataforma e fundamentos de Renda Fixa</p>
+              </div>
+            </div>
+            <div class="modulo-card modulo-bonus">
+              <span class="modulo-num">+</span>
+              <div>
+                <h4>Evolu&ccedil;&atilde;o</h4>
+                <p>Renda Fixa em duas partes e introdu&ccedil;&atilde;o &agrave; Renda Vari&aacute;vel</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mentoria card -->
+      <div class="curso-secundario reveal">
+        <div class="cs-icon"><svg>
+            <use href="#icon-gem"></use>
+          </svg></div>
+        <div class="cs-info">
+          <h3>Mentoria Individual</h3>
+          <p>
+            Atendimento personalizado para quem quer acelerar resultados com orientação
+            exclusiva e direta da Flávia RicaMente. Diagnóstico financeiro completo e
+            plano de ação sob medida.
+          </p>
+        </div>
+        <a href="https://wa.me/message/7LWVU3TUR4C4A1" target="_blank" class="btn btn-outline">
+          Saber mais
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- WORKSHOPS E PALESTRAS -->
+  <section id="workshops">
+    <div class="container workshops-grid">
+      <div class="workshops-content reveal-left">
+        <p class="section-label">Workshops e Palestras</p>
+        <h2>Educa&ccedil;&atilde;o financeira<br /><em>para grupos.</em></h2>
+        <p>
+          Encontros para empresas, eventos, turmas e comunidades que desejam transformar a rela&ccedil;&atilde;o
+          com dinheiro de forma simples, aplic&aacute;vel e inspiradora.
+        </p>
+        <div class="workshops-actions">
+          <a href="https://wa.me/message/7LWVU3TUR4C4A1" target="_blank" class="btn btn-gold btn-lg">
+            Solicitar proposta
+          </a>
+          <a href="#contato" class="btn btn-outline">Falar sobre o evento</a>
+        </div>
+      </div>
+      <div class="workshops-list reveal-right">
+        <div class="workshop-item">
+          <span class="workshop-num">01</span>
+          <div>
+            <h3>Workshop Pr&aacute;tico</h3>
+            <p>Din&acirc;micas para organizar gastos, montar reserva e dar os primeiros passos nos investimentos.</p>
+          </div>
+        </div>
+        <div class="workshop-item">
+          <span class="workshop-num">02</span>
+          <div>
+            <h3>Palestra Corporativa</h3>
+            <p>Conte&uacute;do direto para empresas que querem apoiar a sa&uacute;de financeira dos colaboradores.</p>
+          </div>
+        </div>
+        <div class="workshop-item">
+          <span class="workshop-num">03</span>
+          <div>
+            <h3>Encontros Personalizados</h3>
+            <p>Temas ajustados ao perfil do p&uacute;blico, com linguagem acess&iacute;vel e foco em mudan&ccedil;a real.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DEPOIMENTOS -->
+  <section id="depoimentos">
+    <div class="depo-bg"></div>
+    <div class="container">
+      <div class="section-header reveal">
+        <p class="section-label">Depoimentos</p>
+        <h2>Vidas <em>transformadas.</em></h2>
+      </div>
+      <div class="depo-grid">
+        <div class="depo-card reveal">
+          <div class="depo-stars">★★★★★</div>
+          <p>"Finalmente entendi como investir de verdade. Fiz minha reserva em 4 meses e já comecei na renda fixa. Obrigada, Flávia!"</p>
+          <div class="depo-author">
+            <div class="depo-avatar">A</div>
+            <div>
+              <strong>Ana C.</strong>
+              <span>Professora · São Paulo</span>
+            </div>
+          </div>
+        </div>
+        <div class="depo-card reveal">
+          <div class="depo-stars">★★★★★</div>
+          <p>"Nunca imaginei que com meu salário eu pudesse investir. O método é simples, direto e funciona. Me sinto livre financeiramente!"</p>
+          <div class="depo-author">
+            <div class="depo-avatar">M</div>
+            <div>
+              <strong>Marcos L.</strong>
+              <span>Enfermeiro · Rio de Janeiro</span>
+            </div>
+          </div>
+        </div>
+        <div class="depo-card reveal">
+          <div class="depo-stars">★★★★★</div>
+          <p>"A Flávia transforma assuntos complexos em algo que qualquer um entende. Já tenho minha carteira montada e recebo dividendos todo mês!"</p>
+          <div class="depo-author">
+            <div class="depo-avatar">C</div>
+            <div>
+              <strong>Carla M.</strong>
+              <span>Empreendedora · Belo Horizonte</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section id="cta-final">
+    <div class="cta-bg">
+      <div class="cta-orb"></div>
+    </div>
+    <div class="container cta-content reveal">
+      <p class="section-label">É hora de decidir</p>
+      <h2>Você não nasceu para<br />ser <em>refém do salário.</em></h2>
+      <p>
+        Você e sua família merecem qualidade de vida e liberdade financeira.
+        Chega de medo, chega de desculpas. A decisão está na sua mão.
+      </p>
+      <a href="#cursos" class="btn btn-gold btn-lg">Começar Agora →</a>
+    </div>
+  </section>
+
+  <!-- CONTATO -->
+  <section id="contato">
+    <div class="container contato-grid">
+      <div class="contato-info reveal-left">
+        <p class="section-label">Contato</p>
+        <h2>Vamos <em>conversar?</em></h2>
+        <p>Estou aqui para te ajudar a dar o primeiro passo rumo à sua independência financeira.</p>
+        <div class="contato-links">
+          <a href="https://wa.me/message/7LWVU3TUR4C4A1" target="_blank" class="contato-link">
+            <span class="cl-icon"><svg>
+                <use href="#icon-message"></use>
+              </svg></span>
+            <span>WhatsApp</span>
+          </a>
+          <a href="https://www.instagram.com/flaviaricamente/" target="_blank" class="contato-link">
+            <span class="cl-icon"><svg>
+                <use href="#icon-camera"></use>
+              </svg></span>
+            <span>@flaviaricamente</span>
+          </a>
+          <a href="https://www.youtube.com/@flaviaricamente" target="_blank" class="contato-link">
+            <span class="cl-icon"><svg>
+                <use href="#icon-play"></use>
+              </svg></span>
+            <span>YouTube</span>
+          </a>
+        </div>
+      </div>
+      <form class="contato-form reveal-right" id="contact-form">
+        <div class="form-group">
+          <label for="nome">Nome</label>
+          <input type="text" id="nome" name="nome" placeholder="Seu nome completo" required />
+        </div>
+        <div class="form-group">
+          <label for="email">E-mail</label>
+          <input type="email" id="email" name="email" placeholder="seu@email.com" required />
+        </div>
+        <div class="form-group">
+          <label for="assunto">Assunto</label>
+          <select id="assunto" name="assunto">
+            <option value="">Selecione...</option>
+            <option value="curso">Curso Investidor de Propósito</option>
+            <option value="mentoria">Mentoria Individual</option>
+            <option value="palestra">Palestra / Workshop</option>
+            <option value="outro">Outro</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="mensagem">Mensagem</label>
+          <textarea id="mensagem" name="mensagem" rows="4" placeholder="Como posso te ajudar?"></textarea>
+        </div>
+        <button type="submit" class="btn btn-gold btn-full">Enviar Mensagem</button>
+        <div id="form-success" class="form-success hidden">✦ Mensagem enviada! Entro em contato em breve.</div>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <img src="image/logo-flavia.png" alt="Flávia RicaMente" class="footer-logo-img" />
+        <p>Educação Financeira com propósito.</p>
+      </div>
+      <div class="footer-links">
+        <a href="#sobre">Sobre</a>
+        <a href="#metodo">Método</a>
+        <a href="#cursos">Cursos</a>
+        <a href="#workshops">Workshops</a>
+        <a href="#contato">Contato</a>
+        <a href="https://www.instagram.com/flaviaricamente/" target="_blank">Instagram</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>*Não se trata de recomendação de Investimentos e sim, de Educação em Investir. Quem aprende não depende.</p>
+      <p>© 2026 Flávia RicaMente · Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+
+</html>
