@@ -260,19 +260,27 @@ section { padding: 120px 0; position: relative; overflow: hidden; }
   font-weight: 500;
 }
 .hero-title {
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.6rem;
   color: var(--white);
 }
-.hero-title em { font-size: 1.1em; }
-.hero-subtitle {
-  font-size: 1.2rem;
-  color: var(--white-dim);
+.hero-bridge {
+  font-size: clamp(1.45rem, 3vw, 2.3rem);
+  line-height: 1.25;
+  color: var(--white);
+  font-weight: 600;
+  max-width: 700px;
+  margin: 0 auto 2rem;
+}
+.hero-reinforcement {
+  font-size: clamp(1.05rem, 2vw, 1.35rem);
+  line-height: 1.45;
+  color: rgba(245,240,232,0.86);
+  font-weight: 500;
   margin-bottom: 2.5rem;
   max-width: 520px;
   margin-left: auto;
   margin-right: auto;
 }
-.hero-subtitle strong { color: var(--white); font-weight: 500; }
 .hero-actions {
   display: flex;
   gap: 1rem;
@@ -376,6 +384,18 @@ section { padding: 120px 0; position: relative; overflow: hidden; }
   margin-top: 0.5rem;
   font-style: normal;
 }
+.sobre-quote-destaque {
+  font-family: var(--ff-body);
+  font-size: clamp(1.08rem, 2vw, 1.28rem);
+  font-style: normal;
+  line-height: 1.6;
+  color: var(--white);
+  background: rgba(201,168,76,0.08);
+  border: 1px solid rgba(201,168,76,0.16);
+  border-left: 2px solid var(--gold);
+  border-radius: var(--radius);
+  margin: 0 0 1.8rem;
+}
 
 /* ============================================================
    MÉTODO
@@ -470,9 +490,133 @@ section { padding: 120px 0; position: relative; overflow: hidden; }
 .pilar p { font-size: 0.95rem; }
 
 /* ============================================================
+   ASSESSORIA INTEGRATIVA
+   ============================================================ */
+#assessoria {
+  background: var(--dark);
+}
+.assessoria-grid {
+  display: grid;
+  grid-template-columns: 1.08fr 0.92fr;
+  gap: 4rem;
+  align-items: center;
+}
+.assessoria-content h2 {
+  margin-bottom: 1.6rem;
+}
+.assessoria-content > p {
+  max-width: 620px;
+  margin-bottom: 1.4rem;
+}
+.assessoria-lead {
+  color: var(--white);
+  font-size: clamp(1.25rem, 2vw, 1.6rem);
+  font-weight: 500;
+}
+.assessoria-card {
+  background:
+    linear-gradient(135deg, rgba(201,168,76,0.1), rgba(245,240,232,0.025)),
+    var(--dark-2);
+  border: 1px solid rgba(201,168,76,0.16);
+  border-left: 2px solid var(--gold);
+  border-radius: var(--radius);
+  padding: 2.4rem;
+}
+.assessoria-card h3 {
+  color: var(--white);
+  font-size: clamp(1.35rem, 2.2vw, 1.8rem);
+  margin-bottom: 1.6rem;
+}
+.assessoria-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.assessoria-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  color: var(--white-dim);
+  font-size: 1.02rem;
+}
+.assessoria-list span {
+  color: var(--gold-light);
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+/* ============================================================
    CURSOS
    ============================================================ */
 #cursos { background: var(--dark-2); }
+#curso-proposito,
+#curso-simples,
+#mentoria {
+  scroll-margin-top: 96px;
+}
+
+.curso-guia {
+  background:
+    linear-gradient(135deg, rgba(201,168,76,0.12), rgba(245,240,232,0.035)),
+    var(--dark-3);
+  border: 1px solid rgba(201,168,76,0.18);
+  border-radius: var(--radius);
+  padding: 2.5rem;
+  margin: -2rem 0 3.5rem;
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: 2.5rem;
+  align-items: center;
+}
+.curso-guia-intro h3 {
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  color: var(--white);
+  margin-bottom: 1rem;
+}
+.curso-guia-intro p:last-child {
+  margin: 0;
+  max-width: 420px;
+}
+.curso-guia-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+.curso-guia-card {
+  min-height: 180px;
+  padding: 1.35rem;
+  background: rgba(10,10,11,0.48);
+  border: 1px solid rgba(245,240,232,0.08);
+  border-radius: var(--radius);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+}
+.curso-guia-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(201,168,76,0.42);
+  background: rgba(10,10,11,0.68);
+}
+.guia-status {
+  color: var(--white);
+  font-size: 1.02rem;
+  font-weight: 500;
+  line-height: 1.35;
+}
+.guia-arrow {
+  color: var(--gold-light);
+  font-size: 1.7rem;
+  line-height: 1;
+  margin: 1.2rem 0 0.5rem;
+}
+.curso-guia-card strong {
+  color: var(--gold-light);
+  font-family: var(--ff-display);
+  font-size: 1.35rem;
+  font-weight: 400;
+  line-height: 1.2;
+}
 
 .curso-destaque {
   background: var(--dark-3);
@@ -786,13 +930,21 @@ section { padding: 120px 0; position: relative; overflow: hidden; }
   border-radius: var(--radius);
   padding: 2.2rem;
   transition: border-color 0.3s, transform 0.3s;
+  display: flex;
+  flex-direction: column;
 }
 .depo-card:hover {
   border-color: rgba(201,168,76,0.25);
   transform: translateY(-4px);
 }
 .depo-stars { color: var(--gold); font-size: 0.9rem; letter-spacing: 0.1em; margin-bottom: 1rem; }
-.depo-card p { font-size: 1rem; color: var(--white-dim); margin-bottom: 1.5rem; font-style: italic; }
+.depo-card p {
+  font-size: 0.96rem;
+  color: var(--white-dim);
+  margin-bottom: 1.5rem;
+  font-style: italic;
+  flex: 1;
+}
 .depo-author {
   display: flex;
   align-items: center;
@@ -968,6 +1120,13 @@ footer {
   color: rgba(245,240,232,0.25);
   font-style: italic;
 }
+.footer-bottom a {
+  color: rgba(245,240,232,0.45);
+  transition: color 0.2s;
+}
+.footer-bottom a:hover {
+  color: var(--gold-light);
+}
 
 /* ============================================================
    ANIMATIONS
@@ -1003,10 +1162,25 @@ footer {
 /* ============================================================
    RESPONSIVE
    ============================================================ */
+@media (max-width: 1100px) {
+  .nav-links {
+    gap: 1rem;
+  }
+  .nav-links a {
+    font-size: 0.76rem;
+    letter-spacing: 0.08em;
+  }
+  .nav-cta {
+    padding: 0.5rem 1rem !important;
+  }
+}
+
 @media (max-width: 968px) {
   .sobre-grid { grid-template-columns: 1fr; gap: 4rem; }
   .sobre-img-wrap { max-width: 360px; margin: 0 auto; }
   .pilares-grid { grid-template-columns: repeat(2, 1fr); }
+  .assessoria-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  .curso-guia { grid-template-columns: 1fr; }
   .curso-grid { grid-template-columns: 1fr; }
   .contato-grid { grid-template-columns: 1fr; }
   .workshops-grid { grid-template-columns: 1fr; gap: 3rem; }
@@ -1037,11 +1211,28 @@ footer {
   .metodo-text p { font-size: 0.96rem; }
   .metodo-signature { font-size: 1.25rem; }
   .pilares-grid { grid-template-columns: 1fr; }
+  .assessoria-card { padding: 1.6rem; }
+  .assessoria-list li { font-size: 0.98rem; }
+  .curso-guia {
+    padding: 1.6rem;
+    margin: -1.25rem 0 3rem;
+    gap: 1.6rem;
+  }
+  .curso-guia-grid { grid-template-columns: 1fr; }
+  .curso-guia-card {
+    min-height: 0;
+    padding: 1.15rem;
+  }
+  .guia-arrow { margin: 0.75rem 0 0.35rem; }
   .curso-destaque { padding: 2rem; }
   .curso-secundario { flex-direction: column; }
   .workshops-list { padding: 0.25rem 1.25rem; }
   .workshop-item { gap: 0.9rem; }
   .workshops-actions { flex-direction: column; align-items: stretch; }
+  #hero { padding: 88px 1.25rem 2rem; }
+  .hero-title { margin-bottom: 1.1rem; }
+  .hero-bridge { margin-bottom: 1.35rem; }
+  .hero-reinforcement { margin-bottom: 1.8rem; }
   .hero-photo { object-position: 56% center; }
   .hero-overlay {
     background:
