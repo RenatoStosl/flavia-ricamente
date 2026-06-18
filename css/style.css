@@ -256,8 +256,8 @@ section { padding: 120px 0; position: relative; overflow: hidden; }
   min-height: 100svh;
   display: flex;
   align-items: center;
-  justify-content: center;
-  text-align: center;
+  justify-content: flex-start;
+  text-align: left;
   padding: 94px 2rem 1.75rem;
   position: relative;
 }
@@ -273,14 +273,14 @@ section { padding: 120px 0; position: relative; overflow: hidden; }
   height: 100%;
   object-fit: cover;
   object-position: center;
-  filter: brightness(1.16) contrast(1.12) saturate(1.08);
+  filter: brightness(1.02) contrast(1.18) saturate(1.08);
 }
 .hero-overlay {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(90deg, rgba(10,10,11,0.78) 0%, rgba(10,10,11,0.58) 42%, rgba(10,10,11,0.38) 100%),
-    linear-gradient(180deg, rgba(10,10,11,0.52) 0%, rgba(10,10,11,0.16) 46%, rgba(10,10,11,0.78) 100%);
+    linear-gradient(90deg, rgba(10,10,11,0.98) 0%, rgba(10,10,11,0.9) 14%, rgba(10,10,11,0.38) 64%, rgba(10,10,11,0.1) 100%),
+    linear-gradient(180deg, rgba(10,10,11,0.4) 0%, rgba(10,10,11,0.08) 14%, rgba(10,10,11,0.78) 100%);
 }
 .hero-grain {
   position: absolute;
@@ -288,7 +288,13 @@ section { padding: 120px 0; position: relative; overflow: hidden; }
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
   opacity: 0.4;
 }
-.hero-content { position: relative; z-index: 1; max-width: 800px; }
+.hero-content {
+  position: relative;
+  z-index: 1;
+  width: min(46vw, 660px);
+  max-width: 660px;
+  margin-left: clamp(1rem, 6vw, 5rem);
+}
 .hero-eyebrow {
   font-size: 0.72rem;
   letter-spacing: 0.4em;
@@ -310,7 +316,7 @@ section { padding: 120px 0; position: relative; overflow: hidden; }
   color: var(--white);
   font-weight: 600;
   max-width: 700px;
-  margin: 0 auto 1.55rem;
+  margin: 0 0 1.55rem;
   text-shadow: 0 6px 24px rgba(0,0,0,0.5);
 }
 .hero-reinforcement {
@@ -320,14 +326,14 @@ section { padding: 120px 0; position: relative; overflow: hidden; }
   font-weight: 500;
   margin-bottom: 1.7rem;
   max-width: 520px;
-  margin-left: auto;
-  margin-right: auto;
+  margin-left: 0;
+  margin-right: 0;
   text-shadow: 0 5px 20px rgba(0,0,0,0.55);
 }
 .hero-actions {
   display: flex;
   gap: 1rem;
-  justify-content: center;
+  justify-content: flex-start;
   flex-wrap: wrap;
 }
 
@@ -1238,6 +1244,23 @@ footer {
 }
 
 @media (max-width: 968px) {
+  #hero {
+    align-items: flex-end;
+    justify-content: center;
+    text-align: center;
+    padding-bottom: 3rem;
+  }
+  .hero-content {
+    width: min(100%, 680px);
+    max-width: 680px;
+    margin-left: 0;
+  }
+  .hero-bridge,
+  .hero-reinforcement {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .hero-actions { justify-content: center; }
   .sobre-grid { grid-template-columns: 1fr; gap: 4rem; }
   .sobre-img-wrap { max-width: 360px; margin: 0 auto; }
   .pilares-grid { grid-template-columns: repeat(2, 1fr); }
@@ -1303,15 +1326,25 @@ footer {
   .workshops-list { padding: 0.25rem 1.25rem; }
   .workshop-item { gap: 0.9rem; }
   .workshops-actions { flex-direction: column; align-items: stretch; }
-  #hero { padding: 88px 1.25rem 2rem; }
+  #hero {
+    min-height: 100svh;
+    align-items: flex-start;
+    background: var(--dark);
+    padding: clamp(390px, 56svh, 460px) 1.25rem 2rem;
+  }
+  .hero-bg {
+    inset: 0 0 auto;
+    height: clamp(390px, 56svh, 460px);
+    overflow: hidden;
+  }
   .hero-title { margin-bottom: 1.1rem; }
   .hero-bridge { margin-bottom: 1.35rem; }
   .hero-reinforcement { margin-bottom: 1.8rem; }
-  .hero-photo { object-position: 56% center; }
+  .hero-photo { object-position: 50% top; }
   .hero-overlay {
     background:
-      linear-gradient(180deg, rgba(10,10,11,0.78) 0%, rgba(10,10,11,0.52) 38%, rgba(10,10,11,0.92) 100%),
-      linear-gradient(90deg, rgba(10,10,11,0.72), rgba(10,10,11,0.42));
+      linear-gradient(180deg, rgba(10,10,11,0.08) 0%, rgba(10,10,11,0.04) 42%, rgba(10,10,11,0.8) 84%, rgba(10,10,11,1) 100%),
+      linear-gradient(90deg, rgba(10,10,11,0.12), rgba(10,10,11,0.12));
   }
   .curso-photo,
   .workshops-photo {
