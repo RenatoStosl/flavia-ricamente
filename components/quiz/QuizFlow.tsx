@@ -182,15 +182,15 @@ export function QuizFlow() {
               <div className="mt-9 grid gap-4">
                 <label className="grid gap-2 text-sm text-[#f8eee5]/80">
                   {texts.lead.nameLabel}
-                  <input required autoComplete="name" value={lead.name} onChange={(event) => setLead((current) => ({ ...current, name: event.target.value }))} className="quiz-option rounded-[14px] border px-4 py-3.5 text-base text-[#f8eee5] outline-none transition focus:border-[#d8af7a] focus:ring-2 focus:ring-[#d8af7a]/30" />
+                  <input required minLength={2} maxLength={160} autoComplete="name" placeholder={texts.lead.namePlaceholder} value={lead.name} onChange={(event) => setLead((current) => ({ ...current, name: event.target.value }))} className="quiz-option rounded-[14px] border px-4 py-3.5 text-base text-[#f8eee5] outline-none transition placeholder:text-[#f8eee5]/35 focus:border-[#d8af7a] focus:ring-2 focus:ring-[#d8af7a]/30" />
                 </label>
                 <label className="grid gap-2 text-sm text-[#f8eee5]/80">
                   {texts.lead.emailLabel}
-                  <input required type="email" autoComplete="email" value={lead.email} onChange={(event) => setLead((current) => ({ ...current, email: event.target.value }))} className="quiz-option rounded-[14px] border px-4 py-3.5 text-base text-[#f8eee5] outline-none transition focus:border-[#d8af7a] focus:ring-2 focus:ring-[#d8af7a]/30" />
+                  <input required type="email" maxLength={254} autoComplete="email" placeholder={texts.lead.emailPlaceholder} value={lead.email} onChange={(event) => setLead((current) => ({ ...current, email: event.target.value }))} className="quiz-option rounded-[14px] border px-4 py-3.5 text-base text-[#f8eee5] outline-none transition placeholder:text-[#f8eee5]/35 focus:border-[#d8af7a] focus:ring-2 focus:ring-[#d8af7a]/30" />
                 </label>
                 <label className="grid gap-2 text-sm text-[#f8eee5]/80">
                   {texts.lead.phoneLabel}
-                  <input required type="tel" autoComplete="tel" inputMode="tel" value={lead.phone} onChange={(event) => setLead((current) => ({ ...current, phone: event.target.value }))} className="quiz-option rounded-[14px] border px-4 py-3.5 text-base text-[#f8eee5] outline-none transition focus:border-[#d8af7a] focus:ring-2 focus:ring-[#d8af7a]/30" />
+                  <input required type="tel" minLength={8} maxLength={40} pattern="[0-9+() -]{8,40}" autoComplete="tel" inputMode="tel" placeholder={texts.lead.phonePlaceholder} value={lead.phone} onChange={(event) => setLead((current) => ({ ...current, phone: event.target.value }))} className="quiz-option rounded-[14px] border px-4 py-3.5 text-base text-[#f8eee5] outline-none transition placeholder:text-[#f8eee5]/35 focus:border-[#d8af7a] focus:ring-2 focus:ring-[#d8af7a]/30" />
                 </label>
               </div>
               {leadError && <p className="mt-5 text-center text-sm text-[#f4c7c7]" role="alert">{leadError}</p>}
