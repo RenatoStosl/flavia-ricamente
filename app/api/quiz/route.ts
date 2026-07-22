@@ -70,7 +70,8 @@ export async function POST(request: Request) {
     `;
 
     return NextResponse.json({ id: Number(rows[0]?.id) }, { status: 201 });
-  } catch {
+  } catch (error) {
+    console.error("Quiz response persistence failed", error);
     return NextResponse.json({ error: "Unable to save response." }, { status: 500 });
   }
 }
