@@ -1,0 +1,271 @@
+"use client";
+
+import { type FormEvent, useEffect, useMemo, useState } from "react";
+import { questions } from "@/config/questions";
+import { texts } from "@/config/texts";
+import type { QuizAnswers, QuizQuestion } from "@/config/types";
+import { getQuizResult } from "@/lib/quiz";
+
+type QuizStep = "intro" | "lead" | "attention" | "questions" | "processing" | "result";
+
+type LeadData = {
+  name: string;
+  email: string;
+  phone: string;
+};
+
+const transitionDurationMs = 360;
+const processingDurationMs = 1400;
+
+function formatText(template: string, values: Record<string, number>): string {
+  return Object.entries(values).reduce(
+    (text, [key, value]) => text.replace(`{${key}}`, String(value)),
+    template,
+  );
+}
+
+export function QuizFlow() {
+  const [step, setStep] = useState<QuizStep>("intro");
+  const [questionIndex, setQuestionIndex] = useState(0);
+  const [answers, setAnswers] = useState<QuizAnswers>({});
+  const [selectedOptionId, setSelectedOptionId] = useState<string>();
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const [lead, setLead] = useState<LeadData>({ name: "", email: "", phone: "" });
+  const [startedAt, setStartedAt] = useState<number>();
+  const [isSaving, setIsSaving] = useState(false);
+  const [leadError, setLeadError] = useState<string>();
+
+  const currentQuestion: QuizQuestion = questions[questionIndex];
+  const result = useMemo(() => getQuizResult(answers), [answers]);
+  const progress = step === "questions" ? ((questionIndex + 1) / questions.length) * 100 : step === "intro" || step === "attention" ? 0 : 100;
+  const selectedMultipleOptions = Array.isArray(answers[currentQuestion?.id]) ? answers[currentQuestion.id] : [];
+
+  useEffect(() => {
+    if (step !== "processing") return;
+
+    const timeout = window.setTimeout(() => setStep("result"), processingDurationMs);
+    return () => window.clearTimeout(timeout);
+  }, [step]);
+
+  function advanceQuestion() {
+    const isLastQuestion = questionIndex === questions.length - 1;
+
+    if (isLastQuestion) {
+      setStep("lead");
+      return;
+    }
+
+    setQuestionIndex((currentIndex) => currentIndex + 1);
+    setSelectedOptionId(undefined);
+    setIsTransitioning(false);
+  }
+
+  function selectAnswer(optionId: string) {
+    if (isTransitioning) return;
+
+    if (currentQuestion.selectionMode === "multiple") {
+      setAnswers((currentAnswers) => {
+        const currentSelection = currentAnswers[currentQuestion.id];
+        const selected: string[] = Array.isArray(currentSelection) ? currentSelection : [];
+        const nextSelected = selected.includes(optionId)
+          ? selected.filter((id) => id !== optionId)
+          : [...selected, optionId];
+
+        return { ...currentAnswers, [currentQuestion.id]: nextSelected };
+      });
+      return;
+    }
+
+    setSelectedOptionId(optionId);
+    setAnswers((currentAnswers) => ({ ...currentAnswers, [currentQuestion.id]: optionId }));
+    setIsTransitioning(true);
+    window.setTimeout(advanceQuestion, transitionDurationMs);
+  }
+
+  function continueMultipleQuestion() {
+    if (selectedMultipleOptions.length === 0) return;
+    setIsTransitioning(true);
+    window.setTimeout(advanceQuestion, transitionDurationMs);
+  }
+
+  function restartQuiz() {
+    setStep("intro");
+    setQuestionIndex(0);
+    setAnswers({});
+    setSelectedOptionId(undefined);
+    setIsTransitioning(false);
+    setStartedAt(undefined);
+    setLeadError(undefined);
+  }
+
+  async function submitLead(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (isSaving) return;
+
+    setIsSaving(true);
+    setLeadError(undefined);
+
+    const searchParams = new URLSearchParams(window.location.search);
+    const durationSeconds = Math.max(1, Math.round((Date.now() - (startedAt ?? Date.now())) / 1000));
+
+    try {
+      const response = await fetch("/api/quiz", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          lead,
+          answers,
+          durationSeconds,
+          utm: {
+            source: searchParams.get("utm_source"),
+            medium: searchParams.get("utm_medium"),
+            campaign: searchParams.get("utm_campaign"),
+          },
+        }),
+      });
+
+      if (!response.ok) throw new Error("Unable to save response.");
+      setStep("processing");
+    } catch {
+      setLeadError(texts.errors.saveResponse);
+    } finally {
+      setIsSaving(false);
+    }
+  }
+
+  return (
+    <main className="quiz-page min-h-screen px-5 py-6 text-[#f8eee5] sm:px-8 sm:py-10">
+      <div className="quiz-surface mx-auto flex min-h-[calc(100vh-3rem)] w-full max-w-3xl flex-col rounded-[20px] border shadow-2xl shadow-black/30 sm:min-h-[calc(100vh-5rem)]">
+        <header className="flex items-center justify-between border-b border-[#c4946f]/25 px-6 py-5 sm:px-10">
+          <a href="/" aria-label={texts.brand}>
+            <img src={texts.assets.cim.src} alt={texts.assets.cim.alt} className="h-11 w-11 rounded-full border border-[#d8af7a]/50 object-cover" />
+          </a>
+          {step !== "intro" && step !== "attention" && (
+            <span className="text-xs font-medium uppercase tracking-[0.2em] text-[#f8eee5]/55">{texts.progress.label}</span>
+          )}
+        </header>
+
+        {step === "questions" && (
+          <div className="px-6 pt-6 sm:px-10">
+            <div className="mb-3 flex items-center justify-between gap-4 text-xs uppercase tracking-[0.16em] text-[#f8eee5]/55">
+              <span>{texts.progress.label}</span>
+              <span>{formatText(texts.progress.questionLabel, { current: questionIndex + 1, total: questions.length })}</span>
+            </div>
+            <div className="h-1 overflow-hidden bg-white/10" aria-hidden="true">
+              <div className="h-full bg-[#d8af7a] transition-all duration-300 ease-out" style={{ width: `${progress}%` }} />
+            </div>
+          </div>
+        )}
+
+        <section className="flex flex-1 items-center px-6 py-12 sm:px-10 sm:py-16">
+          {step === "intro" && (
+            <div className="mx-auto max-w-xl animate-[fadeIn_500ms_ease-out] text-center">
+              <img src={texts.assets.mfp.src} alt={texts.assets.mfp.alt} className="mx-auto mb-7 aspect-square w-36 rounded-full border border-[#d8af7a]/60 object-cover shadow-xl shadow-black/20 sm:w-40" />
+              <p className="mb-5 text-xs font-medium uppercase tracking-[0.28em] text-[#d8af7a]">{texts.intro.eyebrow}</p>
+              <h1 className="font-serif text-4xl leading-tight sm:text-5xl">{texts.intro.title}</h1>
+              <p className="mx-auto mt-6 max-w-lg text-base leading-7 text-[#f8eee5]/65 sm:text-lg">{texts.intro.description}</p>
+              <button type="button" onClick={() => setStep("attention")} className="quiz-gold-button mt-10 rounded-full px-7 py-4 text-sm font-semibold uppercase tracking-[0.12em] text-[#28101d] transition focus:outline-none focus:ring-2 focus:ring-[#e6c18a] focus:ring-offset-2 focus:ring-offset-[#452338]">
+                {texts.intro.startLabel}
+              </button>
+              <p className="mt-4 text-sm text-[#f8eee5]/45">{texts.intro.duration}</p>
+            </div>
+          )}
+
+          {step === "lead" && (
+            <form
+              className="mx-auto w-full max-w-lg animate-[fadeIn_500ms_ease-out]"
+              onSubmit={submitLead}
+            >
+              <p className="mb-5 text-center text-xs font-medium uppercase tracking-[0.28em] text-[#d8af7a]">{texts.intro.eyebrow}</p>
+              <h1 className="text-center font-serif text-4xl leading-tight sm:text-5xl">{texts.lead.title}</h1>
+              <p className="mx-auto mt-5 max-w-md text-center leading-7 text-[#f8eee5]/65">{texts.lead.description}</p>
+              <div className="mt-9 grid gap-4">
+                <label className="grid gap-2 text-sm text-[#f8eee5]/80">
+                  {texts.lead.nameLabel}
+                  <input required autoComplete="name" value={lead.name} onChange={(event) => setLead((current) => ({ ...current, name: event.target.value }))} className="quiz-option rounded-[14px] border px-4 py-3.5 text-base text-[#f8eee5] outline-none transition focus:border-[#d8af7a] focus:ring-2 focus:ring-[#d8af7a]/30" />
+                </label>
+                <label className="grid gap-2 text-sm text-[#f8eee5]/80">
+                  {texts.lead.emailLabel}
+                  <input required type="email" autoComplete="email" value={lead.email} onChange={(event) => setLead((current) => ({ ...current, email: event.target.value }))} className="quiz-option rounded-[14px] border px-4 py-3.5 text-base text-[#f8eee5] outline-none transition focus:border-[#d8af7a] focus:ring-2 focus:ring-[#d8af7a]/30" />
+                </label>
+                <label className="grid gap-2 text-sm text-[#f8eee5]/80">
+                  {texts.lead.phoneLabel}
+                  <input required type="tel" autoComplete="tel" inputMode="tel" value={lead.phone} onChange={(event) => setLead((current) => ({ ...current, phone: event.target.value }))} className="quiz-option rounded-[14px] border px-4 py-3.5 text-base text-[#f8eee5] outline-none transition focus:border-[#d8af7a] focus:ring-2 focus:ring-[#d8af7a]/30" />
+                </label>
+              </div>
+              {leadError && <p className="mt-5 text-center text-sm text-[#f4c7c7]" role="alert">{leadError}</p>}
+              <button type="submit" disabled={isSaving} className="quiz-gold-button mt-8 w-full rounded-full px-7 py-4 text-sm font-semibold uppercase tracking-[0.12em] text-[#28101d] transition focus:outline-none focus:ring-2 focus:ring-[#e6c18a] focus:ring-offset-2 focus:ring-offset-[#452338] disabled:cursor-wait disabled:opacity-70">{isSaving ? texts.saving.label : texts.lead.submitLabel}</button>
+              <p className="mt-4 text-center text-xs leading-5 text-[#f8eee5]/45">{texts.lead.privacy}</p>
+            </form>
+          )}
+
+          {step === "attention" && (
+            <div className="mx-auto max-w-xl animate-[fadeIn_500ms_ease-out] text-center">
+              <p className="mb-5 text-xs font-medium uppercase tracking-[0.28em] text-[#d8af7a]">{texts.attention.eyebrow}</p>
+              <h1 className="font-serif text-4xl leading-tight sm:text-5xl">{texts.attention.title}</h1>
+              <p className="mx-auto mt-6 max-w-lg text-base leading-7 text-[#f8eee5]/65 sm:text-lg">{texts.attention.description}</p>
+              <button type="button" onClick={() => { setStartedAt(Date.now()); setStep("questions"); }} className="quiz-gold-button mt-10 rounded-full px-7 py-4 text-sm font-semibold uppercase tracking-[0.12em] text-[#28101d] transition focus:outline-none focus:ring-2 focus:ring-[#e6c18a] focus:ring-offset-2 focus:ring-offset-[#452338]">
+                {texts.attention.continueLabel}
+              </button>
+            </div>
+          )}
+
+          {step === "questions" && (
+            <div key={currentQuestion.id} className={`mx-auto w-full max-w-xl ${isTransitioning ? "animate-[fadeOut_360ms_ease-in_forwards]" : "animate-[slideIn_360ms_ease-out]"}`}>
+              <h1 className="font-serif text-3xl leading-tight sm:text-5xl">{currentQuestion.title}</h1>
+              {currentQuestion.description && <p className="mt-4 text-[#f8eee5]/60">{currentQuestion.description}</p>}
+              <div className="mt-9 grid gap-3" role="list">
+                {currentQuestion.options.map((option) => {
+                  const isSelected = currentQuestion.selectionMode === "multiple" ? selectedMultipleOptions.includes(option.id) : selectedOptionId === option.id;
+                  return (
+                    <button key={option.id} type="button" onClick={() => selectAnswer(option.id)} disabled={isTransitioning} role={currentQuestion.selectionMode === "multiple" ? "checkbox" : undefined} aria-checked={currentQuestion.selectionMode === "multiple" ? isSelected : undefined} aria-label={`${texts.questions.optionLabel}: ${option.label}`} className={`quiz-option flex w-full items-center gap-4 rounded-[18px] border p-5 text-left text-base leading-6 text-[#f8eee5]/85 transition focus:outline-none focus:ring-2 focus:ring-[#e6c18a] disabled:cursor-wait ${isSelected ? "quiz-option-selected text-[#f8eee5]" : ""}`}>
+                      {currentQuestion.selectionMode === "multiple" && (
+                        <span aria-hidden="true" className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-[4px] border ${isSelected ? "border-[#e6c18a] bg-[#d8af7a] text-[#351827]" : "border-[#e6c18a]/60"}`}>
+                          {isSelected && "✓"}
+                        </span>
+                      )}
+                      {option.label}
+                    </button>
+                  );
+                })}
+              </div>
+              {currentQuestion.selectionMode === "multiple" && (
+                <button type="button" onClick={continueMultipleQuestion} disabled={selectedMultipleOptions.length === 0 || isTransitioning} className="quiz-gold-button mt-7 rounded-full px-7 py-4 text-sm font-semibold uppercase tracking-[0.12em] text-[#28101d] transition disabled:cursor-not-allowed disabled:opacity-40">
+                  {texts.questions.multipleContinueLabel}
+                </button>
+              )}
+            </div>
+          )}
+
+          {step === "processing" && (
+            <div className="mx-auto max-w-lg animate-[fadeIn_500ms_ease-out] text-center" aria-live="polite">
+              <div className="mx-auto h-12 w-12 animate-spin rounded-full border-2 border-white/15 border-t-[#d8af7a]" />
+              <h1 className="mt-8 font-serif text-4xl leading-tight sm:text-5xl">{texts.processing.title}</h1>
+              <p className="mt-5 text-lg leading-7 text-[#f8eee5]/65">{texts.processing.description}</p>
+            </div>
+          )}
+
+          {step === "result" && result && (
+            <div className="mx-auto max-w-xl animate-[fadeIn_500ms_ease-out] text-center">
+              <img src={texts.assets.cim.src} alt={texts.assets.cim.alt} className="mx-auto mb-7 w-32 rounded-full border border-[#d8af7a]/65 shadow-xl shadow-black/20" />
+              <p className="text-xs font-medium uppercase tracking-[0.28em] text-[#d8af7a]">{result.level}</p>
+              <h1 className="mt-5 font-serif text-4xl leading-tight sm:text-5xl">{result.title}</h1>
+              <div className="mt-9 space-y-8 text-left">
+                {result.sections.map((section) => (
+                  <section key={section.title} className="border-t border-[#c4946f]/20 pt-7 first:border-t-0 first:pt-0">
+                    <h2 className="font-serif text-2xl">{section.title}</h2>
+                    {section.paragraphs?.map((paragraph) => <p key={paragraph} className="mt-4 leading-7 text-[#f8eee5]/70">{paragraph}</p>)}
+                    {section.bullets && <ul className="mt-5 space-y-3 text-[#f8eee5]/75">{section.bullets.map((bullet) => <li key={bullet} className="flex gap-3 leading-6"><span className="text-[#d8af7a]">✦</span><span>{bullet}</span></li>)}</ul>}
+                  </section>
+                ))}
+              </div>
+              <p className="mt-10 border-y border-[#d8af7a]/30 py-7 text-left text-lg leading-8 text-[#f8eee5]/90">{texts.result.finalMessage}</p>
+              <a href={result.ctaUrl} target="_blank" rel="noreferrer" className="quiz-gold-button mt-9 inline-flex rounded-full px-7 py-4 text-sm font-semibold uppercase tracking-[0.1em] text-[#28101d] transition focus:outline-none focus:ring-2 focus:ring-[#e6c18a] focus:ring-offset-2 focus:ring-offset-[#452338]">{result.ctaLabel}</a>
+              <button type="button" onClick={restartQuiz} className="mt-5 block w-full text-sm text-[#f8eee5]/55 underline-offset-4 transition hover:text-[#e6c18a] hover:underline focus:outline-none focus:underline">{texts.result.restartLabel}</button>
+            </div>
+          )}
+        </section>
+      </div>
+    </main>
+  );
+}
