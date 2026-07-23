@@ -60,6 +60,17 @@ export function QuizFlow() {
     .filter((question) => question.id.startsWith("statement-")).length;
   const progress = step === "questions" ? (answeredScoredQuestions / scoredQuestionCount) * 100 : step === "intro" || step === "attention" ? 0 : 100;
   const selectedMultipleOptions = Array.isArray(answers[currentQuestion?.id]) ? answers[currentQuestion.id] : [];
+  const selectedLeaveBehind = answers["leave-behind"];
+  const manualPersonalizations = Array.isArray(selectedLeaveBehind)
+    ? selectedLeaveBehind
+        .map(
+          (optionId) =>
+            texts.manualOffer.personalizationByLeaveBehind[
+              optionId as keyof typeof texts.manualOffer.personalizationByLeaveBehind
+            ],
+        )
+        .filter((message): message is NonNullable<typeof message> => Boolean(message))
+    : [];
 
   useEffect(() => {
     if (step !== "processing") return;
@@ -333,7 +344,11 @@ export function QuizFlow() {
               <p className="mt-9 rounded-[18px] border border-[#d8af7a]/45 bg-black/10 p-6 text-left text-base leading-7 text-[#f8eee5]">{texts.manualOffer.highlight}</p>
               <p className="mt-10 text-xs font-normal uppercase tracking-[0.28em] text-[#d8af7a]">{texts.manualOffer.label}</p>
               <p className="mt-3 font-serif text-4xl text-[#f8eee5]">{texts.manualOffer.price}</p>
-              <p className="mt-6 text-base italic leading-7 text-[#d8af7a]">{formatText(texts.manualOffer.personalization, { name: lead.name.trim().split(/\s+/)[0] || lead.name })}</p>
+              <div className="mt-6 space-y-3 text-base italic leading-7 text-[#d8af7a]">
+                {(manualPersonalizations.length > 0 ? manualPersonalizations : [texts.manualOffer.personalizationFallback]).map((message) => (
+                  <p key={message}>{formatText(message, { name: lead.name.trim().split(/\s+/)[0] || lead.name })}</p>
+                ))}
+              </div>
               {texts.manualOffer.ctaUrl ? <a href={texts.manualOffer.ctaUrl} target="_blank" rel="noreferrer" className="quiz-gold-button mt-9 inline-flex rounded-full px-8 py-4 text-sm font-medium uppercase tracking-[0.12em] text-[#28101d]">{texts.manualOffer.ctaLabel}</a> : <button type="button" disabled className="quiz-gold-button mt-9 inline-flex cursor-not-allowed rounded-full px-8 py-4 text-sm font-medium uppercase tracking-[0.12em] text-[#28101d] opacity-60">{texts.manualOffer.unavailableLabel}</button>}
               <p className="mt-6 text-xs font-normal uppercase tracking-[0.2em] text-[#f8eee5]/45">{texts.manualOffer.footer}</p>
             </div>
