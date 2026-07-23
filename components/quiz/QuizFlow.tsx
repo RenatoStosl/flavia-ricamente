@@ -55,7 +55,10 @@ export function QuizFlow() {
       return;
     }
 
-    if (questionIndex === questions.length - 3) {
+    const firstFinalQuestionIndex = questions.findIndex(
+      (question) => "selectionMode" in question && question.selectionMode === "multiple",
+    );
+    if (questionIndex === firstFinalQuestionIndex - 1) {
       setStep("reflection");
       setIsTransitioning(false);
       return;

@@ -58,12 +58,51 @@ const scoredStatements = [
   "Eu trabalho bastante, mas continuo preocupado(a) com dinheiro.",
 ] as const;
 
+const scoredQuestions = scoredStatements.map((title, index) => ({
+  id: `statement-${index + 1}`,
+  title,
+  options: responseScale,
+}));
+
+const transitionQuestions = [
+  {
+    id: "transition-celebration",
+    title: "Se hoje fosse seu último dia no modo sobrevivência, o que você comemoraria primeiro?",
+    options: [
+      { id: "coffee", label: "☕ Um café sem culpa" },
+      { id: "sleep", label: "💤 Uma noite de sono tranquila" },
+      { id: "bank", label: "🚫 Um dia sem checar o banco" },
+      { id: "toast", label: "🎉 Um brinde com quem eu amo" },
+    ],
+  },
+  {
+    id: "transition-pillar",
+    title: "Dos 3 pilares Corpo, Investimentos e Mente, qual você sente mais fragilizado hoje?",
+    options: [
+      { id: "body", label: "💪 Corpo — minha energia e bem-estar" },
+      { id: "investments", label: "💰 Investimentos — minha relação com dinheiro" },
+      { id: "mind", label: "🧠 Mente — meus pensamentos e emoções" },
+    ],
+  },
+  {
+    id: "transition-money",
+    title: "Se o dinheiro falasse com você agora, o que ele diria?",
+    options: [
+      { id: "calm", label: "💬 Vamos conversar com mais calma." },
+      { id: "direction", label: "🧭 Me dê uma direção." },
+      { id: "step", label: "🌱 Um passo de cada vez." },
+      { id: "growth", label: "✨ Estou pronto para crescer com você." },
+    ],
+  },
+] as const satisfies readonly QuizQuestion[];
+
 export const questions = [
-  ...scoredStatements.map((title, index) => ({
-    id: `statement-${index + 1}`,
-    title,
-    options: responseScale,
-  })),
+  ...scoredQuestions.slice(0, 9),
+  transitionQuestions[0],
+  ...scoredQuestions.slice(9, 18),
+  transitionQuestions[1],
+  ...scoredQuestions.slice(18),
+  transitionQuestions[2],
   {
     id: "desired-manifestation",
     title: "O que você mais deseja manifestar nos próximos meses?",
