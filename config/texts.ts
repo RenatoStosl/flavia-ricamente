@@ -20,8 +20,7 @@ export const texts = {
       "Um diagnóstico de 3 minutos que revela em qual frequência você está vivendo hoje, e o que está te impedindo de prosperar.",
     description: "Descubra as ameaças e encontre a solução.",
     startLabel: "Começar com sinceridade",
-    pillars: "C.i.M Corpo – Investimentos – Mentalidade",
-    duration: "Leva cerca de 3 minutos",
+    pillars: "Prospere C.i.M Corpo – Investimentos – Mentalidade",
   },
   attention: {
     eyebrow: "Atenção e presença",

@@ -232,7 +232,7 @@ export function QuizFlow() {
         <section className={`flex flex-1 items-center px-6 sm:px-10 ${step === "intro" ? "py-8 sm:py-10" : "py-12 sm:py-16"}`}>
           {step === "intro" && (
             <div className="mx-auto max-w-3xl animate-[fadeIn_500ms_ease-out] text-center">
-              <CimLogo className="mx-auto mb-5 w-32 sm:w-36" />
+              <img src={texts.assets.mfp.src} alt={texts.assets.mfp.alt} className="mx-auto mb-5 w-36 object-contain sm:w-40" />
               <p className="mb-4 text-[0.68rem] font-normal uppercase tracking-[0.24em] text-[#d8af7a] sm:text-xs sm:tracking-[0.28em]">{texts.intro.eyebrow}</p>
               <h1 className="font-serif text-3xl leading-tight sm:text-[2.1rem]">{texts.intro.title}</h1>
               <p className="mx-auto mt-4 max-w-lg text-sm leading-6 text-[#f8eee5]/65 sm:text-base sm:leading-7">{texts.intro.description}</p>
@@ -240,7 +240,6 @@ export function QuizFlow() {
                 {texts.intro.startLabel}
               </button>
               <p className="mt-5 text-xs font-normal tracking-[0.2em] text-[#d8af7a]/85">{texts.intro.pillars}</p>
-              <p className="mt-3 text-sm text-[#f8eee5]/45">{texts.intro.duration}</p>
             </div>
           )}
 
