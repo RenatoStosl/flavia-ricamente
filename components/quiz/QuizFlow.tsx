@@ -4,9 +4,9 @@ import { type FormEvent, useEffect, useMemo, useState } from "react";
 import { questions } from "@/config/questions";
 import { texts } from "@/config/texts";
 import type { QuizAnswers, QuizQuestion } from "@/config/types";
-import { getQuizResult } from "@/lib/quiz";
+import { calculateScore, getQuizResult } from "@/lib/quiz";
 
-type QuizStep = "intro" | "lead" | "attention" | "questions" | "processing" | "result";
+type QuizStep = "intro" | "lead" | "attention" | "reflection" | "questions" | "processing" | "result" | "manual-offer";
 
 type LeadData = {
   name: string;
@@ -36,6 +36,7 @@ export function QuizFlow() {
 
   const currentQuestion: QuizQuestion = questions[questionIndex];
   const result = useMemo(() => getQuizResult(answers), [answers]);
+  const score = useMemo(() => calculateScore(answers).score, [answers]);
   const progress = step === "questions" ? ((questionIndex + 1) / questions.length) * 100 : step === "intro" || step === "attention" ? 0 : 100;
   const selectedMultipleOptions = Array.isArray(answers[currentQuestion?.id]) ? answers[currentQuestion.id] : [];
 
@@ -51,6 +52,12 @@ export function QuizFlow() {
 
     if (isLastQuestion) {
       setStep("lead");
+      return;
+    }
+
+    if (questionIndex === questions.length - 3) {
+      setStep("reflection");
+      setIsTransitioning(false);
       return;
     }
 
@@ -95,6 +102,12 @@ export function QuizFlow() {
     setIsTransitioning(false);
     setStartedAt(undefined);
     setLeadError(undefined);
+  }
+
+  function continueToFinalQuestions() {
+    setQuestionIndex((currentIndex) => currentIndex + 1);
+    setSelectedOptionId(undefined);
+    setStep("questions");
   }
 
   function isValidPhone(value: string) {
@@ -152,7 +165,7 @@ export function QuizFlow() {
           <a href="/" aria-label={texts.brand}>
             <img src={texts.assets.cim.src} alt={texts.assets.cim.alt} className="h-11 w-11 rounded-full border border-[#d8af7a]/50 object-cover" />
           </a>
-          {step !== "intro" && step !== "attention" && (
+          {step !== "intro" && step !== "attention" && step !== "reflection" && step !== "manual-offer" && (
             <span className="text-xs font-medium uppercase tracking-[0.2em] text-[#f8eee5]/55">{texts.progress.label}</span>
           )}
         </header>
@@ -218,9 +231,19 @@ export function QuizFlow() {
             </div>
           )}
 
+          {step === "reflection" && (
+            <div className="mx-auto max-w-2xl animate-[fadeIn_500ms_ease-out] text-center">
+              <div className="text-5xl text-[#d8af7a]" aria-hidden="true">{texts.reflection.symbol}</div>
+              <div className="mx-auto mt-7 flex max-w-40 items-center gap-4 text-[#d8af7a]" aria-hidden="true"><span className="h-px flex-1 bg-current/70" /><span>✦</span><span className="h-px flex-1 bg-current/70" /></div>
+              <h1 className="mt-12 font-serif text-3xl leading-snug sm:text-5xl">{texts.reflection.title}</h1>
+              <p className="mt-8 text-sm font-medium uppercase tracking-[0.28em] text-[#d8af7a]">{texts.reflection.remainingLabel}</p>
+              <button type="button" onClick={continueToFinalQuestions} className="quiz-gold-button mt-12 rounded-full px-10 py-4 text-sm font-semibold uppercase tracking-[0.16em] text-[#28101d] transition focus:outline-none focus:ring-2 focus:ring-[#e6c18a] focus:ring-offset-2 focus:ring-offset-[#452338]">{texts.reflection.continueLabel}</button>
+            </div>
+          )}
+
           {step === "questions" && (
             <div key={currentQuestion.id} className={`mx-auto w-full max-w-xl ${isTransitioning ? "animate-[fadeOut_360ms_ease-in_forwards]" : "animate-[slideIn_360ms_ease-out]"}`}>
-              <h1 className="font-serif text-3xl leading-tight sm:text-5xl">{currentQuestion.title}</h1>
+              <h1 className="font-serif text-2xl leading-snug sm:text-3xl">{currentQuestion.title}</h1>
               {currentQuestion.description && <p className="mt-4 text-[#f8eee5]/60">{currentQuestion.description}</p>}
               <div className="mt-9 grid gap-3" role="list">
                 {currentQuestion.options.map((option) => {
@@ -254,23 +277,39 @@ export function QuizFlow() {
           )}
 
           {step === "result" && result && (
-            <div className="mx-auto max-w-xl animate-[fadeIn_500ms_ease-out] text-center">
-              <img src={texts.assets.cim.src} alt={texts.assets.cim.alt} className="mx-auto mb-7 w-32 rounded-full border border-[#d8af7a]/65 shadow-xl shadow-black/20" />
-              <p className="text-xs font-medium uppercase tracking-[0.28em] text-[#d8af7a]">{result.level}</p>
-              <p className="mt-4 text-lg text-[#f8eee5]/75">{formatText(texts.result.personalizedTitle, { name: lead.name.trim().split(/\s+/)[0] || lead.name })}</p>
-              <h1 className="mt-5 font-serif text-4xl leading-tight sm:text-5xl">{result.title}</h1>
-              <div className="mt-9 space-y-8 text-left">
+            <div className="mx-auto max-w-2xl animate-[fadeIn_500ms_ease-out] text-center">
+              <img src={texts.assets.cim.src} alt={texts.assets.cim.alt} className="mx-auto mb-7 w-28 rounded-full border border-[#d8af7a]/65 shadow-xl shadow-black/20" />
+              <p className="text-xs font-medium uppercase tracking-[0.28em] text-[#d8af7a]">{formatText(texts.result.personalizedTitle, { name: lead.name.trim().split(/\s+/)[0] || lead.name })}</p>
+              <h1 className="mt-4 font-serif text-4xl leading-tight text-[#d8af7a] sm:text-5xl">{result.title}</h1>
+              <p className="mt-3 text-xs font-medium uppercase tracking-[0.2em] text-[#f8eee5]/70">{score} pontos · {result.level}</p>
+              <div className="mx-auto mt-6 flex max-w-40 items-center gap-4 text-[#d8af7a]" aria-hidden="true"><span className="h-px flex-1 bg-current/70" /><span>✦</span><span className="h-px flex-1 bg-current/70" /></div>
+              <div className="mt-10 space-y-5 text-left">
                 {result.sections.map((section) => (
-                  <section key={section.title} className="border-t border-[#c4946f]/20 pt-7 first:border-t-0 first:pt-0">
-                    <h2 className="font-serif text-2xl">{section.title}</h2>
-                    {section.paragraphs?.map((paragraph) => <p key={paragraph} className="mt-4 leading-7 text-[#f8eee5]/70">{paragraph}</p>)}
-                    {section.bullets && <ul className="mt-5 space-y-3 text-[#f8eee5]/75">{section.bullets.map((bullet) => <li key={bullet} className="flex gap-3 leading-6"><span className="text-[#d8af7a]">✦</span><span>{bullet}</span></li>)}</ul>}
+                  <section key={section.title} className="rounded-[16px] border border-[#c4946f]/25 bg-black/10 p-5 sm:p-6">
+                    <h2 className="font-serif text-2xl text-[#d8af7a]">{section.title}</h2>
+                    {section.paragraphs?.map((paragraph) => <p key={paragraph} className="mt-4 leading-7 text-[#f8eee5]/85">{paragraph}</p>)}
+                    {section.bullets && <ul className="mt-5 space-y-3 text-[#f8eee5]/90">{section.bullets.map((bullet) => <li key={bullet} className="flex gap-3 leading-6"><span className="text-[#d8af7a]">✦</span><span>{bullet}</span></li>)}</ul>}
                   </section>
                 ))}
               </div>
-              <p className="mt-10 border-y border-[#d8af7a]/30 py-7 text-left text-lg leading-8 text-[#f8eee5]/90">{texts.result.finalMessage}</p>
-              <a href={result.ctaUrl} target="_blank" rel="noreferrer" className="quiz-gold-button mt-9 inline-flex rounded-full px-7 py-4 text-sm font-semibold uppercase tracking-[0.1em] text-[#28101d] transition focus:outline-none focus:ring-2 focus:ring-[#e6c18a] focus:ring-offset-2 focus:ring-offset-[#452338]">{result.ctaLabel}</a>
+              <p className="mt-8 rounded-[16px] border border-[#d8af7a]/45 bg-[#2b1020]/50 p-6 text-left text-base leading-7 text-[#f8eee5]">{texts.result.finalMessage}</p>
+              <button type="button" onClick={() => setStep("manual-offer")} className="quiz-gold-button mt-9 inline-flex rounded-full px-7 py-4 text-sm font-semibold uppercase tracking-[0.1em] text-[#28101d] transition focus:outline-none focus:ring-2 focus:ring-[#e6c18a] focus:ring-offset-2 focus:ring-offset-[#452338]">{result.ctaLabel}</button>
               <button type="button" onClick={restartQuiz} className="mt-5 block w-full text-sm text-[#f8eee5]/55 underline-offset-4 transition hover:text-[#e6c18a] hover:underline focus:outline-none focus:underline">{texts.result.restartLabel}</button>
+            </div>
+          )}
+
+          {step === "manual-offer" && (
+            <div className="mx-auto max-w-2xl animate-[fadeIn_500ms_ease-out] text-center">
+              <img src={texts.assets.cim.src} alt={texts.assets.cim.alt} className="mx-auto w-32 rounded-full border border-[#d8af7a]/65 shadow-xl shadow-black/20" />
+              <div className="mx-auto mt-9 flex max-w-40 items-center gap-4 text-[#d8af7a]" aria-hidden="true"><span className="h-px flex-1 bg-current/70" /><span>✦</span><span className="h-px flex-1 bg-current/70" /></div>
+              <h1 className="mt-10 font-serif text-4xl leading-tight text-[#d8af7a] sm:text-5xl">{texts.manualOffer.title}</h1>
+              <p className="mt-8 text-lg leading-8 text-[#f8eee5]/90">{texts.manualOffer.description}</p>
+              <p className="mt-9 rounded-[18px] border border-[#d8af7a]/45 bg-black/10 p-6 text-left text-lg leading-7 text-[#f8eee5]">{texts.manualOffer.highlight}</p>
+              <p className="mt-10 text-xs font-medium uppercase tracking-[0.28em] text-[#d8af7a]">{texts.manualOffer.label}</p>
+              <p className="mt-3 font-serif text-5xl text-[#f8eee5]">{texts.manualOffer.price}</p>
+              <p className="mt-6 text-base italic leading-7 text-[#d8af7a]">{formatText(texts.manualOffer.personalization, { name: lead.name.trim().split(/\s+/)[0] || lead.name })}</p>
+              {texts.manualOffer.ctaUrl ? <a href={texts.manualOffer.ctaUrl} target="_blank" rel="noreferrer" className="quiz-gold-button mt-9 inline-flex rounded-full px-8 py-4 text-sm font-semibold uppercase tracking-[0.12em] text-[#28101d]">{texts.manualOffer.ctaLabel}</a> : <button type="button" disabled className="quiz-gold-button mt-9 inline-flex cursor-not-allowed rounded-full px-8 py-4 text-sm font-semibold uppercase tracking-[0.12em] text-[#28101d] opacity-60">{texts.manualOffer.unavailableLabel}</button>}
+              <p className="mt-6 text-xs font-medium uppercase tracking-[0.2em] text-[#f8eee5]/45">{texts.manualOffer.footer}</p>
             </div>
           )}
         </section>
