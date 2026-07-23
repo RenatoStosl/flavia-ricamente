@@ -40,12 +40,13 @@ export async function POST(request: Request) {
   }
 
   const name = text(body.lead?.name, 160);
-  const email = text(body.lead?.email, 254);
+  const email = optionalText(body.lead?.email, 254);
   const phone = text(body.lead?.phone, 40);
   const answers = body.answers;
   const durationSeconds = typeof body.durationSeconds === "number" ? Math.round(body.durationSeconds) : NaN;
 
-  if (!name || !email || !phone || !isQuizAnswers(answers) || !hasCompleteQuizAnswers(answers) || !Number.isFinite(durationSeconds) || durationSeconds < 1 || durationSeconds > 7200) {
+  const phoneDigits = phone?.replace(/\D/g, "") ?? "";
+  if (!name || !phone || ![10, 11].includes(phoneDigits.length) || !isQuizAnswers(answers) || !hasCompleteQuizAnswers(answers) || !Number.isFinite(durationSeconds) || durationSeconds < 1 || durationSeconds > 7200) {
     return NextResponse.json({ error: "Invalid quiz submission." }, { status: 400 });
   }
 

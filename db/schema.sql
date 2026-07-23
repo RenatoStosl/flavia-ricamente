@@ -2,7 +2,7 @@ CREATE TABLE IF NOT EXISTS responses (
   id BIGSERIAL PRIMARY KEY,
   created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
   name TEXT NOT NULL,
-  email TEXT NOT NULL,
+  email TEXT,
   phone TEXT NOT NULL,
   score INTEGER NOT NULL,
   level TEXT NOT NULL,

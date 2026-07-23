@@ -42,15 +42,15 @@ export const texts = {
     description: "Deixe seus dados para liberar seu diagnóstico completo.",
     nameLabel: "Nome",
     namePlaceholder: "Seu nome completo",
-    emailLabel: "E-mail",
-    emailPlaceholder: "seu@email.com",
     phoneLabel: "WhatsApp",
     phonePlaceholder: "(00) 00000-0000",
+    phoneError: "Informe um WhatsApp válido com DDD.",
     submitLabel: "Ver meu resultado",
     privacy: "Seus dados serão usados apenas para contato sobre educação financeira.",
   },
   result: {
     restartLabel: "Refazer diagnóstico",
+    personalizedTitle: "{name}, este é o seu resultado",
     finalMessage:
       "Seu diagnóstico não é o seu destino. É o seu ponto de partida. Independentemente do nível em que você está hoje, existe um próximo passo e é ele que vai equilibrar sua vida com seus objetivos. Ele te ajuda a transformar conhecimento em prática, hábitos em identidade e identidade em resultados consistentes. É assim que viver em prosperidade passa a ser seu estado natural. Seu estilo de vida.",
   },

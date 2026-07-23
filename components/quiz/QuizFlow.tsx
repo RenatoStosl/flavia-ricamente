@@ -10,14 +10,13 @@ type QuizStep = "intro" | "lead" | "attention" | "questions" | "processing" | "r
 
 type LeadData = {
   name: string;
-  email: string;
   phone: string;
 };
 
 const transitionDurationMs = 360;
 const processingDurationMs = 1400;
 
-function formatText(template: string, values: Record<string, number>): string {
+function formatText(template: string, values: Record<string, string | number>): string {
   return Object.entries(values).reduce(
     (text, [key, value]) => text.replace(`{${key}}`, String(value)),
     template,
@@ -30,7 +29,7 @@ export function QuizFlow() {
   const [answers, setAnswers] = useState<QuizAnswers>({});
   const [selectedOptionId, setSelectedOptionId] = useState<string>();
   const [isTransitioning, setIsTransitioning] = useState(false);
-  const [lead, setLead] = useState<LeadData>({ name: "", email: "", phone: "" });
+  const [lead, setLead] = useState<LeadData>({ name: "", phone: "" });
   const [startedAt, setStartedAt] = useState<number>();
   const [isSaving, setIsSaving] = useState(false);
   const [leadError, setLeadError] = useState<string>();
@@ -96,6 +95,11 @@ export function QuizFlow() {
     setIsTransitioning(false);
     setStartedAt(undefined);
     setLeadError(undefined);
+  }
+
+  function isValidPhone(value: string) {
+    const digits = value.replace(/\D/g, "");
+    return digits.length === 10 || digits.length === 11;
   }
 
   async function submitLead(event: FormEvent<HTMLFormElement>) {
@@ -185,12 +189,8 @@ export function QuizFlow() {
                   <input required minLength={2} maxLength={160} autoComplete="name" placeholder={texts.lead.namePlaceholder} value={lead.name} onChange={(event) => setLead((current) => ({ ...current, name: event.target.value }))} className="quiz-option rounded-[14px] border px-4 py-3.5 text-base text-[#f8eee5] outline-none transition placeholder:text-[#f8eee5]/35 focus:border-[#d8af7a] focus:ring-2 focus:ring-[#d8af7a]/30" />
                 </label>
                 <label className="grid gap-2 text-sm text-[#f8eee5]/80">
-                  {texts.lead.emailLabel}
-                  <input required type="email" maxLength={254} autoComplete="email" placeholder={texts.lead.emailPlaceholder} value={lead.email} onChange={(event) => setLead((current) => ({ ...current, email: event.target.value }))} className="quiz-option rounded-[14px] border px-4 py-3.5 text-base text-[#f8eee5] outline-none transition placeholder:text-[#f8eee5]/35 focus:border-[#d8af7a] focus:ring-2 focus:ring-[#d8af7a]/30" />
-                </label>
-                <label className="grid gap-2 text-sm text-[#f8eee5]/80">
                   {texts.lead.phoneLabel}
-                  <input required type="tel" minLength={8} maxLength={40} pattern="[0-9+() -]{8,40}" autoComplete="tel" inputMode="tel" placeholder={texts.lead.phonePlaceholder} value={lead.phone} onChange={(event) => setLead((current) => ({ ...current, phone: event.target.value }))} className="quiz-option rounded-[14px] border px-4 py-3.5 text-base text-[#f8eee5] outline-none transition placeholder:text-[#f8eee5]/35 focus:border-[#d8af7a] focus:ring-2 focus:ring-[#d8af7a]/30" />
+                  <input required type="tel" maxLength={20} autoComplete="tel" inputMode="tel" placeholder={texts.lead.phonePlaceholder} value={lead.phone} onChange={(event) => { const value = event.target.value; event.currentTarget.setCustomValidity(value === "" || isValidPhone(value) ? "" : texts.lead.phoneError); setLead((current) => ({ ...current, phone: value })); }} onInvalid={(event) => event.currentTarget.setCustomValidity(texts.lead.phoneError)} className="quiz-option rounded-[14px] border px-4 py-3.5 text-base text-[#f8eee5] outline-none transition placeholder:text-[#f8eee5]/35 focus:border-[#d8af7a] focus:ring-2 focus:ring-[#d8af7a]/30" />
                 </label>
               </div>
               {leadError && <p className="mt-5 text-center text-sm text-[#f4c7c7]" role="alert">{leadError}</p>}
@@ -249,6 +249,7 @@ export function QuizFlow() {
             <div className="mx-auto max-w-xl animate-[fadeIn_500ms_ease-out] text-center">
               <img src={texts.assets.cim.src} alt={texts.assets.cim.alt} className="mx-auto mb-7 w-32 rounded-full border border-[#d8af7a]/65 shadow-xl shadow-black/20" />
               <p className="text-xs font-medium uppercase tracking-[0.28em] text-[#d8af7a]">{result.level}</p>
+              <p className="mt-4 text-lg text-[#f8eee5]/75">{formatText(texts.result.personalizedTitle, { name: lead.name.trim().split(/\s+/)[0] || lead.name })}</p>
               <h1 className="mt-5 font-serif text-4xl leading-tight sm:text-5xl">{result.title}</h1>
               <div className="mt-9 space-y-8 text-left">
                 {result.sections.map((section) => (
