@@ -20,7 +20,7 @@ export const texts = {
       "Um diagnóstico de 3 minutos que revela em qual frequência você está vivendo hoje, e o que está te impedindo de prosperar.",
     description: "Descubra as ameaças e encontre a solução.",
     startLabel: "Começar com sinceridade",
-    pillars: "Prospere C.i.M Corpo – Investimentos – Mentalidade",
+    pillars: "Prospere C.i.M | Corpo – Investimentos – Mentalidade",
   },
   attention: {
     eyebrow: "Atenção e presença",
@@ -71,7 +71,7 @@ export const texts = {
     title:
       "Foi exatamente para isso que nasceu o Manual Frequência da Prosperidade. Para elevar e sustentar a Energia que te faz PROSPERAR por inteiro. É a peça chave que faltava para a sua LIBERDADE. ",
     description:
-      "Um guia prático do método “Prospere C.i.M – Corpo – Investimentos – Mentalidade”, construído a partir da rotina exata que sustenta os meus próprios resultados. Agora é VOCÊ que vai ativar essa Frequência se tornando mais Próspero por inteiro. Seus sonhos e sua qualidade de vida serão de alto nível com essas práticas simples e realistas.",
+      "Um guia prático do método “Prospere C.i.M | Corpo – Investimentos – Mentalidade”, construído a partir da rotina exata que sustenta os meus próprios resultados. Agora é VOCÊ que vai ativar essa Frequência se tornando mais Próspero por inteiro. Seus sonhos e sua qualidade de vida serão de alto nível com essas práticas simples e realistas.",
     highlight:
       "Você já chegou até aqui. Isso já é sinal de que sua frequência começou a mudar. Não deixe ela cair de novo.",
     label: "Manual da Frequência da Prosperidade",

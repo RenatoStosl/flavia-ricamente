@@ -212,7 +212,7 @@ export function QuizFlow() {
               <CimLogo className="h-11 w-11" />
             </a>
             {step !== "attention" && step !== "reflection" && (
-              <span className="absolute right-6 text-xs font-normal uppercase tracking-[0.2em] text-[#f8eee5]/55 sm:right-10">{texts.progress.label}</span>
+              <span className="absolute right-10 hidden text-xs font-normal uppercase tracking-[0.2em] text-[#f8eee5]/55 sm:block">{texts.progress.label}</span>
             )}
           </header>
         )}
