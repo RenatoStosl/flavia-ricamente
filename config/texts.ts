@@ -16,9 +16,9 @@ export const texts = {
   },
   intro: {
     eyebrow: "DFP — Diagnóstico Frequência da Prosperidade",
-    title: "Um diagnóstico de 3 minutos que revela em qual frequência você está vivendo hoje, e o que está te impedindo de prosperar.",
-    description:
-      "Descubra as ameaças e encontre a solução.",
+    title:
+      "Um diagnóstico de 3 minutos que revela em qual frequência você está vivendo hoje, e o que está te impedindo de prosperar.",
+    description: "Descubra as ameaças e encontre a solução.",
     startLabel: "Começar com sinceridade",
     pillars: "C.i.M Corpo – Investimentos – Mentalidade",
     duration: "Leva cerca de 3 minutos",
@@ -32,7 +32,8 @@ export const texts = {
   },
   reflection: {
     symbol: "✧",
-    title: "Você já percebeu que só de responder até aqui, algo em você já começou a mudar?",
+    title:
+      "Você já percebeu que só de responder até aqui, algo em você já começou a mudar?",
     remainingLabel: "Faltam só mais 2 perguntas",
     continueLabel: "Continuar",
   },
@@ -46,7 +47,8 @@ export const texts = {
   },
   processing: {
     title: "Estamos preparando seu resultado.",
-    description: "Analisando suas respostas para identificar o próximo passo mais adequado.",
+    description:
+      "Analisando suas respostas para identificar o próximo passo mais adequado.",
   },
   lead: {
     title: "Antes de revelar o seu resultado",
@@ -57,7 +59,8 @@ export const texts = {
     phonePlaceholder: "(00) 00000-0000",
     phoneError: "Informe um WhatsApp válido com DDD.",
     submitLabel: "Ver meu resultado",
-    privacy: "Seus dados serão usados apenas para contato sobre educação financeira.",
+    privacy:
+      "Seus dados serão usados apenas para contato sobre educação financeira.",
   },
   result: {
     restartLabel: "Refazer diagnóstico",
@@ -66,14 +69,18 @@ export const texts = {
       "Seu diagnóstico não é o seu destino. É o seu ponto de partida. Independentemente do nível em que você está hoje, existe um próximo passo e é ele que vai equilibrar sua vida com seus objetivos. Ele te ajuda a transformar conhecimento em prática, hábitos em identidade e identidade em resultados consistentes. É assim que viver em prosperidade passa a ser seu estado natural. Seu estilo de vida.",
   },
   manualOffer: {
-    title: "Foi exatamente para isso que nasceu o Manual da Frequência da Prosperidade",
+    title:
+      "Foi exatamente para isso que nasceu o Manual da Frequência da Prosperidade. Para elevar e sustentar a Energia que te faz PROSPERAR por inteiro. É a peça chave que faltava para a sua LIBERDADE. ",
     description:
-      "Um guia prático do método Prospere C.I.M., construído a partir da rotina que sustenta os meus próprios resultados, reunindo práticas simples e realistas que você pode aplicar hoje mesmo — independente da sua rotina, idade ou condição financeira.",
-    highlight: "Você já chegou até aqui. Isso já é sinal de que sua frequência começou a mudar. Não deixe ela cair de novo.",
+      "Um guia prático do método “Prospere C.i.M – Corpo – Investimentos – Mentalidade”, construído a partir da rotina exata que sustenta os meus próprios resultados. Agora é VOCÊ que vai ativar essa Frequência se tornando mais Próspero por inteiro. Seus sonhos e sua qualidade de vida serão de alto nível com essas práticas simples e realistas.",
+    highlight:
+      "Você já chegou até aqui. Isso já é sinal de que sua frequência começou a mudar. Não deixe ela cair de novo.",
     label: "Manual da Frequência da Prosperidade",
     price: "R$ 33,70",
-    personalizationFallback: "{name}, o Manual mostra como transformar intenção em uma nova rotina de prosperidade.",
-    personalizationTemplate: "{name}, você marcou que quer deixar {items} para trás — o Manual mostra como construir uma rotina mais consciente e próspera no dia a dia.",
+    personalizationFallback:
+      "{name}, o Manual mostra como transformar intenção em uma nova rotina de prosperidade.",
+    personalizationTemplate:
+      "{name}, você marcou que quer deixar {items} para trás — o Manual mostra como construir uma rotina mais consciente e próspera no dia a dia.",
     personalizationItems: {
       "financial-anxiety": "a ansiedade financeira",
       "future-fear": "o medo do futuro",
