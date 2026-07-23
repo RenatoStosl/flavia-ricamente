@@ -339,16 +339,19 @@ export function QuizFlow() {
             </div>
           )}
         </section>
+        <footer className="border-t border-[#c4946f]/20 px-6 py-4 text-center sm:px-10">
+          <a
+            href={texts.social.instagramUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-2 text-sm text-[#f8eee5]/65 transition hover:text-[#d8af7a] focus:outline-none focus:ring-2 focus:ring-[#e6c18a]"
+            aria-label={`Instagram ${texts.social.instagramLabel}`}
+          >
+            <svg aria-hidden="true" viewBox="0 0 24 24" className="h-5 w-5 fill-none stroke-current stroke-[1.8]"><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.5" cy="6.5" r="1" className="fill-current stroke-none" /></svg>
+            <span>{texts.social.instagramLabel}</span>
+          </a>
+        </footer>
       </div>
-      <a
-        href={texts.social.instagramUrl}
-        target="_blank"
-        rel="noreferrer"
-        className="fixed bottom-4 left-1/2 z-20 -translate-x-1/2 rounded-full border border-[#d8af7a]/45 bg-[#351827]/90 px-4 py-2 text-xs tracking-[0.08em] text-[#f8eee5]/80 shadow-lg shadow-black/25 backdrop-blur transition hover:border-[#d8af7a] hover:text-[#d8af7a] focus:outline-none focus:ring-2 focus:ring-[#e6c18a]"
-        aria-label={`Instagram ${texts.social.instagramLabel}`}
-      >
-        {texts.social.instagramLabel}
-      </a>
     </main>
   );
 }
