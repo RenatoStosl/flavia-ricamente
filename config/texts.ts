@@ -12,9 +12,9 @@ export const texts = {
   },
   intro: {
     eyebrow: "DFP — Diagnóstico Frequência da Prosperidade",
-    title: "Um diagnóstico de 3 minutos que revela em qual frequência você está vivendo hoje.",
+    title: "Um diagnóstico de 3 minutos que revela em qual frequência você está vivendo hoje, e o que está te impedindo de prosperar.",
     description:
-      "Descubra as ameaças e encontre a solução para o que está te impedindo de prosperar.",
+      "Descubra as ameaças e encontre a solução.",
     startLabel: "Começar com sinceridade",
     duration: "Leva cerca de 3 minutos",
   },
