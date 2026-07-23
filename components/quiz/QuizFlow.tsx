@@ -38,6 +38,7 @@ export function QuizFlow() {
   const result = useMemo(() => getQuizResult(answers), [answers]);
   const score = useMemo(() => calculateScore(answers).score, [answers]);
   const isTransitionQuestion = currentQuestion?.id.startsWith("transition-");
+  const isFinalQuestion = currentQuestion?.selectionMode === "multiple";
   const answeredScoredQuestions = questions
     .slice(0, questionIndex + 1)
     .filter((question) => question.id.startsWith("statement-")).length;
@@ -177,7 +178,7 @@ export function QuizFlow() {
           )}
         </header>
 
-        {step === "questions" && !isTransitionQuestion && (
+        {step === "questions" && !isTransitionQuestion && !isFinalQuestion && (
           <div className="px-6 pt-6 sm:px-10">
             <div className="mb-3 flex items-center justify-between gap-4 text-xs uppercase tracking-[0.16em] text-[#f8eee5]/55">
               <span>{texts.progress.label}</span>
@@ -189,17 +190,17 @@ export function QuizFlow() {
           </div>
         )}
 
-        <section className="flex flex-1 items-center px-6 py-12 sm:px-10 sm:py-16">
+        <section className={`flex flex-1 items-center px-6 sm:px-10 ${step === "intro" ? "py-8 sm:py-10" : "py-12 sm:py-16"}`}>
           {step === "intro" && (
-            <div className="mx-auto max-w-xl animate-[fadeIn_500ms_ease-out] text-center">
-              <img src={texts.assets.mfp.src} alt={texts.assets.mfp.alt} className="mx-auto mb-7 aspect-square w-36 rounded-full border border-[#d8af7a]/60 object-cover shadow-xl shadow-black/20 sm:w-40" />
-              <p className="mb-5 text-xs font-medium uppercase tracking-[0.28em] text-[#d8af7a]">{texts.intro.eyebrow}</p>
-              <h1 className="font-serif text-4xl leading-tight sm:text-5xl">{texts.intro.title}</h1>
-              <p className="mx-auto mt-6 max-w-lg text-base leading-7 text-[#f8eee5]/65 sm:text-lg">{texts.intro.description}</p>
-              <button type="button" onClick={() => setStep("attention")} className="quiz-gold-button mt-10 rounded-full px-7 py-4 text-sm font-semibold uppercase tracking-[0.12em] text-[#28101d] transition focus:outline-none focus:ring-2 focus:ring-[#e6c18a] focus:ring-offset-2 focus:ring-offset-[#452338]">
+            <div className="mx-auto max-w-2xl animate-[fadeIn_500ms_ease-out] text-center">
+              <img src={texts.assets.mfp.src} alt={texts.assets.mfp.alt} className="mx-auto mb-5 aspect-square w-24 rounded-full border border-[#d8af7a]/60 object-cover shadow-xl shadow-black/20 sm:w-28" />
+              <p className="mb-4 text-[0.68rem] font-medium uppercase tracking-[0.24em] text-[#d8af7a] sm:text-xs sm:tracking-[0.28em]">{texts.intro.eyebrow}</p>
+              <h1 className="font-serif text-3xl leading-tight sm:text-4xl">{texts.intro.title}</h1>
+              <p className="mx-auto mt-4 max-w-lg text-sm leading-6 text-[#f8eee5]/65 sm:text-base sm:leading-7">{texts.intro.description}</p>
+              <button type="button" onClick={() => setStep("attention")} className="quiz-gold-button mt-7 rounded-full px-7 py-3.5 text-sm font-semibold uppercase tracking-[0.12em] text-[#28101d] transition focus:outline-none focus:ring-2 focus:ring-[#e6c18a] focus:ring-offset-2 focus:ring-offset-[#452338]">
                 {texts.intro.startLabel}
               </button>
-              <p className="mt-4 text-sm text-[#f8eee5]/45">{texts.intro.duration}</p>
+              <p className="mt-3 text-sm text-[#f8eee5]/45">{texts.intro.duration}</p>
             </div>
           )}
 
