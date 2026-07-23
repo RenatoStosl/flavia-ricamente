@@ -231,7 +231,7 @@ export function QuizFlow() {
 
         <section className={`flex flex-1 items-center px-6 sm:px-10 ${step === "intro" ? "py-8 sm:py-10" : "py-12 sm:py-16"}`}>
           {step === "intro" && (
-            <div className="mx-auto max-w-2xl animate-[fadeIn_500ms_ease-out] text-center">
+            <div className="mx-auto max-w-3xl animate-[fadeIn_500ms_ease-out] text-center">
               <CimLogo className="mx-auto mb-5 w-32 sm:w-36" />
               <p className="mb-4 text-[0.68rem] font-normal uppercase tracking-[0.24em] text-[#d8af7a] sm:text-xs sm:tracking-[0.28em]">{texts.intro.eyebrow}</p>
               <h1 className="font-serif text-3xl leading-tight sm:text-[2.1rem]">{texts.intro.title}</h1>
@@ -346,11 +346,11 @@ export function QuizFlow() {
           )}
 
           {step === "manual-offer" && (
-            <div className="mx-auto max-w-2xl animate-[fadeIn_500ms_ease-out] text-center">
+            <div className="mx-auto max-w-3xl animate-[fadeIn_500ms_ease-out] text-center">
               <MfpLogo className="mx-auto w-32" />
               <div className="mx-auto mt-9 flex max-w-40 items-center gap-4 text-[#d8af7a]" aria-hidden="true"><span className="h-px flex-1 bg-current/70" /><span>✦</span><span className="h-px flex-1 bg-current/70" /></div>
-              <h1 className="mt-10 font-serif text-3xl leading-tight text-[#d8af7a] sm:text-4xl">{texts.manualOffer.title}</h1>
-              <p className="mt-8 text-base leading-7 text-[#f8eee5]/90">{texts.manualOffer.description}</p>
+              <h1 className="mx-auto mt-8 max-w-3xl font-serif text-2xl leading-snug text-[#d8af7a] sm:text-3xl">{texts.manualOffer.title}</h1>
+              <p className="mx-auto mt-6 max-w-2xl text-sm leading-6 text-[#f8eee5]/90 sm:text-base sm:leading-7">{texts.manualOffer.description}</p>
               <p className="mt-9 rounded-[18px] border border-[#d8af7a]/45 bg-black/10 p-6 text-left text-base leading-7 text-[#f8eee5]">{texts.manualOffer.highlight}</p>
               <p className="mt-10 text-xs font-normal uppercase tracking-[0.28em] text-[#d8af7a]">{texts.manualOffer.label}</p>
               <p className="mt-3 font-serif text-4xl text-[#f8eee5]">{texts.manualOffer.price}</p>
