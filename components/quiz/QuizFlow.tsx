@@ -1,7 +1,7 @@
 "use client";
 
 import { type FormEvent, useEffect, useMemo, useState } from "react";
-import { questions } from "@/config/questions";
+import { questions, scoredQuestionCount } from "@/config/questions";
 import { texts } from "@/config/texts";
 import type { QuizAnswers, QuizQuestion } from "@/config/types";
 import { calculateScore, getQuizResult } from "@/lib/quiz";
@@ -37,7 +37,11 @@ export function QuizFlow() {
   const currentQuestion: QuizQuestion = questions[questionIndex];
   const result = useMemo(() => getQuizResult(answers), [answers]);
   const score = useMemo(() => calculateScore(answers).score, [answers]);
-  const progress = step === "questions" ? ((questionIndex + 1) / questions.length) * 100 : step === "intro" || step === "attention" ? 0 : 100;
+  const isTransitionQuestion = currentQuestion?.id.startsWith("transition-");
+  const answeredScoredQuestions = questions
+    .slice(0, questionIndex + 1)
+    .filter((question) => question.id.startsWith("statement-")).length;
+  const progress = step === "questions" ? (answeredScoredQuestions / scoredQuestionCount) * 100 : step === "intro" || step === "attention" ? 0 : 100;
   const selectedMultipleOptions = Array.isArray(answers[currentQuestion?.id]) ? answers[currentQuestion.id] : [];
 
   useEffect(() => {
@@ -173,11 +177,11 @@ export function QuizFlow() {
           )}
         </header>
 
-        {step === "questions" && (
+        {step === "questions" && !isTransitionQuestion && (
           <div className="px-6 pt-6 sm:px-10">
             <div className="mb-3 flex items-center justify-between gap-4 text-xs uppercase tracking-[0.16em] text-[#f8eee5]/55">
               <span>{texts.progress.label}</span>
-              <span>{formatText(texts.progress.questionLabel, { current: questionIndex + 1, total: questions.length })}</span>
+              <span>{formatText(texts.progress.questionLabel, { current: answeredScoredQuestions, total: scoredQuestionCount })}</span>
             </div>
             <div className="h-1 overflow-hidden bg-white/10" aria-hidden="true">
               <div className="h-full bg-[#d8af7a] transition-all duration-300 ease-out" style={{ width: `${progress}%` }} />
@@ -236,8 +240,7 @@ export function QuizFlow() {
 
           {step === "reflection" && (
             <div className="mx-auto max-w-2xl animate-[fadeIn_500ms_ease-out] text-center">
-              <div className="text-5xl text-[#d8af7a]" aria-hidden="true">{texts.reflection.symbol}</div>
-              <div className="mx-auto mt-7 flex max-w-40 items-center gap-4 text-[#d8af7a]" aria-hidden="true"><span className="h-px flex-1 bg-current/70" /><span>✦</span><span className="h-px flex-1 bg-current/70" /></div>
+              <div className="mx-auto flex max-w-40 items-center gap-4 text-[#d8af7a]" aria-hidden="true"><span className="h-px flex-1 bg-current/70" /><span>✦</span><span className="h-px flex-1 bg-current/70" /></div>
               <h1 className="mt-12 font-serif text-3xl leading-snug sm:text-5xl">{texts.reflection.title}</h1>
               <p className="mt-8 text-sm font-medium uppercase tracking-[0.28em] text-[#d8af7a]">{texts.reflection.remainingLabel}</p>
               <button type="button" onClick={continueToFinalQuestions} className="quiz-gold-button mt-12 rounded-full px-10 py-4 text-sm font-semibold uppercase tracking-[0.16em] text-[#28101d] transition focus:outline-none focus:ring-2 focus:ring-[#e6c18a] focus:ring-offset-2 focus:ring-offset-[#452338]">{texts.reflection.continueLabel}</button>
