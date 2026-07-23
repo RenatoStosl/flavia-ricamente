@@ -340,6 +340,15 @@ export function QuizFlow() {
           )}
         </section>
       </div>
+      <a
+        href={texts.social.instagramUrl}
+        target="_blank"
+        rel="noreferrer"
+        className="fixed bottom-4 left-1/2 z-20 -translate-x-1/2 rounded-full border border-[#d8af7a]/45 bg-[#351827]/90 px-4 py-2 text-xs tracking-[0.08em] text-[#f8eee5]/80 shadow-lg shadow-black/25 backdrop-blur transition hover:border-[#d8af7a] hover:text-[#d8af7a] focus:outline-none focus:ring-2 focus:ring-[#e6c18a]"
+        aria-label={`Instagram ${texts.social.instagramLabel}`}
+      >
+        {texts.social.instagramLabel}
+      </a>
     </main>
   );
 }

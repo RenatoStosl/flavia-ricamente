@@ -1,5 +1,9 @@
 export const texts = {
   brand: "Flávia RicaMente",
+  social: {
+    instagramLabel: "@flaviaricamente",
+    instagramUrl: "https://www.instagram.com/flaviaricamente",
+  },
   assets: {
     mfp: {
       src: "/image/mfp.jpeg",
