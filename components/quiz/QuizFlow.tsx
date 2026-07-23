@@ -174,7 +174,7 @@ export function QuizFlow() {
             <img src={texts.assets.cim.src} alt={texts.assets.cim.alt} className="h-11 w-11 rounded-full border border-[#d8af7a]/50 object-cover" />
           </a>
           {step !== "intro" && step !== "attention" && step !== "reflection" && step !== "manual-offer" && (
-            <span className="text-xs font-medium uppercase tracking-[0.2em] text-[#f8eee5]/55">{texts.progress.label}</span>
+            <span className="text-xs font-normal uppercase tracking-[0.2em] text-[#f8eee5]/55">{texts.progress.label}</span>
           )}
         </header>
 
@@ -196,10 +196,10 @@ export function QuizFlow() {
               <div className="mx-auto mb-5 aspect-square w-24 overflow-hidden rounded-full border border-[#d8af7a]/60 shadow-xl shadow-black/20 sm:w-28">
                 <img src={texts.assets.mfp.src} alt={texts.assets.mfp.alt} className="h-full w-full scale-[1.35] object-cover" />
               </div>
-              <p className="mb-4 text-[0.68rem] font-medium uppercase tracking-[0.24em] text-[#d8af7a] sm:text-xs sm:tracking-[0.28em]">{texts.intro.eyebrow}</p>
-              <h1 className="font-serif text-3xl leading-tight sm:text-4xl">{texts.intro.title}</h1>
+              <p className="mb-4 text-[0.68rem] font-normal uppercase tracking-[0.24em] text-[#d8af7a] sm:text-xs sm:tracking-[0.28em]">{texts.intro.eyebrow}</p>
+              <h1 className="font-serif text-3xl leading-tight sm:text-[2.1rem]">{texts.intro.title}</h1>
               <p className="mx-auto mt-4 max-w-lg text-sm leading-6 text-[#f8eee5]/65 sm:text-base sm:leading-7">{texts.intro.description}</p>
-              <button type="button" onClick={() => setStep("attention")} className="quiz-gold-button mt-7 rounded-full px-7 py-3.5 text-sm font-semibold uppercase tracking-[0.12em] text-[#28101d] transition focus:outline-none focus:ring-2 focus:ring-[#e6c18a] focus:ring-offset-2 focus:ring-offset-[#452338]">
+              <button type="button" onClick={() => setStep("attention")} className="quiz-gold-button mt-7 rounded-full px-7 py-3.5 text-sm font-medium uppercase tracking-[0.12em] text-[#28101d] transition focus:outline-none focus:ring-2 focus:ring-[#e6c18a] focus:ring-offset-2 focus:ring-offset-[#452338]">
                 {texts.intro.startLabel}
               </button>
               <p className="mt-3 text-sm text-[#f8eee5]/45">{texts.intro.duration}</p>
@@ -211,8 +211,8 @@ export function QuizFlow() {
               className="mx-auto w-full max-w-lg animate-[fadeIn_500ms_ease-out]"
               onSubmit={submitLead}
             >
-              <p className="mb-5 text-center text-xs font-medium uppercase tracking-[0.28em] text-[#d8af7a]">{texts.intro.eyebrow}</p>
-              <h1 className="text-center font-serif text-4xl leading-tight sm:text-5xl">{texts.lead.title}</h1>
+              <p className="mb-5 text-center text-xs font-normal uppercase tracking-[0.28em] text-[#d8af7a]">{texts.intro.eyebrow}</p>
+              <h1 className="text-center font-serif text-3xl leading-tight sm:text-4xl">{texts.lead.title}</h1>
               <p className="mx-auto mt-5 max-w-md text-center leading-7 text-[#f8eee5]/65">{texts.lead.description}</p>
               <div className="mt-9 grid gap-4">
                 <label className="grid gap-2 text-sm text-[#f8eee5]/80">
@@ -225,17 +225,17 @@ export function QuizFlow() {
                 </label>
               </div>
               {leadError && <p className="mt-5 text-center text-sm text-[#f4c7c7]" role="alert">{leadError}</p>}
-              <button type="submit" disabled={isSaving} className="quiz-gold-button mt-8 w-full rounded-full px-7 py-4 text-sm font-semibold uppercase tracking-[0.12em] text-[#28101d] transition focus:outline-none focus:ring-2 focus:ring-[#e6c18a] focus:ring-offset-2 focus:ring-offset-[#452338] disabled:cursor-wait disabled:opacity-70">{isSaving ? texts.saving.label : texts.lead.submitLabel}</button>
+              <button type="submit" disabled={isSaving} className="quiz-gold-button mt-8 w-full rounded-full px-7 py-4 text-sm font-medium uppercase tracking-[0.12em] text-[#28101d] transition focus:outline-none focus:ring-2 focus:ring-[#e6c18a] focus:ring-offset-2 focus:ring-offset-[#452338] disabled:cursor-wait disabled:opacity-70">{isSaving ? texts.saving.label : texts.lead.submitLabel}</button>
               <p className="mt-4 text-center text-xs leading-5 text-[#f8eee5]/45">{texts.lead.privacy}</p>
             </form>
           )}
 
           {step === "attention" && (
             <div className="mx-auto max-w-xl animate-[fadeIn_500ms_ease-out] text-center">
-              <p className="mb-5 text-xs font-medium uppercase tracking-[0.28em] text-[#d8af7a]">{texts.attention.eyebrow}</p>
-              <h1 className="font-serif text-4xl leading-tight sm:text-5xl">{texts.attention.title}</h1>
-              <p className="mx-auto mt-6 max-w-lg text-base leading-7 text-[#f8eee5]/65 sm:text-lg">{texts.attention.description}</p>
-              <button type="button" onClick={() => { setStartedAt(Date.now()); setStep("questions"); }} className="quiz-gold-button mt-10 rounded-full px-7 py-4 text-sm font-semibold uppercase tracking-[0.12em] text-[#28101d] transition focus:outline-none focus:ring-2 focus:ring-[#e6c18a] focus:ring-offset-2 focus:ring-offset-[#452338]">
+              <p className="mb-5 text-xs font-normal uppercase tracking-[0.28em] text-[#d8af7a]">{texts.attention.eyebrow}</p>
+              <h1 className="font-serif text-3xl leading-tight sm:text-4xl">{texts.attention.title}</h1>
+              <p className="mx-auto mt-6 max-w-lg text-sm leading-6 text-[#f8eee5]/65 sm:text-base sm:leading-7">{texts.attention.description}</p>
+              <button type="button" onClick={() => { setStartedAt(Date.now()); setStep("questions"); }} className="quiz-gold-button mt-10 rounded-full px-7 py-4 text-sm font-medium uppercase tracking-[0.12em] text-[#28101d] transition focus:outline-none focus:ring-2 focus:ring-[#e6c18a] focus:ring-offset-2 focus:ring-offset-[#452338]">
                 {texts.attention.continueLabel}
               </button>
             </div>
@@ -244,15 +244,15 @@ export function QuizFlow() {
           {step === "reflection" && (
             <div className="mx-auto max-w-2xl animate-[fadeIn_500ms_ease-out] text-center">
               <div className="mx-auto flex max-w-40 items-center gap-4 text-[#d8af7a]" aria-hidden="true"><span className="h-px flex-1 bg-current/70" /><span>✦</span><span className="h-px flex-1 bg-current/70" /></div>
-              <h1 className="mt-12 font-serif text-3xl leading-snug sm:text-5xl">{texts.reflection.title}</h1>
-              <p className="mt-8 text-sm font-medium uppercase tracking-[0.28em] text-[#d8af7a]">{texts.reflection.remainingLabel}</p>
-              <button type="button" onClick={continueToFinalQuestions} className="quiz-gold-button mt-12 rounded-full px-10 py-4 text-sm font-semibold uppercase tracking-[0.16em] text-[#28101d] transition focus:outline-none focus:ring-2 focus:ring-[#e6c18a] focus:ring-offset-2 focus:ring-offset-[#452338]">{texts.reflection.continueLabel}</button>
+              <h1 className="mt-12 font-serif text-2xl leading-snug sm:text-4xl">{texts.reflection.title}</h1>
+              <p className="mt-8 text-sm font-normal uppercase tracking-[0.28em] text-[#d8af7a]">{texts.reflection.remainingLabel}</p>
+              <button type="button" onClick={continueToFinalQuestions} className="quiz-gold-button mt-12 rounded-full px-10 py-4 text-sm font-medium uppercase tracking-[0.16em] text-[#28101d] transition focus:outline-none focus:ring-2 focus:ring-[#e6c18a] focus:ring-offset-2 focus:ring-offset-[#452338]">{texts.reflection.continueLabel}</button>
             </div>
           )}
 
           {step === "questions" && (
             <div key={currentQuestion.id} className={`mx-auto w-full max-w-xl ${isTransitioning ? "animate-[fadeOut_360ms_ease-in_forwards]" : "animate-[slideIn_360ms_ease-out]"}`}>
-              <h1 className="font-serif text-2xl leading-snug sm:text-3xl">{currentQuestion.title}</h1>
+              <h1 className="font-serif text-xl leading-snug sm:text-2xl">{currentQuestion.title}</h1>
               {currentQuestion.description && <p className="mt-4 text-[#f8eee5]/60">{currentQuestion.description}</p>}
               <div className="mt-9 grid gap-3" role="list">
                 {currentQuestion.options.map((option) => {
@@ -270,7 +270,7 @@ export function QuizFlow() {
                 })}
               </div>
               {currentQuestion.selectionMode === "multiple" && (
-                <button type="button" onClick={continueMultipleQuestion} disabled={selectedMultipleOptions.length === 0 || isTransitioning} className="quiz-gold-button mt-7 rounded-full px-7 py-4 text-sm font-semibold uppercase tracking-[0.12em] text-[#28101d] transition disabled:cursor-not-allowed disabled:opacity-40">
+                <button type="button" onClick={continueMultipleQuestion} disabled={selectedMultipleOptions.length === 0 || isTransitioning} className="quiz-gold-button mt-7 rounded-full px-7 py-4 text-sm font-medium uppercase tracking-[0.12em] text-[#28101d] transition disabled:cursor-not-allowed disabled:opacity-40">
                   {texts.questions.multipleContinueLabel}
                 </button>
               )}
