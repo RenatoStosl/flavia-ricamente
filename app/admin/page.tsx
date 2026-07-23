@@ -7,7 +7,11 @@ type LevelRow = { level: string; total: number | string };
 type ResponseRow = { id: number | string; name: string; phone: string; level: string; created_at: string };
 
 function formattedDate(value: string) {
-  return new Intl.DateTimeFormat("pt-BR", { dateStyle: "short", timeStyle: "short" }).format(new Date(value));
+  return new Intl.DateTimeFormat("pt-BR", {
+    dateStyle: "short",
+    timeStyle: "short",
+    timeZone: "America/Sao_Paulo",
+  }).format(new Date(value));
 }
 
 export default async function AdminPage() {
@@ -39,7 +43,7 @@ export default async function AdminPage() {
         </section>
         <section className="quiz-surface mt-8 overflow-hidden rounded-[20px] border">
           <div className="border-b border-[#c4946f]/20 px-6 py-5"><h2 className="font-serif text-2xl">Respostas</h2></div>
-          <div className="overflow-x-auto"><table className="w-full min-w-[640px] text-left text-sm"><thead className="bg-black/10 text-xs uppercase tracking-[0.12em] text-[#f8eee5]/55"><tr><th className="px-6 py-4">Nome</th><th className="px-6 py-4">WhatsApp</th><th className="px-6 py-4">Resultado</th><th className="px-6 py-4">Data</th></tr></thead><tbody>{responses.map((response) => <tr key={response.id} className="border-t border-[#c4946f]/15 text-[#f8eee5]/80 transition hover:bg-white/[0.03]"><td className="px-6 py-4 font-medium text-[#f8eee5]"><Link className="hover:text-[#d8af7a]" href={`/admin/responses/${response.id}`}>{response.name}</Link></td><td className="px-6 py-4">{response.phone}</td><td className="px-6 py-4">{response.level}</td><td className="px-6 py-4">{formattedDate(response.created_at)}</td></tr>)}</tbody></table></div>
+          <div className="overflow-x-auto"><table className="w-full min-w-[640px] text-left text-sm"><thead className="bg-black/10 text-xs uppercase tracking-[0.12em] text-[#f8eee5]/55"><tr><th className="px-6 py-4">Nome</th><th className="px-6 py-4">WhatsApp</th><th className="px-6 py-4">Resultado</th><th className="px-6 py-4">Data (Brasília)</th></tr></thead><tbody>{responses.map((response) => <tr key={response.id} className="border-t border-[#c4946f]/15 text-[#f8eee5]/80 transition hover:bg-white/[0.03]"><td className="px-6 py-4 font-medium text-[#f8eee5]"><Link className="hover:text-[#d8af7a]" href={`/admin/responses/${response.id}`}>{response.name}</Link></td><td className="px-6 py-4">{response.phone}</td><td className="px-6 py-4">{response.level}</td><td className="px-6 py-4">{formattedDate(response.created_at)}</td></tr>)}</tbody></table></div>
           {responses.length === 0 && <p className="px-6 py-12 text-center text-[#f8eee5]/55">Nenhuma resposta registrada ainda.</p>}
         </section>
       </div>
