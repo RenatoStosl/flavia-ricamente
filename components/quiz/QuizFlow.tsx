@@ -102,6 +102,14 @@ export function QuizFlow() {
     return digits.length === 10 || digits.length === 11;
   }
 
+  function formatPhone(value: string) {
+    const digits = value.replace(/\D/g, "").slice(0, 11);
+    if (digits.length <= 2) return digits ? `(${digits}` : "";
+    if (digits.length <= 6) return `(${digits.slice(0, 2)}) ${digits.slice(2)}`;
+    if (digits.length <= 10) return `(${digits.slice(0, 2)}) ${digits.slice(2, 6)}-${digits.slice(6)}`;
+    return `(${digits.slice(0, 2)}) ${digits.slice(2, 7)}-${digits.slice(7)}`;
+  }
+
   async function submitLead(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (isSaving) return;
@@ -190,7 +198,7 @@ export function QuizFlow() {
                 </label>
                 <label className="grid gap-2 text-sm text-[#f8eee5]/80">
                   {texts.lead.phoneLabel}
-                  <input required type="tel" maxLength={20} autoComplete="tel" inputMode="tel" placeholder={texts.lead.phonePlaceholder} value={lead.phone} onChange={(event) => { const value = event.target.value; event.currentTarget.setCustomValidity(value === "" || isValidPhone(value) ? "" : texts.lead.phoneError); setLead((current) => ({ ...current, phone: value })); }} onInvalid={(event) => event.currentTarget.setCustomValidity(texts.lead.phoneError)} className="quiz-option rounded-[14px] border px-4 py-3.5 text-base text-[#f8eee5] outline-none transition placeholder:text-[#f8eee5]/35 focus:border-[#d8af7a] focus:ring-2 focus:ring-[#d8af7a]/30" />
+                  <input required type="tel" maxLength={15} autoComplete="tel" inputMode="numeric" placeholder={texts.lead.phonePlaceholder} value={lead.phone} onChange={(event) => { const value = formatPhone(event.target.value); event.currentTarget.setCustomValidity(value === "" || isValidPhone(value) ? "" : texts.lead.phoneError); setLead((current) => ({ ...current, phone: value })); }} onInvalid={(event) => event.currentTarget.setCustomValidity(texts.lead.phoneError)} className="quiz-option rounded-[14px] border px-4 py-3.5 text-base text-[#f8eee5] outline-none transition placeholder:text-[#f8eee5]/35 focus:border-[#d8af7a] focus:ring-2 focus:ring-[#d8af7a]/30" />
                 </label>
               </div>
               {leadError && <p className="mt-5 text-center text-sm text-[#f4c7c7]" role="alert">{leadError}</p>}
