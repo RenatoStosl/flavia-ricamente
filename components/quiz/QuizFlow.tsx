@@ -23,6 +23,12 @@ function formatText(template: string, values: Record<string, string | number>): 
   );
 }
 
+function joinPortuguese(items: string[]): string {
+  if (items.length <= 1) return items[0] ?? "";
+  if (items.length === 2) return items.join(" e ");
+  return `${items.slice(0, -1).join(", ")} e ${items.at(-1)}`;
+}
+
 function CimLogo({ className }: { className: string }) {
   return (
     <div className={`${className} aspect-square overflow-hidden rounded-full border border-[#d8af7a]/60 shadow-xl shadow-black/20`}>
@@ -61,16 +67,20 @@ export function QuizFlow() {
   const progress = step === "questions" ? (answeredScoredQuestions / scoredQuestionCount) * 100 : step === "intro" || step === "attention" ? 0 : 100;
   const selectedMultipleOptions = Array.isArray(answers[currentQuestion?.id]) ? answers[currentQuestion.id] : [];
   const selectedLeaveBehind = answers["leave-behind"];
-  const manualPersonalizations = Array.isArray(selectedLeaveBehind)
+  const selectedLeaveBehindItems = Array.isArray(selectedLeaveBehind)
     ? selectedLeaveBehind
         .map(
           (optionId) =>
-            texts.manualOffer.personalizationByLeaveBehind[
-              optionId as keyof typeof texts.manualOffer.personalizationByLeaveBehind
+            texts.manualOffer.personalizationItems[
+              optionId as keyof typeof texts.manualOffer.personalizationItems
             ],
         )
         .filter((message): message is NonNullable<typeof message> => Boolean(message))
     : [];
+  const firstName = lead.name.trim().split(/\s+/)[0] || lead.name;
+  const manualPersonalization = selectedLeaveBehindItems.length > 0
+    ? formatText(texts.manualOffer.personalizationTemplate, { name: firstName, items: joinPortuguese(selectedLeaveBehindItems) })
+    : formatText(texts.manualOffer.personalizationFallback, { name: firstName });
 
   useEffect(() => {
     if (step !== "processing") return;
@@ -196,14 +206,16 @@ export function QuizFlow() {
   return (
     <main className="quiz-page min-h-screen px-5 py-6 text-[#f8eee5] sm:px-8 sm:py-10">
       <div className="quiz-surface mx-auto flex min-h-[calc(100vh-3rem)] w-full max-w-3xl flex-col rounded-[20px] border shadow-2xl shadow-black/30 sm:min-h-[calc(100vh-5rem)]">
-        <header className="relative flex min-h-[5.25rem] items-center justify-center border-b border-[#c4946f]/25 px-6 py-4 sm:px-10">
-          <a href="/" aria-label={texts.brand}>
-            <CimLogo className="h-11 w-11" />
-          </a>
-          {step !== "intro" && step !== "attention" && step !== "reflection" && step !== "manual-offer" && (
-            <span className="absolute right-6 text-xs font-normal uppercase tracking-[0.2em] text-[#f8eee5]/55 sm:right-10">{texts.progress.label}</span>
-          )}
-        </header>
+        {step !== "intro" && step !== "manual-offer" && (
+          <header className="relative flex min-h-[5.25rem] items-center justify-center border-b border-[#c4946f]/25 px-6 py-4 sm:px-10">
+            <a href="/" aria-label={texts.brand}>
+              <CimLogo className="h-11 w-11" />
+            </a>
+            {step !== "attention" && step !== "reflection" && (
+              <span className="absolute right-6 text-xs font-normal uppercase tracking-[0.2em] text-[#f8eee5]/55 sm:right-10">{texts.progress.label}</span>
+            )}
+          </header>
+        )}
 
         {step === "questions" && !isTransitionQuestion && !isFinalQuestion && (
           <div className="px-6 pt-6 sm:px-10">
@@ -220,9 +232,7 @@ export function QuizFlow() {
         <section className={`flex flex-1 items-center px-6 sm:px-10 ${step === "intro" ? "py-8 sm:py-10" : "py-12 sm:py-16"}`}>
           {step === "intro" && (
             <div className="mx-auto max-w-2xl animate-[fadeIn_500ms_ease-out] text-center">
-              <div className="mx-auto mb-5 aspect-square w-24 overflow-hidden rounded-full border border-[#d8af7a]/60 shadow-xl shadow-black/20 sm:w-28">
-                <img src={texts.assets.mfp.src} alt={texts.assets.mfp.alt} className="h-full w-full scale-[1.35] object-cover" />
-              </div>
+              <CimLogo className="mx-auto mb-5 w-32 sm:w-36" />
               <p className="mb-4 text-[0.68rem] font-normal uppercase tracking-[0.24em] text-[#d8af7a] sm:text-xs sm:tracking-[0.28em]">{texts.intro.eyebrow}</p>
               <h1 className="font-serif text-3xl leading-tight sm:text-[2.1rem]">{texts.intro.title}</h1>
               <p className="mx-auto mt-4 max-w-lg text-sm leading-6 text-[#f8eee5]/65 sm:text-base sm:leading-7">{texts.intro.description}</p>
@@ -337,18 +347,14 @@ export function QuizFlow() {
 
           {step === "manual-offer" && (
             <div className="mx-auto max-w-2xl animate-[fadeIn_500ms_ease-out] text-center">
-              <CimLogo className="mx-auto w-32" />
+              <MfpLogo className="mx-auto w-32" />
               <div className="mx-auto mt-9 flex max-w-40 items-center gap-4 text-[#d8af7a]" aria-hidden="true"><span className="h-px flex-1 bg-current/70" /><span>✦</span><span className="h-px flex-1 bg-current/70" /></div>
               <h1 className="mt-10 font-serif text-3xl leading-tight text-[#d8af7a] sm:text-4xl">{texts.manualOffer.title}</h1>
               <p className="mt-8 text-base leading-7 text-[#f8eee5]/90">{texts.manualOffer.description}</p>
               <p className="mt-9 rounded-[18px] border border-[#d8af7a]/45 bg-black/10 p-6 text-left text-base leading-7 text-[#f8eee5]">{texts.manualOffer.highlight}</p>
               <p className="mt-10 text-xs font-normal uppercase tracking-[0.28em] text-[#d8af7a]">{texts.manualOffer.label}</p>
               <p className="mt-3 font-serif text-4xl text-[#f8eee5]">{texts.manualOffer.price}</p>
-              <div className="mt-6 space-y-3 text-base italic leading-7 text-[#d8af7a]">
-                {(manualPersonalizations.length > 0 ? manualPersonalizations : [texts.manualOffer.personalizationFallback]).map((message) => (
-                  <p key={message}>{formatText(message, { name: lead.name.trim().split(/\s+/)[0] || lead.name })}</p>
-                ))}
-              </div>
+              <p className="mt-6 text-base italic leading-7 text-[#d8af7a]">{manualPersonalization}</p>
               {texts.manualOffer.ctaUrl ? <a href={texts.manualOffer.ctaUrl} target="_blank" rel="noreferrer" className="quiz-gold-button mt-9 inline-flex rounded-full px-8 py-4 text-sm font-medium uppercase tracking-[0.12em] text-[#28101d]">{texts.manualOffer.ctaLabel}</a> : <button type="button" disabled className="quiz-gold-button mt-9 inline-flex cursor-not-allowed rounded-full px-8 py-4 text-sm font-medium uppercase tracking-[0.12em] text-[#28101d] opacity-60">{texts.manualOffer.unavailableLabel}</button>}
               <p className="mt-6 text-xs font-normal uppercase tracking-[0.2em] text-[#f8eee5]/45">{texts.manualOffer.footer}</p>
             </div>
