@@ -23,6 +23,22 @@ function formatText(template: string, values: Record<string, string | number>): 
   );
 }
 
+function CimLogo({ className }: { className: string }) {
+  return (
+    <div className={`${className} aspect-square overflow-hidden rounded-full border border-[#d8af7a]/60 shadow-xl shadow-black/20`}>
+      <img src={texts.assets.cim.src} alt={texts.assets.cim.alt} className="h-full w-full scale-[1.35] object-cover" />
+    </div>
+  );
+}
+
+function MfpLogo({ className }: { className: string }) {
+  return (
+    <div className={`${className} aspect-square overflow-hidden rounded-full border border-[#d8af7a]/60 shadow-xl shadow-black/20`}>
+      <img src={texts.assets.mfp.src} alt={texts.assets.mfp.alt} className="h-full w-full scale-[1.35] object-cover" />
+    </div>
+  );
+}
+
 export function QuizFlow() {
   const [step, setStep] = useState<QuizStep>("intro");
   const [questionIndex, setQuestionIndex] = useState(0);
@@ -169,12 +185,12 @@ export function QuizFlow() {
   return (
     <main className="quiz-page min-h-screen px-5 py-6 text-[#f8eee5] sm:px-8 sm:py-10">
       <div className="quiz-surface mx-auto flex min-h-[calc(100vh-3rem)] w-full max-w-3xl flex-col rounded-[20px] border shadow-2xl shadow-black/30 sm:min-h-[calc(100vh-5rem)]">
-        <header className="flex items-center justify-between border-b border-[#c4946f]/25 px-6 py-5 sm:px-10">
+        <header className="relative flex min-h-[5.25rem] items-center justify-center border-b border-[#c4946f]/25 px-6 py-4 sm:px-10">
           <a href="/" aria-label={texts.brand}>
-            <img src={texts.assets.cim.src} alt={texts.assets.cim.alt} className="h-11 w-11 rounded-full border border-[#d8af7a]/50 object-cover" />
+            <CimLogo className="h-11 w-11" />
           </a>
           {step !== "intro" && step !== "attention" && step !== "reflection" && step !== "manual-offer" && (
-            <span className="text-xs font-normal uppercase tracking-[0.2em] text-[#f8eee5]/55">{texts.progress.label}</span>
+            <span className="absolute right-6 text-xs font-normal uppercase tracking-[0.2em] text-[#f8eee5]/55 sm:right-10">{texts.progress.label}</span>
           )}
         </header>
 
@@ -287,7 +303,7 @@ export function QuizFlow() {
 
           {step === "result" && result && (
             <div className="mx-auto max-w-2xl animate-[fadeIn_500ms_ease-out] text-center">
-              <img src={texts.assets.cim.src} alt={texts.assets.cim.alt} className="mx-auto mb-7 w-28 rounded-full border border-[#d8af7a]/65 shadow-xl shadow-black/20" />
+              <MfpLogo className="mx-auto mb-7 w-28" />
               <p className="text-xs font-normal uppercase tracking-[0.28em] text-[#d8af7a]">{formatText(texts.result.personalizedTitle, { name: lead.name.trim().split(/\s+/)[0] || lead.name })}</p>
               <h1 className="mt-4 font-serif text-3xl leading-tight text-[#d8af7a] sm:text-4xl">{result.title}</h1>
               <p className="mt-3 text-xs font-normal uppercase tracking-[0.2em] text-[#f8eee5]/70">{score} pontos · {result.level}</p>
@@ -309,7 +325,7 @@ export function QuizFlow() {
 
           {step === "manual-offer" && (
             <div className="mx-auto max-w-2xl animate-[fadeIn_500ms_ease-out] text-center">
-              <img src={texts.assets.cim.src} alt={texts.assets.cim.alt} className="mx-auto w-32 rounded-full border border-[#d8af7a]/65 shadow-xl shadow-black/20" />
+              <CimLogo className="mx-auto w-32" />
               <div className="mx-auto mt-9 flex max-w-40 items-center gap-4 text-[#d8af7a]" aria-hidden="true"><span className="h-px flex-1 bg-current/70" /><span>✦</span><span className="h-px flex-1 bg-current/70" /></div>
               <h1 className="mt-10 font-serif text-3xl leading-tight text-[#d8af7a] sm:text-4xl">{texts.manualOffer.title}</h1>
               <p className="mt-8 text-base leading-7 text-[#f8eee5]/90">{texts.manualOffer.description}</p>
