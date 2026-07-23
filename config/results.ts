@@ -5,8 +5,8 @@ export const results = [
   {
     id: "survival",
     level: "Nível 1",
-    minScore: 27,
-    maxScore: 54,
+    minScore: -43,
+    maxScore: -6,
     title: "Frequência da Sobrevivência",
     sections: [
       {
@@ -55,8 +55,8 @@ export const results = [
   {
     id: "oscillation",
     level: "Nível 2",
-    minScore: 55,
-    maxScore: 81,
+    minScore: -5,
+    maxScore: 31,
     title: "Frequência da Oscilação",
     sections: [
       {
@@ -100,8 +100,8 @@ export const results = [
   {
     id: "prosperity",
     level: "Nível 3",
-    minScore: 82,
-    maxScore: 108,
+    minScore: 32,
+    maxScore: 68,
     title: "Frequência da Prosperidade",
     sections: [
       {
