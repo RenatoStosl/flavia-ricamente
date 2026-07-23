@@ -218,6 +218,7 @@ export function QuizFlow() {
               <button type="button" onClick={() => setStep("attention")} className="quiz-gold-button mt-7 rounded-full px-7 py-3.5 text-sm font-medium uppercase tracking-[0.12em] text-[#28101d] transition focus:outline-none focus:ring-2 focus:ring-[#e6c18a] focus:ring-offset-2 focus:ring-offset-[#452338]">
                 {texts.intro.startLabel}
               </button>
+              <p className="mt-5 text-xs font-normal uppercase tracking-[0.2em] text-[#d8af7a]/85">{texts.intro.pillars}</p>
               <p className="mt-3 text-sm text-[#f8eee5]/45">{texts.intro.duration}</p>
             </div>
           )}

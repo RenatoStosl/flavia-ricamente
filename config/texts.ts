@@ -16,6 +16,7 @@ export const texts = {
     description:
       "Descubra as ameaças e encontre a solução.",
     startLabel: "Começar com sinceridade",
+    pillars: "C.i.M Corpo – Investimentos – Mentalidade",
     duration: "Leva cerca de 3 minutos",
   },
   attention: {
