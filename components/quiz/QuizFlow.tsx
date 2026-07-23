@@ -26,7 +26,7 @@ function formatText(template: string, values: Record<string, string | number>): 
 function CimLogo({ className }: { className: string }) {
   return (
     <div className={`${className} aspect-square overflow-hidden rounded-full border border-[#d8af7a]/60 shadow-xl shadow-black/20`}>
-      <img src={texts.assets.cim.src} alt={texts.assets.cim.alt} className="h-full w-full scale-[1.35] object-cover" />
+      <img src={texts.assets.cim.src} alt={texts.assets.cim.alt} className="h-full w-full scale-150 object-cover" />
     </div>
   );
 }
