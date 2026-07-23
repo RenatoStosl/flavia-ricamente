@@ -193,7 +193,9 @@ export function QuizFlow() {
         <section className={`flex flex-1 items-center px-6 sm:px-10 ${step === "intro" ? "py-8 sm:py-10" : "py-12 sm:py-16"}`}>
           {step === "intro" && (
             <div className="mx-auto max-w-2xl animate-[fadeIn_500ms_ease-out] text-center">
-              <img src={texts.assets.mfp.src} alt={texts.assets.mfp.alt} className="mx-auto mb-5 aspect-square w-24 rounded-full border border-[#d8af7a]/60 object-cover shadow-xl shadow-black/20 sm:w-28" />
+              <div className="mx-auto mb-5 aspect-square w-24 overflow-hidden rounded-full border border-[#d8af7a]/60 shadow-xl shadow-black/20 sm:w-28">
+                <img src={texts.assets.mfp.src} alt={texts.assets.mfp.alt} className="h-full w-full scale-[1.35] object-cover" />
+              </div>
               <p className="mb-4 text-[0.68rem] font-medium uppercase tracking-[0.24em] text-[#d8af7a] sm:text-xs sm:tracking-[0.28em]">{texts.intro.eyebrow}</p>
               <h1 className="font-serif text-3xl leading-tight sm:text-4xl">{texts.intro.title}</h1>
               <p className="mx-auto mt-4 max-w-lg text-sm leading-6 text-[#f8eee5]/65 sm:text-base sm:leading-7">{texts.intro.description}</p>
