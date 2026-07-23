@@ -308,7 +308,7 @@ export function QuizFlow() {
                 })}
               </div>
               {currentQuestion.selectionMode === "multiple" && (
-                <button type="button" onClick={continueMultipleQuestion} disabled={selectedMultipleOptions.length === 0 || isTransitioning} className="quiz-gold-button mt-7 rounded-full px-7 py-4 text-sm font-medium uppercase tracking-[0.12em] text-[#28101d] transition disabled:cursor-not-allowed disabled:opacity-40">
+                <button type="button" onClick={continueMultipleQuestion} disabled={selectedMultipleOptions.length === 0 || isTransitioning} className="quiz-gold-button mx-auto mt-7 block rounded-full px-7 py-4 text-sm font-medium uppercase tracking-[0.12em] text-[#28101d] transition disabled:cursor-not-allowed disabled:opacity-40">
                   {texts.questions.multipleContinueLabel}
                 </button>
               )}
