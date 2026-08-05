@@ -50,7 +50,7 @@ export const results = [
       },
     ],
     ctaLabel: "Quero meu próximo passo",
-    ctaUrl: "https://wa.me/message/7LWVU3TUR4C4A1",
+    ctaUrl: "https://wa.me/553175357730",
   },
   {
     id: "oscillation",
@@ -95,7 +95,7 @@ export const results = [
       },
     ],
     ctaLabel: "Quero meu próximo passo",
-    ctaUrl: "https://wa.me/message/7LWVU3TUR4C4A1",
+    ctaUrl: "https://wa.me/553175357730",
   },
   {
     id: "prosperity",
@@ -134,6 +134,6 @@ export const results = [
       },
     ],
     ctaLabel: "Quero meu próximo passo",
-    ctaUrl: "https://wa.me/message/7LWVU3TUR4C4A1",
+    ctaUrl: "https://wa.me/553175357730",
   },
 ] as const satisfies readonly QuizResult[];
