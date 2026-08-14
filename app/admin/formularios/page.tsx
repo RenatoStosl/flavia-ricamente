@@ -1,0 +1,75 @@
+import Link from "next/link";
+import { requireAdmin } from "@/lib/admin";
+import { getDatabase } from "@/lib/db";
+
+type MetricsRow = { total: number | string; average_duration: number | string | null };
+type ApplicationRow = {
+  id: number | string;
+  created_at: string;
+  duration_seconds: number;
+  answers: Record<string, string>;
+};
+
+function formattedDate(value: string) {
+  return new Intl.DateTimeFormat("pt-BR", {
+    dateStyle: "short",
+    timeStyle: "short",
+    timeZone: "America/Sao_Paulo",
+  }).format(new Date(value));
+}
+
+export default async function FormsAdminPage() {
+  await requireAdmin();
+  const sql = getDatabase();
+  const [metricsRows, applicationRows] = await Promise.all([
+    sql`SELECT COUNT(*) AS total, ROUND(AVG(duration_seconds)) AS average_duration FROM mentorship_applications`,
+    sql`SELECT id, created_at, duration_seconds, answers FROM mentorship_applications ORDER BY created_at DESC LIMIT 150`,
+  ]);
+
+  const metrics = (metricsRows[0] ?? { total: 0, average_duration: null }) as MetricsRow;
+  const applications = applicationRows as ApplicationRow[];
+  const lastApplication = applications[0];
+
+  return (
+    <main className="quiz-page min-h-screen p-5 text-[#f8eee5] sm:p-10">
+      <div className="mx-auto max-w-6xl">
+        <header className="mb-10 flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#d8af7a]">Flávia RicaMente</p>
+            <h1 className="mt-2 font-serif text-4xl">Formulários recebidos</h1>
+          </div>
+          <div className="flex flex-wrap gap-3">
+            <a href="/api/admin/formularios/export" className="rounded-full border border-[#d8af7a]/50 px-5 py-3 text-sm font-medium transition hover:bg-white/10">Exportar CSV</a>
+            <form action="/api/admin/logout" method="post"><button className="rounded-full border border-white/20 px-5 py-3 text-sm text-[#f8eee5]/75 transition hover:bg-white/10">Sair</button></form>
+          </div>
+        </header>
+
+        <nav className="mb-8 flex flex-wrap gap-3" aria-label="Seções do painel">
+          <Link href="/admin" className="rounded-full border border-[#d8af7a]/50 px-5 py-3 text-sm font-medium transition hover:bg-white/10">Quiz diagnóstico</Link>
+          <span className="quiz-gold-button rounded-full px-5 py-3 text-sm font-medium text-[#28101d]">Formulários da mentoria</span>
+        </nav>
+
+        <section className="grid gap-4 sm:grid-cols-3">
+          <Metric label="Total de formulários" value={String(metrics.total)} />
+          <Metric label="Último formulário" value={lastApplication ? `Aplicação #${lastApplication.id}` : "—"} detail={lastApplication ? formattedDate(lastApplication.created_at) : undefined} />
+          <Metric label="Tempo médio" value={metrics.average_duration ? `${metrics.average_duration}s` : "—"} />
+        </section>
+
+        <section className="quiz-surface mt-8 overflow-hidden rounded-[20px] border">
+          <div className="border-b border-[#c4946f]/20 px-6 py-5"><h2 className="font-serif text-2xl">Aplicações para a mentoria</h2></div>
+          <div className="overflow-x-auto">
+            <table className="w-full min-w-[720px] text-left text-sm">
+              <thead className="bg-black/10 text-xs uppercase tracking-[0.12em] text-[#f8eee5]/55"><tr><th className="px-6 py-4">Aplicação</th><th className="px-6 py-4">Idade</th><th className="px-6 py-4">Profissão</th><th className="px-6 py-4">Investimento</th><th className="px-6 py-4">Data (Brasília)</th></tr></thead>
+              <tbody>{applications.map((application) => <tr key={application.id} className="border-t border-[#c4946f]/15 text-[#f8eee5]/80 transition hover:bg-white/[0.03]"><td className="px-6 py-4 font-medium"><Link className="text-[#f8eee5] hover:text-[#d8af7a]" href={`/admin/formularios/${application.id}`}>#{application.id}</Link></td><td className="px-6 py-4">{application.answers.age}</td><td className="max-w-xs px-6 py-4">{application.answers.profession}</td><td className="max-w-sm px-6 py-4">{application.answers["investment-readiness"]}</td><td className="whitespace-nowrap px-6 py-4">{formattedDate(application.created_at)}</td></tr>)}</tbody>
+            </table>
+          </div>
+          {applications.length === 0 && <p className="px-6 py-12 text-center text-[#f8eee5]/55">Nenhum formulário registrado ainda.</p>}
+        </section>
+      </div>
+    </main>
+  );
+}
+
+function Metric({ label, value, detail }: { label: string; value: string; detail?: string }) {
+  return <div className="quiz-surface rounded-[18px] border p-5"><p className="text-xs uppercase tracking-[0.14em] text-[#f8eee5]/50">{label}</p><p className="mt-3 font-serif text-2xl">{value}</p>{detail && <p className="mt-1 text-sm text-[#f8eee5]/55">{detail}</p>}</div>;
+}

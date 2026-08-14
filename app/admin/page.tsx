@@ -35,6 +35,10 @@ export default async function AdminPage() {
           <div><p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#d8af7a]">Flávia RicaMente</p><h1 className="mt-2 font-serif text-4xl">Diagnósticos recebidos</h1></div>
           <div className="flex gap-3"><a href="/api/admin/export" className="rounded-full border border-[#d8af7a]/50 px-5 py-3 text-sm font-medium text-[#f8eee5] transition hover:bg-white/10">Exportar CSV</a><form action="/api/admin/logout" method="post"><button className="rounded-full border border-white/20 px-5 py-3 text-sm text-[#f8eee5]/75 transition hover:bg-white/10">Sair</button></form></div>
         </header>
+        <nav className="mb-8 flex flex-wrap gap-3" aria-label="Seções do painel">
+          <span className="quiz-gold-button rounded-full px-5 py-3 text-sm font-medium text-[#28101d]">Quiz diagnóstico</span>
+          <Link href="/admin/formularios" className="rounded-full border border-[#d8af7a]/50 px-5 py-3 text-sm font-medium transition hover:bg-white/10">Formulários da mentoria</Link>
+        </nav>
         <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           <Metric label="Total de respostas" value={String(metrics.total)} />
           <Metric label="Resultado predominante" value={leadingLevel?.level ?? "—"} detail={leadingLevel ? `${leadingLevel.total} respostas` : undefined} />
