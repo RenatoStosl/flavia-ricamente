@@ -7,6 +7,8 @@ type ApplicationRow = {
   id: number | string;
   created_at: string;
   duration_seconds: number;
+  full_name: string | null;
+  email: string | null;
   answers: Record<string, string>;
 };
 
@@ -23,7 +25,7 @@ export default async function FormsAdminPage() {
   const sql = getDatabase();
   const [metricsRows, applicationRows] = await Promise.all([
     sql`SELECT COUNT(*) AS total, ROUND(AVG(duration_seconds)) AS average_duration FROM mentorship_applications`,
-    sql`SELECT id, created_at, duration_seconds, answers FROM mentorship_applications ORDER BY created_at DESC LIMIT 150`,
+    sql`SELECT id, created_at, full_name, email, duration_seconds, answers FROM mentorship_applications ORDER BY created_at DESC LIMIT 150`,
   ]);
 
   const metrics = (metricsRows[0] ?? { total: 0, average_duration: null }) as MetricsRow;
@@ -58,9 +60,9 @@ export default async function FormsAdminPage() {
         <section className="quiz-surface mt-8 overflow-hidden rounded-[20px] border">
           <div className="border-b border-[#c4946f]/20 px-6 py-5"><h2 className="font-serif text-2xl">Aplicações para a mentoria</h2></div>
           <div className="overflow-x-auto">
-            <table className="w-full min-w-[720px] text-left text-sm">
-              <thead className="bg-black/10 text-xs uppercase tracking-[0.12em] text-[#f8eee5]/55"><tr><th className="px-6 py-4">Aplicação</th><th className="px-6 py-4">Idade</th><th className="px-6 py-4">Profissão</th><th className="px-6 py-4">Investimento</th><th className="px-6 py-4">Data (Brasília)</th></tr></thead>
-              <tbody>{applications.map((application) => <tr key={application.id} className="border-t border-[#c4946f]/15 text-[#f8eee5]/80 transition hover:bg-white/[0.03]"><td className="px-6 py-4 font-medium"><Link className="text-[#f8eee5] hover:text-[#d8af7a]" href={`/admin/formularios/${application.id}`}>#{application.id}</Link></td><td className="px-6 py-4">{application.answers.age}</td><td className="max-w-xs px-6 py-4">{application.answers.profession}</td><td className="max-w-sm px-6 py-4">{application.answers["investment-readiness"]}</td><td className="whitespace-nowrap px-6 py-4">{formattedDate(application.created_at)}</td></tr>)}</tbody>
+            <table className="w-full min-w-[980px] text-left text-sm">
+              <thead className="bg-black/10 text-xs uppercase tracking-[0.12em] text-[#f8eee5]/55"><tr><th className="px-6 py-4">Nome</th><th className="px-6 py-4">E-mail</th><th className="px-6 py-4">Idade</th><th className="px-6 py-4">Profissão</th><th className="px-6 py-4">Investimento</th><th className="px-6 py-4">Data (Brasília)</th><th className="px-6 py-4 text-right">Ações</th></tr></thead>
+              <tbody>{applications.map((application) => <tr key={application.id} className="border-t border-[#c4946f]/15 text-[#f8eee5]/80 transition hover:bg-white/[0.03]"><td className="px-6 py-4 font-medium"><Link className="text-[#f8eee5] hover:text-[#d8af7a]" href={`/admin/formularios/${application.id}`}>{application.full_name ?? `Aplicação #${application.id}`}</Link></td><td className="px-6 py-4">{application.email ?? "—"}</td><td className="px-6 py-4">{application.answers.age}</td><td className="max-w-xs px-6 py-4">{application.answers.profession}</td><td className="max-w-sm px-6 py-4">{application.answers["investment-readiness"]}</td><td className="whitespace-nowrap px-6 py-4">{formattedDate(application.created_at)}</td><td className="px-6 py-4 text-right"><Link href={`/admin/formularios/${application.id}`} aria-label={`Ver todas as respostas da aplicação ${application.id}`} title="Ver todas as respostas" className="inline-flex items-center gap-2 whitespace-nowrap rounded-full border border-[#d8af7a]/50 px-4 py-2 text-sm font-medium text-[#d8af7a] transition hover:border-[#d8af7a] hover:bg-[#d8af7a]/10 focus:outline-none focus:ring-2 focus:ring-[#e6c18a]"><svg aria-hidden="true" viewBox="0 0 24 24" className="h-5 w-5 fill-none stroke-current stroke-[1.8]"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z"/><circle cx="12" cy="12" r="2.75"/></svg><span>Ver respostas</span></Link></td></tr>)}</tbody>
             </table>
           </div>
           {applications.length === 0 && <p className="px-6 py-12 text-center text-[#f8eee5]/55">Nenhum formulário registrado ainda.</p>}

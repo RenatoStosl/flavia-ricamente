@@ -6,6 +6,8 @@ import { getDatabase } from "@/lib/db";
 
 type ApplicationDetail = {
   id: number;
+  full_name: string | null;
+  email: string | null;
   answers: Record<string, string>;
   duration_seconds: number;
   created_at: string;
@@ -33,8 +35,10 @@ export default async function FormDetailPage({ params }: { params: Promise<{ id:
       <article className="quiz-surface mx-auto max-w-4xl rounded-[20px] border p-6 sm:p-10">
         <Link href="/admin/formularios" className="text-sm text-[#d8af7a] hover:underline">← Voltar para formulários</Link>
         <p className="mt-8 text-xs uppercase tracking-[0.2em] text-[#d8af7a]">Aplicação para a mentoria</p>
-        <h1 className="mt-2 font-serif text-4xl">Formulário #{application.id}</h1>
+        <h1 className="mt-2 font-serif text-4xl">{application.full_name ?? `Formulário #${application.id}`}</h1>
         <dl className="mt-8 grid gap-5 sm:grid-cols-2">
+          <Data label="Nome completo" value={application.full_name ?? "—"} />
+          <Data label="E-mail" value={application.email ?? "—"} />
           <Data label="Data (Brasília)" value={formattedDate(application.created_at)} />
           <Data label="Duração" value={`${application.duration_seconds}s`} />
           <Data label="UTM source" value={application.utm_source ?? "—"} />

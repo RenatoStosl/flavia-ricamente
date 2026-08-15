@@ -3,7 +3,7 @@
 import { type FormEvent, useState } from "react";
 import { applicationFormQuestions, type ApplicationFormAnswers } from "@/config/application-form";
 
-type Step = "intro" | "questions" | "saving" | "success";
+type Step = "intro" | "identification" | "questions" | "saving" | "success";
 
 export function ApplicationFormFlow() {
   const [step, setStep] = useState<Step>("intro");
@@ -12,6 +12,7 @@ export function ApplicationFormFlow() {
   const [startedAt, setStartedAt] = useState<number>();
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [error, setError] = useState<string>();
+  const [lead, setLead] = useState({ fullName: "", email: "" });
 
   const question = applicationFormQuestions[questionIndex];
   const answer = answers[question.id] ?? "";
@@ -41,6 +42,12 @@ export function ApplicationFormFlow() {
     window.setTimeout(advance, 360);
   }
 
+  function continueIdentification(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setStartedAt(Date.now());
+    setStep("questions");
+  }
+
   async function submit(submittedAnswers: ApplicationFormAnswers) {
     setStep("saving");
     setError(undefined);
@@ -50,6 +57,7 @@ export function ApplicationFormFlow() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          lead,
           answers: submittedAnswers,
           durationSeconds: Math.max(1, Math.round((Date.now() - (startedAt ?? Date.now())) / 1000)),
           utm: {
@@ -94,13 +102,27 @@ export function ApplicationFormFlow() {
         <section className={`flex flex-1 items-center px-6 sm:px-10 ${step === "intro" ? "py-8 sm:py-10" : "py-12 sm:py-16"}`}>
           {step === "intro" && (
             <div className="mx-auto max-w-xl animate-[fadeIn_500ms_ease-out] text-center">
-              <img src="/image/mfp.jpeg" alt="Método Flávia Prosperidade" className="mx-auto mb-5 w-44 object-contain sm:w-48" />
+              <img src="/image/cim.jpeg" alt="CIM — Corpo, Investimentos e Mente" className="mx-auto mb-5 w-44 object-contain sm:w-48" />
               <p className="mb-4 text-xs uppercase tracking-[0.28em] text-[#d8af7a]">Mentoria Flávia RicaMente</p>
               <h1 className="font-serif text-3xl leading-tight sm:text-4xl">Sua próxima fase começa com clareza.</h1>
               <p className="mx-auto mt-5 max-w-lg text-sm leading-6 text-[#f8eee5]/65 sm:text-base sm:leading-7">Responda com presença e sinceridade. Quero conhecer o seu momento e entender se faz sentido caminharmos juntas(os) nas próximas três semanas.</p>
-              <button type="button" onClick={() => { setStartedAt(Date.now()); setStep("questions"); }} className="quiz-gold-button mt-9 rounded-full px-8 py-4 text-sm font-medium uppercase tracking-[0.12em] text-[#28101d]">Começar formulário</button>
+              <button type="button" onClick={() => setStep("identification")} className="quiz-gold-button mt-9 rounded-full px-8 py-4 text-sm font-medium uppercase tracking-[0.12em] text-[#28101d]">Começar formulário</button>
               <p className="mt-5 text-xs tracking-[0.16em] text-[#d8af7a]/85">Leva apenas alguns minutos</p>
             </div>
+          )}
+
+          {step === "identification" && (
+            <form onSubmit={continueIdentification} className="mx-auto w-full max-w-lg animate-[fadeIn_500ms_ease-out]">
+              <p className="mb-5 text-center text-xs uppercase tracking-[0.28em] text-[#d8af7a]">Antes de começar</p>
+              <h1 className="text-center font-serif text-3xl leading-tight sm:text-4xl">Como podemos te identificar?</h1>
+              <p className="mx-auto mt-5 max-w-md text-center leading-7 text-[#f8eee5]/65">Preencha seus dados para iniciar o formulário da mentoria.</p>
+              <div className="mt-9 grid gap-4">
+                <label className="grid gap-2 text-sm text-[#f8eee5]/80">Nome completo<input autoFocus required minLength={3} maxLength={160} pattern=".*\S+\s+\S+.*" title="Digite seu nome e sobrenome" autoComplete="name" value={lead.fullName} onChange={(event) => setLead((current) => ({ ...current, fullName: event.target.value }))} placeholder="Digite seu nome completo" className="quiz-option rounded-[14px] border px-4 py-3.5 text-base text-[#f8eee5] outline-none placeholder:text-[#f8eee5]/35 focus:border-[#d8af7a] focus:ring-2 focus:ring-[#d8af7a]/30" /></label>
+                <label className="grid gap-2 text-sm text-[#f8eee5]/80">E-mail<input required type="email" maxLength={254} autoComplete="email" value={lead.email} onChange={(event) => setLead((current) => ({ ...current, email: event.target.value }))} placeholder="voce@exemplo.com" className="quiz-option rounded-[14px] border px-4 py-3.5 text-base text-[#f8eee5] outline-none placeholder:text-[#f8eee5]/35 focus:border-[#d8af7a] focus:ring-2 focus:ring-[#d8af7a]/30" /></label>
+              </div>
+              <button type="submit" className="quiz-gold-button mt-8 w-full rounded-full px-7 py-4 text-sm font-medium uppercase tracking-[0.12em] text-[#28101d]">Continuar</button>
+              <p className="mt-4 text-center text-xs leading-5 text-[#f8eee5]/45">Seus dados serão usados somente para o contato relacionado à mentoria.</p>
+            </form>
           )}
 
           {step === "questions" && (

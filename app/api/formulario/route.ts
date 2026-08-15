@@ -3,10 +3,17 @@ import { applicationFormQuestions, type ApplicationFormAnswers } from "@/config/
 import { getDatabase } from "@/lib/db";
 
 type SubmissionBody = {
+  lead?: { fullName?: unknown; email?: unknown };
   answers?: unknown;
   durationSeconds?: unknown;
   utm?: { source?: unknown; medium?: unknown; campaign?: unknown };
 };
+
+function requiredText(value: unknown, maxLength: number): string | undefined {
+  if (typeof value !== "string") return undefined;
+  const normalized = value.trim();
+  return normalized.length > 0 && normalized.length <= maxLength ? normalized : undefined;
+}
 
 function optionalText(value: unknown, maxLength: number): string | null {
   if (typeof value !== "string") return null;
@@ -35,7 +42,10 @@ export async function POST(request: Request) {
   }
 
   const durationSeconds = typeof body.durationSeconds === "number" ? Math.round(body.durationSeconds) : NaN;
-  if (!validAnswers(body.answers) || !Number.isFinite(durationSeconds) || durationSeconds < 1 || durationSeconds > 7200) {
+  const fullName = requiredText(body.lead?.fullName, 160);
+  const email = requiredText(body.lead?.email, 254)?.toLowerCase();
+  const validEmail = email && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  if (!fullName || !/^\S+(?:\s+\S+)+$/.test(fullName) || !validEmail || !validAnswers(body.answers) || !Number.isFinite(durationSeconds) || durationSeconds < 1 || durationSeconds > 7200) {
     return NextResponse.json({ error: "Invalid form submission." }, { status: 400 });
   }
 
@@ -43,9 +53,9 @@ export async function POST(request: Request) {
     const sql = getDatabase();
     const rows = await sql`
       INSERT INTO mentorship_applications (
-        answers, duration_seconds, utm_source, utm_medium, utm_campaign
+        full_name, email, answers, duration_seconds, utm_source, utm_medium, utm_campaign
       ) VALUES (
-        ${JSON.stringify(body.answers)}::jsonb, ${durationSeconds},
+        ${fullName}, ${email}, ${JSON.stringify(body.answers)}::jsonb, ${durationSeconds},
         ${optionalText(body.utm?.source, 200)}, ${optionalText(body.utm?.medium, 200)},
         ${optionalText(body.utm?.campaign, 200)}
       ) RETURNING id

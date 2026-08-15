@@ -14,8 +14,8 @@ export async function GET() {
   if (!isValidAdminSession(cookieStore.get(adminSession.cookieName)?.value)) return new NextResponse("Unauthorized", { status: 401 });
 
   const sql = getDatabase();
-  const rows = await sql`SELECT id, created_at, duration_seconds, utm_source, utm_medium, utm_campaign, answers FROM mentorship_applications ORDER BY created_at DESC`;
-  const metadataHeaders = ["id", "created_at", "duration_seconds", "utm_source", "utm_medium", "utm_campaign"];
+  const rows = await sql`SELECT id, created_at, full_name, email, duration_seconds, utm_source, utm_medium, utm_campaign, answers FROM mentorship_applications ORDER BY created_at DESC`;
+  const metadataHeaders = ["id", "created_at", "full_name", "email", "duration_seconds", "utm_source", "utm_medium", "utm_campaign"];
   const headers = [...metadataHeaders, ...applicationFormQuestions.map((question) => question.title)];
   const csvRows = rows.map((row) => {
     const answers = row.answers as Record<string, string>;
