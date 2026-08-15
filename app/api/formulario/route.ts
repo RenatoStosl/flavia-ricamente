@@ -28,7 +28,9 @@ function validAnswers(value: unknown): value is ApplicationFormAnswers {
     const answer = answers[question.id];
     if (typeof answer !== "string" || !answer.trim() || answer.length > 2000) return false;
     if (question.type === "single" && !(question.options as readonly string[] | undefined)?.includes(answer)) return false;
-    if (question.id === "age" && !/^\d{1,3}$/.test(answer)) return false;
+    if (question.id === "age" && (!/^\d{1,3}$/.test(answer.trim()) || Number(answer) < 18 || Number(answer) > 120)) return false;
+    if (question.id === "profession" && (answer.trim().length < 2 || answer.trim().length > 200)) return false;
+    if (question.type === "paragraph" && answer.trim().length < 10) return false;
     return true;
   });
 }
@@ -51,11 +53,14 @@ export async function POST(request: Request) {
 
   try {
     const sql = getDatabase();
+    const normalizedAnswers = Object.fromEntries(
+      Object.entries(body.answers).map(([key, value]) => [key, value.trim()]),
+    );
     const rows = await sql`
       INSERT INTO mentorship_applications (
         full_name, email, answers, duration_seconds, utm_source, utm_medium, utm_campaign
       ) VALUES (
-        ${fullName}, ${email}, ${JSON.stringify(body.answers)}::jsonb, ${durationSeconds},
+        ${fullName}, ${email}, ${JSON.stringify(normalizedAnswers)}::jsonb, ${durationSeconds},
         ${optionalText(body.utm?.source, 200)}, ${optionalText(body.utm?.medium, 200)},
         ${optionalText(body.utm?.campaign, 200)}
       ) RETURNING id
