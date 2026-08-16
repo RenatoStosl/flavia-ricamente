@@ -104,9 +104,9 @@ export const applicationFormQuestions = [
     title: "Você está disposta(o) a dedicar atenção e se comprometer com as práticas propostas durante as três semanas?",
     type: "single",
     options: [
-      "Sim. Estou pronta(o) para me comprometer.",
-      "Sim, mas minha rotina é bastante corrida.",
-      "Não tenho certeza se conseguirei manter o compromisso.",
+      "Sim, estou pronto para me comprometer.",
+      "Sim, quando alguém me guia fica mais fácil.",
+      "Não tenho certeza se escolho me priorizar.",
     ],
   },
   {

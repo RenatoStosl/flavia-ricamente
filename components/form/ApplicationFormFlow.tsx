@@ -104,8 +104,9 @@ export function ApplicationFormFlow() {
             <div className="mx-auto max-w-xl animate-[fadeIn_500ms_ease-out] text-center">
               <img src="/image/cim.jpeg" alt="CIM — Corpo, Investimentos e Mente" className="mx-auto mb-5 w-44 object-contain sm:w-48" />
               <p className="mb-4 text-xs uppercase tracking-[0.28em] text-[#d8af7a]">Mentoria Flávia RicaMente</p>
-              <h1 className="font-serif text-3xl leading-tight sm:text-4xl">Sua próxima fase começa com clareza.</h1>
-              <p className="mx-auto mt-5 max-w-lg text-sm leading-6 text-[#f8eee5]/65 sm:text-base sm:leading-7">Responda com presença e sinceridade. Quero conhecer o seu momento e entender se faz sentido caminharmos juntas(os) nas próximas três semanas.</p>
+              <h1 className="font-serif text-3xl leading-tight sm:text-4xl">Você tem a oportunidade de mudar a sua vida através do Método “Prospere C.iM.”</h1>
+              <p className="mx-auto mt-5 max-w-lg text-sm leading-6 text-[#f8eee5]/65 sm:text-base sm:leading-7">Mas são poucas vagas. Eu vou SELECIONAR a turma que seguirá comigo durante 3 semanas, em um acompanhamento muito próximo, te guiando no seu dia a dia.</p>
+              <p className="mx-auto mt-4 max-w-lg text-sm leading-6 text-[#f8eee5]/65 sm:text-base sm:leading-7">Para saber quem vai receber todo meu conhecimento e com quem vou caminhar junto, preciso das suas melhores respostas.</p>
               <button type="button" onClick={() => setStep("identification")} className="quiz-gold-button mt-9 rounded-full px-8 py-4 text-sm font-medium uppercase tracking-[0.12em] text-[#28101d]">Começar formulário</button>
               <p className="mt-5 text-xs tracking-[0.16em] text-[#d8af7a]/85">Leva apenas alguns minutos</p>
             </div>
