@@ -160,7 +160,7 @@ export function ApplicationFormFlow() {
               <p className="mt-10 text-xs uppercase tracking-[0.28em] text-[#d8af7a]">Formulário recebido</p>
               <h1 className="mt-4 font-serif text-3xl leading-tight sm:text-4xl">Obrigada por compartilhar seu momento.</h1>
               <p className="mx-auto mt-6 max-w-lg leading-7 text-[#f8eee5]/70">Suas respostas foram enviadas com sucesso e serão analisadas com carinho e atenção.</p>
-              <a href="/" className="quiz-gold-button mt-9 inline-flex rounded-full px-8 py-4 text-sm font-medium uppercase tracking-[0.12em] text-[#28101d]">Voltar ao início</a>
+              <a href="/formulario" className="quiz-gold-button mt-9 inline-flex rounded-full px-8 py-4 text-sm font-medium uppercase tracking-[0.12em] text-[#28101d]">Voltar ao início</a>
             </div>
           )}
         </section>
