@@ -37,14 +37,6 @@ function CimLogo({ className }: { className: string }) {
   );
 }
 
-function MfpLogo({ className }: { className: string }) {
-  return (
-    <div className={`${className} aspect-square overflow-hidden rounded-full border border-[#d8af7a]/60 shadow-xl shadow-black/20`}>
-      <img src={texts.assets.mfp.src} alt={texts.assets.mfp.alt} className="h-full w-full scale-[1.35] object-cover" />
-    </div>
-  );
-}
-
 export function QuizFlow() {
   const [step, setStep] = useState<QuizStep>("intro");
   const [questionIndex, setQuestionIndex] = useState(0);
@@ -232,7 +224,7 @@ export function QuizFlow() {
         <section className={`flex flex-1 items-center px-6 sm:px-10 ${step === "intro" ? "py-8 sm:py-10" : "py-12 sm:py-16"}`}>
           {step === "intro" && (
             <div className="mx-auto max-w-3xl animate-[fadeIn_500ms_ease-out] text-center">
-              <img src={texts.assets.mfp.src} alt={texts.assets.mfp.alt} className="mx-auto mb-5 w-44 object-contain sm:w-48" />
+              <img src={texts.assets.cim.src} alt={texts.assets.cim.alt} className="mx-auto mb-5 w-44 object-contain sm:w-48" />
               <p className="mb-4 text-[0.68rem] font-normal uppercase tracking-[0.24em] text-[#d8af7a] sm:text-xs sm:tracking-[0.28em]">{texts.intro.eyebrow}</p>
               <h1 className="font-serif text-3xl leading-tight sm:text-[2.1rem]">{texts.intro.title}</h1>
               <p className="mx-auto mt-4 max-w-lg text-sm leading-6 text-[#f8eee5]/65 sm:text-base sm:leading-7">{texts.intro.description}</p>
@@ -324,7 +316,7 @@ export function QuizFlow() {
 
           {step === "result" && result && (
             <div className="mx-auto max-w-2xl animate-[fadeIn_500ms_ease-out] text-center">
-              <MfpLogo className="mx-auto mb-7 w-28" />
+              <CimLogo className="mx-auto mb-7 w-28" />
               <p className="text-xs font-normal uppercase tracking-[0.28em] text-[#d8af7a]">{formatText(texts.result.personalizedTitle, { name: lead.name.trim().split(/\s+/)[0] || lead.name })}</p>
               <h1 className="mt-4 font-serif text-3xl leading-tight text-[#d8af7a] sm:text-4xl">{result.title}</h1>
               <p className="mt-3 text-xs font-normal uppercase tracking-[0.2em] text-[#f8eee5]/70">{score} pontos · {result.level}</p>
@@ -346,7 +338,7 @@ export function QuizFlow() {
 
           {step === "manual-offer" && (
             <div className="mx-auto max-w-3xl animate-[fadeIn_500ms_ease-out] text-center">
-              <MfpLogo className="mx-auto w-32" />
+              <CimLogo className="mx-auto w-32" />
               <div className="mx-auto mt-9 flex max-w-40 items-center gap-4 text-[#d8af7a]" aria-hidden="true"><span className="h-px flex-1 bg-current/70" /><span>✦</span><span className="h-px flex-1 bg-current/70" /></div>
               <img
                 src={texts.assets.finalCard.src}

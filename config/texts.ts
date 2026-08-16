@@ -5,10 +5,6 @@ export const texts = {
     instagramUrl: "https://www.instagram.com/flaviaricamente",
   },
   assets: {
-    mfp: {
-      src: "/image/mfp.jpeg",
-      alt: "MFP — Manual Frequência da Prosperidade",
-    },
     cim: {
       src: "/image/cim.jpeg",
       alt: "CIM — Corpo, Investimentos e Mente",
