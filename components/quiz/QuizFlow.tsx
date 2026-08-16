@@ -356,11 +356,8 @@ export function QuizFlow() {
               <h1 className="mx-auto mt-8 max-w-3xl font-serif text-2xl leading-snug text-[#d8af7a] sm:text-3xl">{texts.manualOffer.title}</h1>
               <p className="mx-auto mt-6 max-w-2xl text-sm leading-6 text-[#f8eee5]/90 sm:text-base sm:leading-7">{texts.manualOffer.descriptionPrefix}<em>{texts.manualOffer.descriptionMethod}</em>{texts.manualOffer.descriptionSuffix}</p>
               <p className="mt-9 rounded-[18px] border border-[#d8af7a]/45 bg-black/10 p-6 text-left text-base leading-7 text-[#f8eee5]">{texts.manualOffer.highlight}</p>
-              <p className="mt-10 text-xs font-normal uppercase tracking-[0.28em] text-[#d8af7a]">{texts.manualOffer.label}</p>
-              <p className="mt-3 font-serif text-4xl text-[#f8eee5]">{texts.manualOffer.price}</p>
               <p className="mt-6 text-base italic leading-7 text-[#d8af7a]">{manualPersonalization}</p>
               {texts.manualOffer.ctaUrl ? <a href={texts.manualOffer.ctaUrl} target="_blank" rel="noreferrer" className="quiz-gold-button mt-9 inline-flex rounded-full px-8 py-4 text-sm font-medium uppercase tracking-[0.12em] text-[#28101d]">{texts.manualOffer.ctaLabel}</a> : <button type="button" disabled className="quiz-gold-button mt-9 inline-flex cursor-not-allowed rounded-full px-8 py-4 text-sm font-medium uppercase tracking-[0.12em] text-[#28101d] opacity-60">{texts.manualOffer.unavailableLabel}</button>}
-              <p className="mt-6 text-xs font-normal uppercase tracking-[0.2em] text-[#f8eee5]/45">{texts.manualOffer.footer}</p>
             </div>
           )}
         </section>
