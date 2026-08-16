@@ -78,7 +78,7 @@ export function ApplicationFormFlow() {
 
   return (
     <main className="quiz-page min-h-screen px-5 py-6 text-[#f8eee5] sm:px-8 sm:py-10">
-      <div className="quiz-surface mx-auto flex min-h-[calc(100vh-3rem)] w-full max-w-3xl flex-col rounded-[20px] border shadow-2xl shadow-black/30 sm:min-h-[calc(100vh-5rem)]">
+      <div className={`quiz-surface mx-auto flex min-h-[calc(100vh-3rem)] w-full flex-col overflow-hidden rounded-[20px] border shadow-2xl shadow-black/30 transition-[max-width] duration-500 sm:min-h-[calc(100vh-5rem)] ${step === "intro" ? "max-w-5xl" : "max-w-3xl"}`}>
         {step !== "intro" && (
           <header className="relative flex min-h-[5.25rem] items-center justify-center border-b border-[#c4946f]/25 px-6 py-4 sm:px-10">
             <a href="/" aria-label="Flávia RicaMente">
@@ -99,16 +99,25 @@ export function ApplicationFormFlow() {
           </div>
         )}
 
-        <section className={`flex flex-1 items-center px-6 sm:px-10 ${step === "intro" ? "py-8 sm:py-10" : "py-12 sm:py-16"}`}>
+        <section className={`flex flex-1 items-center ${step === "intro" ? "p-0" : "px-6 py-12 sm:px-10 sm:py-16"}`}>
           {step === "intro" && (
-            <div className="mx-auto max-w-xl animate-[fadeIn_500ms_ease-out] text-center">
-              <img src="/image/cim.jpeg" alt="CIM — Corpo, Investimentos e Mente" className="mx-auto mb-5 w-44 object-contain sm:w-48" />
-              <p className="mb-4 text-xs uppercase tracking-[0.28em] text-[#d8af7a]">Mentoria Flávia RicaMente</p>
-              <h1 className="font-serif text-3xl leading-tight sm:text-4xl">Você tem a oportunidade de mudar a sua vida através do Método “Prospere C.iM.”</h1>
-              <p className="mx-auto mt-5 max-w-lg text-sm leading-6 text-[#f8eee5]/65 sm:text-base sm:leading-7">Mas são poucas vagas. Eu vou SELECIONAR a turma que seguirá comigo durante 3 semanas, em um acompanhamento muito próximo, te guiando no seu dia a dia.</p>
-              <p className="mx-auto mt-4 max-w-lg text-sm leading-6 text-[#f8eee5]/65 sm:text-base sm:leading-7">Para saber quem vai receber todo meu conhecimento e com quem vou caminhar junto, preciso das suas melhores respostas.</p>
-              <button type="button" onClick={() => setStep("identification")} className="quiz-gold-button mt-9 rounded-full px-8 py-4 text-sm font-medium uppercase tracking-[0.12em] text-[#28101d]">Começar formulário</button>
-              <p className="mt-5 text-xs tracking-[0.16em] text-[#d8af7a]/85">Leva apenas alguns minutos</p>
+            <div className="grid w-full animate-[fadeIn_500ms_ease-out] lg:min-h-[640px] lg:grid-cols-[1.08fr_0.92fr]">
+              <div className="relative aspect-[3/4] overflow-hidden sm:aspect-[4/3] lg:order-2 lg:aspect-auto lg:min-h-full">
+                <img src="/image/flv-dubai.jpeg" alt="Flávia em Dubai, com o Burj Khalifa ao fundo" className="absolute inset-0 h-full w-full scale-[1.4] object-cover object-[68%_center] lg:scale-[1.25] lg:object-[62%_center]" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#351827] via-transparent to-black/5 lg:bg-gradient-to-r lg:from-[#351827]/75 lg:via-transparent lg:to-transparent" aria-hidden="true" />
+              </div>
+
+              <div className="flex flex-col justify-center px-6 py-9 text-center sm:px-10 sm:py-12 lg:order-1 lg:px-12 lg:py-14 lg:text-left">
+                <img src="/image/cim.jpeg" alt="CIM — Corpo, Investimentos e Mente" className="mx-auto mb-5 w-40 object-contain sm:w-44 lg:mx-0" />
+                <p className="mb-4 text-xs tracking-[0.28em] text-[#d8af7a]">Mentoria Flávia RicaMente</p>
+                <h1 className="font-serif text-3xl leading-tight sm:text-4xl">Você tem a oportunidade de mudar a sua vida através do Método “Prospere C.iM.”</h1>
+                <p className="mt-5 text-sm leading-6 text-[#f8eee5]/65 sm:text-base sm:leading-7">Mas são poucas vagas. Eu vou SELECIONAR a turma que seguirá comigo durante 3 semanas, em um acompanhamento muito próximo, te guiando no seu dia a dia.</p>
+                <p className="mt-4 text-sm leading-6 text-[#f8eee5]/65 sm:text-base sm:leading-7">Para saber quem vai receber todo meu conhecimento e com quem vou caminhar junto, preciso das suas melhores respostas.</p>
+                <div>
+                  <button type="button" onClick={() => setStep("identification")} className="quiz-gold-button mt-8 rounded-full px-8 py-4 text-sm font-medium uppercase tracking-[0.12em] text-[#28101d]">Começar formulário</button>
+                  <p className="mt-5 text-xs tracking-[0.16em] text-[#d8af7a]/85">Leva apenas alguns minutos</p>
+                </div>
+              </div>
             </div>
           )}
 
