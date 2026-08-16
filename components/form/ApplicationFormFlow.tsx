@@ -121,8 +121,8 @@ export function ApplicationFormFlow() {
                 <label className="grid gap-2 text-sm text-[#f8eee5]/80">Nome completo<input autoFocus required minLength={3} maxLength={160} pattern=".*\S+\s+\S+.*" title="Digite seu nome e sobrenome" autoComplete="name" value={lead.fullName} onChange={(event) => setLead((current) => ({ ...current, fullName: event.target.value }))} placeholder="Digite seu nome completo" className="quiz-option rounded-[14px] border px-4 py-3.5 text-base text-[#f8eee5] outline-none placeholder:text-[#f8eee5]/35 focus:border-[#d8af7a] focus:ring-2 focus:ring-[#d8af7a]/30" /></label>
                 <label className="grid gap-2 text-sm text-[#f8eee5]/80">E-mail<input required type="email" maxLength={254} autoComplete="email" value={lead.email} onChange={(event) => setLead((current) => ({ ...current, email: event.target.value }))} placeholder="voce@exemplo.com" className="quiz-option rounded-[14px] border px-4 py-3.5 text-base text-[#f8eee5] outline-none placeholder:text-[#f8eee5]/35 focus:border-[#d8af7a] focus:ring-2 focus:ring-[#d8af7a]/30" /></label>
               </div>
-              <button type="submit" className="quiz-gold-button mt-8 w-full rounded-full px-7 py-4 text-sm font-medium uppercase tracking-[0.12em] text-[#28101d]">Continuar</button>
-              <p className="mt-4 text-center text-xs leading-5 text-[#f8eee5]/45">Seus dados serão usados somente para o contato relacionado à mentoria.</p>
+              <p className="mt-7 text-center text-xs leading-5 text-[#f8eee5]/55">Ao continuar, você declara estar ciente de que seus dados e respostas serão utilizados exclusivamente para analisar sua candidatura à Mentoria Prospere C.iM. e realizar contatos relacionados a este processo.</p>
+              <button type="submit" className="quiz-gold-button mt-4 w-full rounded-full px-7 py-4 text-sm font-medium uppercase tracking-[0.12em] text-[#28101d]">Continuar</button>
             </form>
           )}
 
