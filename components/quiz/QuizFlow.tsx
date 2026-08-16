@@ -262,8 +262,8 @@ export function QuizFlow() {
                 </label>
               </div>
               {leadError && <p className="mt-5 text-center text-sm text-[#f4c7c7]" role="alert">{leadError}</p>}
-              <button type="submit" disabled={isSaving} className="quiz-gold-button mt-8 w-full rounded-full px-7 py-4 text-sm font-medium uppercase tracking-[0.12em] text-[#28101d] transition focus:outline-none focus:ring-2 focus:ring-[#e6c18a] focus:ring-offset-2 focus:ring-offset-[#452338] disabled:cursor-wait disabled:opacity-70">{isSaving ? texts.saving.label : texts.lead.submitLabel}</button>
-              <p className="mt-4 text-center text-xs leading-5 text-[#f8eee5]/45">{texts.lead.privacy}</p>
+              <p className="mt-7 text-center text-xs leading-5 text-[#f8eee5]/55">{texts.lead.privacy}</p>
+              <button type="submit" disabled={isSaving} className="quiz-gold-button mt-4 w-full rounded-full px-7 py-4 text-sm font-medium uppercase tracking-[0.12em] text-[#28101d] transition focus:outline-none focus:ring-2 focus:ring-[#e6c18a] focus:ring-offset-2 focus:ring-offset-[#452338] disabled:cursor-wait disabled:opacity-70">{isSaving ? texts.saving.label : texts.lead.submitLabel}</button>
             </form>
           )}
 

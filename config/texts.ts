@@ -59,7 +59,7 @@ export const texts = {
     phoneError: "Informe um WhatsApp válido com DDD.",
     submitLabel: "Ver meu resultado",
     privacy:
-      "Seus dados serão usados apenas para contato sobre educação financeira.",
+      "Ao continuar, você declara estar ciente de que seus dados e respostas serão utilizados exclusivamente para identificar sua participação, gerar e apresentar o resultado deste quiz. Não enviaremos comunicações promocionais posteriores.",
   },
   result: {
     restartLabel: "Refazer diagnóstico",
