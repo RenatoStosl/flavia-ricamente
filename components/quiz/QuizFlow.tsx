@@ -338,8 +338,7 @@ export function QuizFlow() {
 
           {step === "manual-offer" && (
             <div className="mx-auto max-w-3xl animate-[fadeIn_500ms_ease-out] text-center">
-              <CimLogo className="mx-auto w-32" />
-              <div className="mx-auto mt-9 flex max-w-40 items-center gap-4 text-[#d8af7a]" aria-hidden="true"><span className="h-px flex-1 bg-current/70" /><span>✦</span><span className="h-px flex-1 bg-current/70" /></div>
+              <div className="mx-auto flex max-w-40 items-center gap-4 text-[#d8af7a]" aria-hidden="true"><span className="h-px flex-1 bg-current/70" /><span>✦</span><span className="h-px flex-1 bg-current/70" /></div>
               <img
                 src={texts.assets.finalCard.src}
                 alt={texts.assets.finalCard.alt}
