@@ -85,7 +85,7 @@ export const texts = {
     personalizationFallback:
       "{name}, o Manual mostra como transformar intenção em uma nova rotina de prosperidade.",
     personalizationTemplate:
-      "{name}, você marcou que quer deixar {items} para trás — o Manual mostra como construir uma rotina mais consciente e próspera no dia a dia.",
+      "{name}, você marcou que quer deixar {items} para trás — SEU PRÓXIMO PASSO para resolver isso está aqui. Clica agora e vou te mostrar como desativar esse padrão no dia a dia.",
     personalizationItems: {
       "financial-anxiety": "a ansiedade financeira",
       "future-fear": "o medo do futuro",
