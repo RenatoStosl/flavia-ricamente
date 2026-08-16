@@ -348,6 +348,11 @@ export function QuizFlow() {
             <div className="mx-auto max-w-3xl animate-[fadeIn_500ms_ease-out] text-center">
               <MfpLogo className="mx-auto w-32" />
               <div className="mx-auto mt-9 flex max-w-40 items-center gap-4 text-[#d8af7a]" aria-hidden="true"><span className="h-px flex-1 bg-current/70" /><span>✦</span><span className="h-px flex-1 bg-current/70" /></div>
+              <img
+                src={texts.assets.finalCard.src}
+                alt={texts.assets.finalCard.alt}
+                className="mt-8 aspect-[3/2] w-full rounded-[18px] border border-[#d8af7a]/35 object-cover shadow-xl shadow-black/25"
+              />
               <h1 className="mx-auto mt-8 max-w-3xl font-serif text-2xl leading-snug text-[#d8af7a] sm:text-3xl">{texts.manualOffer.title}</h1>
               <p className="mx-auto mt-6 max-w-2xl text-sm leading-6 text-[#f8eee5]/90 sm:text-base sm:leading-7">{texts.manualOffer.descriptionPrefix}<em>{texts.manualOffer.descriptionMethod}</em>{texts.manualOffer.descriptionSuffix}</p>
               <p className="mt-9 rounded-[18px] border border-[#d8af7a]/45 bg-black/10 p-6 text-left text-base leading-7 text-[#f8eee5]">{texts.manualOffer.highlight}</p>
