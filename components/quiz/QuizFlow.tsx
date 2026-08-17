@@ -6,7 +6,7 @@ import { texts } from "@/config/texts";
 import type { QuizAnswers, QuizQuestion } from "@/config/types";
 import { calculateScore, getQuizResult } from "@/lib/quiz";
 
-type QuizStep = "intro" | "lead" | "attention" | "reflection" | "questions" | "processing" | "result" | "manual-offer";
+type QuizStep = "intro" | "lead" | "attention" | "reflection" | "questions" | "processing" | "result";
 
 type LeadData = {
   name: string;
@@ -198,7 +198,7 @@ export function QuizFlow() {
   return (
     <main className="quiz-page min-h-screen px-5 py-6 text-[#f8eee5] sm:px-8 sm:py-10">
       <div className="quiz-surface mx-auto flex min-h-[calc(100vh-3rem)] w-full max-w-3xl flex-col rounded-[20px] border shadow-2xl shadow-black/30 sm:min-h-[calc(100vh-5rem)]">
-        {step !== "intro" && step !== "manual-offer" && (
+        {step !== "intro" && (
           <header className="relative flex min-h-[5.25rem] items-center justify-center border-b border-[#c4946f]/25 px-6 py-4 sm:px-10">
             <a href="/" aria-label={texts.brand}>
               <CimLogo className="h-11 w-11" />
@@ -322,33 +322,35 @@ export function QuizFlow() {
               <p className="mt-3 text-xs font-normal uppercase tracking-[0.2em] text-[#f8eee5]/70">{score} pontos · {result.level}</p>
               <div className="mx-auto mt-6 flex max-w-40 items-center gap-4 text-[#d8af7a]" aria-hidden="true"><span className="h-px flex-1 bg-current/70" /><span>✦</span><span className="h-px flex-1 bg-current/70" /></div>
               <div className="mt-10 space-y-5 text-left">
-                {result.sections.map((section) => (
-                  <section key={section.title} className="rounded-[16px] border border-[#c4946f]/25 bg-black/10 p-5 sm:p-6">
-                    <h2 className="font-serif text-xl text-[#d8af7a]">{section.title}</h2>
-                    {section.paragraphs?.map((paragraph) => <p key={paragraph} className="mt-4 leading-7 text-[#f8eee5]/85">{paragraph}</p>)}
-                    {section.bullets && <ul className="mt-5 space-y-3 text-[#f8eee5]/90">{section.bullets.map((bullet) => <li key={bullet} className="flex gap-3 leading-6"><span className="text-[#d8af7a]">✦</span><span>{bullet}</span></li>)}</ul>}
-                  </section>
+                {result.sections.map((section, index) => (
+                  <div key={section.title}>
+                    <section className="rounded-[16px] border border-[#c4946f]/25 bg-black/10 p-5 sm:p-6">
+                      <h2 className="font-serif text-xl text-[#d8af7a]">{section.title}</h2>
+                      {section.paragraphs?.map((paragraph) => <p key={paragraph} className="mt-4 leading-7 text-[#f8eee5]/85">{paragraph}</p>)}
+                      {section.bullets && <ul className="mt-5 space-y-3 text-[#f8eee5]/90">{section.bullets.map((bullet) => <li key={bullet} className="flex gap-3 leading-6"><span className="text-[#d8af7a]">✦</span><span>{bullet}</span></li>)}</ul>}
+                    </section>
+                    {index < result.sections.length - 1 && (
+                      <a href="#prospere-cim" className="quiz-gold-button mx-auto my-7 flex w-fit rounded-full px-7 py-4 text-center text-sm font-medium uppercase tracking-[0.1em] text-[#28101d] transition focus:outline-none focus:ring-2 focus:ring-[#e6c18a] focus:ring-offset-2 focus:ring-offset-[#452338]">{result.ctaLabel}</a>
+                    )}
+                  </div>
                 ))}
               </div>
               <p className="mt-8 rounded-[16px] border border-[#d8af7a]/45 bg-[#2b1020]/50 p-6 text-left text-base leading-7 text-[#f8eee5]">{texts.result.finalMessage}</p>
-              <button type="button" onClick={() => setStep("manual-offer")} className="quiz-gold-button mt-9 inline-flex rounded-full px-7 py-4 text-sm font-medium uppercase tracking-[0.1em] text-[#28101d] transition focus:outline-none focus:ring-2 focus:ring-[#e6c18a] focus:ring-offset-2 focus:ring-offset-[#452338]">{result.ctaLabel}</button>
-              <button type="button" onClick={restartQuiz} className="mt-5 block w-full text-sm text-[#f8eee5]/55 underline-offset-4 transition hover:text-[#e6c18a] hover:underline focus:outline-none focus:underline">{texts.result.restartLabel}</button>
-            </div>
-          )}
-
-          {step === "manual-offer" && (
-            <div className="mx-auto max-w-3xl animate-[fadeIn_500ms_ease-out] text-center">
-              <div className="mx-auto flex max-w-40 items-center gap-4 text-[#d8af7a]" aria-hidden="true"><span className="h-px flex-1 bg-current/70" /><span>✦</span><span className="h-px flex-1 bg-current/70" /></div>
-              <img
-                src={texts.assets.finalCard.src}
-                alt={texts.assets.finalCard.alt}
-                className="mt-8 aspect-[3/2] w-full rounded-[18px] border border-[#d8af7a]/35 object-cover shadow-xl shadow-black/25"
-              />
-              <h1 className="mx-auto mt-8 max-w-3xl font-serif text-2xl leading-snug text-[#d8af7a] sm:text-3xl">{texts.manualOffer.title}</h1>
-              <p className="mx-auto mt-6 max-w-2xl text-sm leading-6 text-[#f8eee5]/90 sm:text-base sm:leading-7">{texts.manualOffer.descriptionPrefix}<em>{texts.manualOffer.descriptionMethod}</em>{texts.manualOffer.descriptionSuffix}</p>
-              <p className="mt-9 rounded-[18px] border border-[#d8af7a]/45 bg-black/10 p-6 text-left text-base leading-7 text-[#f8eee5]">{texts.manualOffer.highlight}</p>
-              <p className="mt-6 text-base italic leading-7 text-[#d8af7a]">{manualPersonalization}</p>
-              {texts.manualOffer.ctaUrl ? <a href={texts.manualOffer.ctaUrl} target="_blank" rel="noreferrer" className="quiz-gold-button mt-9 inline-flex rounded-full px-8 py-4 text-sm font-medium uppercase tracking-[0.12em] text-[#28101d]">{texts.manualOffer.ctaLabel}</a> : <button type="button" disabled className="quiz-gold-button mt-9 inline-flex cursor-not-allowed rounded-full px-8 py-4 text-sm font-medium uppercase tracking-[0.12em] text-[#28101d] opacity-60">{texts.manualOffer.unavailableLabel}</button>}
+              <a href="#prospere-cim" className="quiz-gold-button mt-9 inline-flex rounded-full px-7 py-4 text-sm font-medium uppercase tracking-[0.1em] text-[#28101d] transition focus:outline-none focus:ring-2 focus:ring-[#e6c18a] focus:ring-offset-2 focus:ring-offset-[#452338]">{result.ctaLabel}</a>
+              <div id="prospere-cim" className="scroll-mt-6 pt-12">
+                <div className="mx-auto flex max-w-40 items-center gap-4 text-[#d8af7a]" aria-hidden="true"><span className="h-px flex-1 bg-current/70" /><span>✦</span><span className="h-px flex-1 bg-current/70" /></div>
+                <img
+                  src={texts.assets.finalCard.src}
+                  alt={texts.assets.finalCard.alt}
+                  className="mt-8 aspect-[3/2] w-full rounded-[18px] border border-[#d8af7a]/35 object-cover shadow-xl shadow-black/25"
+                />
+                <h1 className="mx-auto mt-8 max-w-3xl font-serif text-2xl leading-snug text-[#d8af7a] sm:text-3xl">{texts.manualOffer.title}</h1>
+                <p className="mx-auto mt-6 max-w-2xl text-sm leading-6 text-[#f8eee5]/90 sm:text-base sm:leading-7">{texts.manualOffer.descriptionPrefix}<em>{texts.manualOffer.descriptionMethod}</em>{texts.manualOffer.descriptionSuffix}</p>
+                <p className="mt-9 rounded-[18px] border border-[#d8af7a]/45 bg-black/10 p-6 text-left text-base leading-7 text-[#f8eee5]">{texts.manualOffer.highlight}</p>
+                <p className="mt-6 text-base italic leading-7 text-[#d8af7a]">{manualPersonalization}</p>
+                {texts.manualOffer.ctaUrl ? <a href={texts.manualOffer.ctaUrl} target="_blank" rel="noreferrer" className="quiz-gold-button mt-9 inline-flex rounded-full px-8 py-4 text-sm font-medium uppercase tracking-[0.12em] text-[#28101d]">{texts.manualOffer.ctaLabel}</a> : <button type="button" disabled className="quiz-gold-button mt-9 inline-flex cursor-not-allowed rounded-full px-8 py-4 text-sm font-medium uppercase tracking-[0.12em] text-[#28101d] opacity-60">{texts.manualOffer.unavailableLabel}</button>}
+              </div>
+              <button type="button" onClick={restartQuiz} className="mt-8 block w-full text-sm text-[#f8eee5]/55 underline-offset-4 transition hover:text-[#e6c18a] hover:underline focus:outline-none focus:underline">{texts.result.restartLabel}</button>
             </div>
           )}
         </section>
