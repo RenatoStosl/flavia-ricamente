@@ -19,3 +19,20 @@
 .prospere-footer>a{display:block;width:70px;height:70px;flex:0 0 70px;border-radius:50%;overflow:hidden;box-shadow:0 0 0 1px rgba(216,175,122,.32)}
 .prospere-footer img{display:block;width:100%;height:100%;border-radius:0;object-fit:cover;filter:none}
 @media(max-width:900px){.prospere-nav{height:78px}.prospere-brand{width:54px;height:54px;flex-basis:54px}.prospere-nav-cta{padding:5px;border-color:transparent;background:transparent}.prospere-nav-cta .prospere-arrow{width:40px;height:40px;flex-basis:40px}.prospere-footer>a{width:62px;height:62px;flex-basis:62px}}
+.prospere-prosperity{text-align:center;background:var(--paper)}
+.prospere-prosperity>.prospere-kicker{justify-content:center}
+.prospere-prosperity>h2{max-width:950px;margin:24px auto 58px;font-size:clamp(3rem,5vw,5.2rem);line-height:.98}
+.prospere-prosperity blockquote{margin:58px auto 0;font:italic clamp(2rem,4vw,4rem)/1.1 "Cormorant Garamond",serif;color:#9f754d}
+.prospere-pillar-list article p+p{margin-top:14px}
+.prospere-journey-copy .prospere-cta{align-self:flex-start;margin-top:14px;margin-bottom:32px}
+.prospere-receive>.prospere-centered-cta{margin-top:18px}
+.prospere-community-note{max-width:760px;margin:34px auto 0!important;text-align:center;font:italic 25px/1.4 "Cormorant Garamond",serif;color:#795b66}
+.prospere-bonus-grid{grid-template-columns:1fr;max-width:760px;margin:34px auto 0}
+.prospere-bonus-grid article{min-height:0}
+.prospere-bonus-grid h3{margin-top:22px}
+.prospere-audience-note{grid-column:1/-1;padding-top:40px;border-top:1px solid #cdbdab;color:#57454f;line-height:1.8;font-size:17px}
+.prospere-about-copy h3{margin:34px 0 10px;font-size:12px;line-height:1.5;letter-spacing:.18em;color:#9f754d}
+.prospere-objective>p:not(.prospere-kicker):not(.prospere-script)+p:not(.prospere-script){margin-top:12px}
+.prospere-application>div>p{line-height:1.75;color:#685660;margin-top:10px}
+.prospere-application>div>h3{margin:25px 0 10px;font:600 20px/1.2 "Outfit",sans-serif;letter-spacing:.08em;color:#9f754d}
+.prospere-final>p:not(.prospere-kicker)+p:not(.prospere-kicker){margin-top:14px}
