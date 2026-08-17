@@ -329,7 +329,7 @@ export function QuizFlow() {
                       {section.paragraphs?.map((paragraph) => <p key={paragraph} className="mt-4 leading-7 text-[#f8eee5]/85">{paragraph}</p>)}
                       {section.bullets && <ul className="mt-5 space-y-3 text-[#f8eee5]/90">{section.bullets.map((bullet) => <li key={bullet} className="flex gap-3 leading-6"><span className="text-[#d8af7a]">✦</span><span>{bullet}</span></li>)}</ul>}
                     </section>
-                    {index < result.sections.length - 1 && (
+                    {index === Math.ceil(result.sections.length / 2) - 1 && (
                       <a href="#prospere-cim" className="quiz-gold-button mx-auto my-7 flex w-fit rounded-full px-7 py-4 text-center text-sm font-medium uppercase tracking-[0.1em] text-[#28101d] transition focus:outline-none focus:ring-2 focus:ring-[#e6c18a] focus:ring-offset-2 focus:ring-offset-[#452338]">{result.ctaLabel}</a>
                     )}
                   </div>
