@@ -263,7 +263,7 @@ export default function ProsperePage() {
 
       <section className="prospere-final">
         <p className="prospere-kicker">A pergunta agora é</p>
-        <h2>“Quanto tempo mais você vai passar procurando fora aquilo que precisa começar a transformar <em>dentro?</em>”</h2>
+        <h2>“Quanto tempo mais você vai passar procurando fora aquilo que precisa começar a transformar <em>dentro? </em>”</h2>
         <p>O <strong>Prospere C.i.M.</strong> é o meu convite para você parar de apenas desejar uma vida diferente — e começar a governá-la e VIVER essa PROSPERIDADE.</p>
         <p><strong>Vamos juntos ATIVAR sua Nova IDENTIDADE QUE PROSPERA POR INTEIRO!</strong></p>
         <p><strong>Eleve sua Frequência da Prosperidade. Toda a abundância da vida espera por você acessá-la!</strong></p>
