@@ -68,7 +68,11 @@ export default function ProsperePage() {
         <div className="prospere-orb prospere-orb-one" />
         <div className="prospere-orb prospere-orb-two" />
         <div className="prospere-hero-copy">
-          <p className="prospere-kicker">Prospere C.<span className="prospere-lowercase">i</span>.M. <i /> Corpo. Investimentos. Mentalidade.</p>
+          <p className="prospere-kicker prospere-hero-kicker">
+            <span>Prospere C.<span className="prospere-lowercase">i</span>.M.</span>
+            <i aria-hidden="true" />
+            <span>Corpo. Investimentos. Mentalidade.</span>
+          </p>
           <h1>Você,<br /><em>prosperando</em><br />por inteiro.</h1>
           <p className="prospere-lead">Você sabe que pode viver uma vida diferente.</p>
           <CTA>Quero ter liberdade</CTA>

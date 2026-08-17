@@ -9,6 +9,7 @@
 .prospere-arrow{width:34px;height:34px;flex:0 0 34px;display:grid;place-items:center;border-radius:50%;background:var(--gold);color:var(--wine)}
 .prospere-arrow svg{display:block;width:17px;height:17px}
 .prospere-lowercase{text-transform:lowercase}
+.prospere-hero-kicker>span{white-space:nowrap}
 .prospere-nav-cta{display:inline-flex;align-items:center;gap:16px;padding:7px 7px 7px 20px;border:1px solid rgba(216,175,122,.36);border-radius:999px;background:rgba(255,255,255,.025);font-weight:600;transition:background .2s,border-color .2s,transform .2s}
 .prospere-nav-cta:hover{background:rgba(216,175,122,.1);border-color:rgba(216,175,122,.7);transform:translateY(-1px)}
 .prospere-cta{gap:22px;min-width:280px;min-height:56px;padding:7px 7px 7px 24px;background:linear-gradient(135deg,#e7c68e 0%,#cf9966 100%);border:1px solid rgba(255,255,255,.22);font-size:11px;box-shadow:0 12px 30px rgba(24,8,16,.18);transition:transform .2s,box-shadow .2s,filter .2s}
@@ -19,6 +20,7 @@
 .prospere-footer>a{display:block;width:70px;height:70px;flex:0 0 70px;border-radius:50%;overflow:hidden;box-shadow:0 0 0 1px rgba(216,175,122,.32)}
 .prospere-footer img{display:block;width:100%;height:100%;border-radius:0;object-fit:cover;filter:none}
 @media(max-width:900px){.prospere-nav{height:78px}.prospere-brand{width:54px;height:54px;flex-basis:54px}.prospere-nav-cta{padding:5px;border-color:transparent;background:transparent}.prospere-nav-cta .prospere-arrow{width:40px;height:40px;flex-basis:40px}.prospere-footer>a{width:62px;height:62px;flex-basis:62px}}
+@media(max-width:560px){.prospere-hero-kicker{display:grid;gap:7px;line-height:1.45;letter-spacing:.2em}.prospere-hero-kicker>i{display:none}.prospere-hero-kicker>span{white-space:normal}.prospere-hero-kicker>span:first-child{font-size:10px}.prospere-hero-kicker>span:last-child{font-size:9px;color:rgba(216,175,122,.82)}.prospere-hero h1{margin-top:26px}}
 .prospere-prosperity{text-align:center;background:var(--paper)}
 .prospere-prosperity>.prospere-kicker{justify-content:center}
 .prospere-prosperity>h2{max-width:950px;margin:24px auto 58px;font-size:clamp(3rem,5vw,5.2rem);line-height:.98}
