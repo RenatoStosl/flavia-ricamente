@@ -55,6 +55,8 @@
 .prospere-final>p:not(.prospere-kicker)+p:not(.prospere-kicker){margin-top:14px}
 .prospere-proof span:before{content:"";display:inline-block;width:5px;height:5px;margin:0 9px 2px 0;border-radius:50%;background:var(--gold)}
 .prospere-audience li>span{width:7px;height:7px;flex:0 0 7px;margin-top:8px;border-radius:50%;background:#a7794f}
+.prospere-audience li>.prospere-audience-marker{width:7px;height:7px;flex:0 0 7px;margin-top:8px;border-radius:50%;background:#a7794f}
+.prospere-audience li>.prospere-audience-item-text{display:inline;width:auto;height:auto;flex:1 1 auto;margin:0;border-radius:0;background:none;color:#57454f;text-align:left}
 .prospere-page mark{display:inline;padding:.04em .16em;background:linear-gradient(transparent 56%,rgba(216,175,122,.42) 56%);color:inherit;font-weight:700}
 .prospere-page strong{font-weight:700;color:inherit}
 .prospere-cta{min-width:340px;min-height:68px;padding-left:30px;font-size:13px;letter-spacing:.12em}
@@ -75,3 +77,8 @@
 .prospere-readiness mark{display:inline-block;margin-top:6px}
 .prospere-final>p strong{color:#f4ede3}
 @media(max-width:560px){.prospere-cta{min-width:0;min-height:62px;padding-left:22px;font-size:11px}.prospere-cta .prospere-arrow{width:48px;height:48px;flex-basis:48px}.prospere-community-note{font-size:24px}.prospere-bonus-price{font-size:3rem}.prospere-application>div>h2{font-size:clamp(2.8rem,13vw,4rem)}}
+@media(max-width:560px){
+  .prospere-final{overflow:hidden;padding-left:24px;padding-right:24px}
+  .prospere-final h2{display:block;width:auto;max-width:390px;margin-left:auto;margin-right:auto;padding:0 10px;font-size:clamp(2.05rem,9.4vw,2.65rem);line-height:1.16;letter-spacing:-.015em;word-break:normal;overflow-wrap:normal}
+  .prospere-final h2 em{display:inline-block;margin:0 .08em;padding:0 .08em}
+}

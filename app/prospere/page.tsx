@@ -204,7 +204,7 @@ export default function ProsperePage() {
           <CTA>Quero minha liberdade</CTA>
         </div>
         <ul>
-          {audience.map((item) => <li key={item}><span aria-hidden="true" /><HighlightAudience>{item}</HighlightAudience></li>)}
+          {audience.map((item) => <li key={item}><span className="prospere-audience-marker" aria-hidden="true" /><span className="prospere-audience-item-text"><HighlightAudience>{item}</HighlightAudience></span></li>)}
         </ul>
         <p className="prospere-audience-note"><strong>Se você se reconhece em alguns desses itens</strong>, o que falta é alguém que consiga enxergar aqueles <strong>“Pontos Cegos”</strong>, que sozinho é quase possível de você enxergar. Eu mesma investi centenas de milhares de reais em grandes Mestres mundo afora! Você Precisa de alguém que <strong>vai caminhar com você até que aquilo se torne prática. E principalmente, alguém que sabe o caminho, porque o trilhou, e já vive essa realidade.</strong></p>
       </section>
