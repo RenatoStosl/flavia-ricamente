@@ -82,3 +82,9 @@
   .prospere-final h2{display:block;width:auto;max-width:390px;margin-left:auto;margin-right:auto;padding:0 10px;font-size:clamp(2.05rem,9.4vw,2.65rem);line-height:1.16;letter-spacing:-.015em;word-break:normal;overflow-wrap:normal}
   .prospere-final h2 em{display:inline-block;margin:0 .08em;padding:0 .08em}
 }
+.prospere-photo-stack{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;height:auto;align-items:start}
+.prospere-photo-stack img{position:static;width:100%;height:440px;object-fit:cover;box-shadow:0 18px 42px rgba(44,23,31,.14)}
+.prospere-photo-stack .prospere-photo-back,.prospere-photo-stack .prospere-photo-front{width:100%;height:440px}
+.prospere-photo-stack .prospere-stamp{position:static;grid-column:1/-1;justify-self:center;width:112px;height:112px;margin-top:8px;outline-width:5px}
+@media(max-width:1100px){.prospere-photo-stack img,.prospere-photo-stack .prospere-photo-back,.prospere-photo-stack .prospere-photo-front{height:360px}}
+@media(max-width:560px){.prospere-photo-stack{grid-template-columns:1fr;gap:16px}.prospere-photo-stack img,.prospere-photo-stack .prospere-photo-back,.prospere-photo-stack .prospere-photo-front{height:auto}.prospere-photo-stack .prospere-stamp{grid-column:1}}
