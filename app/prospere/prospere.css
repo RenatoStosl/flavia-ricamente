@@ -21,6 +21,21 @@
 .prospere-footer img{display:block;width:100%;height:100%;border-radius:0;object-fit:cover;filter:none}
 @media(max-width:900px){.prospere-nav{height:78px}.prospere-brand{width:54px;height:54px;flex-basis:54px}.prospere-nav-cta{padding:5px;border-color:transparent;background:transparent}.prospere-nav-cta .prospere-arrow{width:40px;height:40px;flex-basis:40px}.prospere-footer>a{width:62px;height:62px;flex-basis:62px}}
 @media(max-width:560px){.prospere-hero-kicker{display:grid;gap:7px;line-height:1.45;letter-spacing:.2em}.prospere-hero-kicker>i{display:none}.prospere-hero-kicker>span{white-space:normal}.prospere-hero-kicker>span:first-child{font-size:10px}.prospere-hero-kicker>span:last-child{font-size:9px;color:rgba(216,175,122,.82)}.prospere-hero h1{margin-top:26px}}
+@media(max-width:560px){
+  .prospere-page h1,.prospere-page h2{line-height:1.02}
+  .prospere-hero h1{line-height:.94}
+  .prospere-method-copy h2,.prospere-section-heading h2,.prospere-origin h2,.prospere-audience h2,.prospere-about h2,.prospere-objective h2,.prospere-application h2,.prospere-journey h2,.prospere-prosperity>h2,.prospere-final h2{line-height:1.04}
+  .prospere-photo-stack{height:auto;display:grid;gap:16px}
+  .prospere-photo-stack img{position:static;width:100%;height:auto;max-height:none;aspect-ratio:auto;object-fit:contain;box-shadow:0 14px 32px rgba(44,23,31,.14)}
+  .prospere-stamp{position:static;width:106px;height:106px;margin:4px auto 0;outline-width:5px}
+  .prospere-about-collage{height:auto;display:grid;gap:16px}
+  .prospere-about-collage img{position:static;width:100%;height:auto;border:0;object-fit:contain;box-shadow:0 14px 32px rgba(45,24,32,.14)}
+  .prospere-pillar-list h3{line-height:1.18}
+  .prospere-receive-grid h3{line-height:1.2}
+  .prospere-final{padding-left:28px;padding-right:28px}
+  .prospere-final h2{width:100%;max-width:100%;padding:0 4px;font-size:clamp(2.45rem,11vw,3.15rem);line-height:1.12;letter-spacing:-.025em;overflow-wrap:break-word}
+  .prospere-final h2 em{display:inline;padding:0 .04em}
+}
 .prospere-prosperity{text-align:center;background:var(--paper)}
 .prospere-prosperity>.prospere-kicker{justify-content:center}
 .prospere-prosperity>h2{max-width:950px;margin:24px auto 58px;font-size:clamp(3rem,5vw,5.2rem);line-height:.98}
@@ -38,3 +53,5 @@
 .prospere-application>div>p{line-height:1.75;color:#685660;margin-top:10px}
 .prospere-application>div>h3{margin:25px 0 10px;font:600 20px/1.2 "Outfit",sans-serif;letter-spacing:.08em;color:#9f754d}
 .prospere-final>p:not(.prospere-kicker)+p:not(.prospere-kicker){margin-top:14px}
+.prospere-proof span:before{content:"";display:inline-block;width:5px;height:5px;margin:0 9px 2px 0;border-radius:50%;background:var(--gold)}
+.prospere-audience li>span{width:7px;height:7px;flex:0 0 7px;margin-top:8px;border-radius:50%;background:#a7794f}

@@ -185,7 +185,7 @@ export default function ProsperePage() {
         <div className="prospere-centered-cta"><CTA>Quero tentar minha vaga</CTA></div>
         <p className="prospere-community-note">Você continua conectado mesmo depois do encerramento da mentoria. Porque, “JUNTOS PROSPERAMOS MAIS”!</p>
         <div className="prospere-receive-grid prospere-bonus-grid">
-          <article className="prospere-bonus"><span>+</span><small>🎁 Bônus</small><h3>Investidor de Propósito + Investir é Simples</h3><p>R$ 1.997,00 de Presente pra vida toda na sua jornada de crescimento como Investidor. Dois dos meus cursos online completos. Acesso pelo Hotmart.</p></article>
+          <article className="prospere-bonus"><span>+</span><small>Bônus</small><h3>Investidor de Propósito + Investir é Simples</h3><p>R$ 1.997,00 de Presente pra vida toda na sua jornada de crescimento como Investidor. Dois dos meus cursos online completos. Acesso pelo Hotmart.</p></article>
         </div>
       </section>
 
@@ -197,7 +197,7 @@ export default function ProsperePage() {
           <CTA>Quero minha liberdade</CTA>
         </div>
         <ul>
-          {audience.map((item) => <li key={item}><span>✓</span>{item}</li>)}
+          {audience.map((item) => <li key={item}><span aria-hidden="true" />{item}</li>)}
         </ul>
         <p className="prospere-audience-note">Se você se reconhece em alguns desses itens, o que falta é alguém que consiga enxergar aqueles “Pontos Cegos”, que sozinho é quase possível de você enxergar. Eu mesma investi centenas de milhares de reais em grandes Mestres mundo afora! Você Precisa de alguém que vai caminhar com você até que aquilo se torne prática. E principalmente, alguém que sabe o caminho, porque o trilhou, e já vive essa realidade.</p>
       </section>
