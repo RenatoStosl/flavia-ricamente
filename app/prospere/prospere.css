@@ -55,3 +55,23 @@
 .prospere-final>p:not(.prospere-kicker)+p:not(.prospere-kicker){margin-top:14px}
 .prospere-proof span:before{content:"";display:inline-block;width:5px;height:5px;margin:0 9px 2px 0;border-radius:50%;background:var(--gold)}
 .prospere-audience li>span{width:7px;height:7px;flex:0 0 7px;margin-top:8px;border-radius:50%;background:#a7794f}
+.prospere-page mark{display:inline;padding:.04em .16em;background:linear-gradient(transparent 56%,rgba(216,175,122,.42) 56%);color:inherit;font-weight:700}
+.prospere-page strong{font-weight:700;color:inherit}
+.prospere-cta{min-width:340px;min-height:68px;padding-left:30px;font-size:13px;letter-spacing:.12em}
+.prospere-cta .prospere-arrow{width:52px;height:52px;flex-basis:52px}
+.prospere-cta .prospere-arrow svg{width:20px;height:20px}
+.prospere-tension-grid strong{color:#3b222e}
+.prospere-prosperity mark{background:linear-gradient(transparent 54%,rgba(216,175,122,.6) 54%)}
+.prospere-community-note{color:#4d3540;font-size:29px}
+.prospere-bonus-price{display:block;margin:6px 0 12px;font:600 clamp(2.6rem,5vw,4.6rem)/1 "Cormorant Garamond",serif;color:#e4be82}
+.prospere-audience .prospere-kicker,.prospere-about .prospere-kicker{font:600 clamp(1rem,1.6vw,1.35rem)/1.3 "Outfit",sans-serif;letter-spacing:.2em;color:#8d603b}
+.prospere-audience li strong{color:#351827;font-weight:700}
+.prospere-audience-note{font-size:clamp(1.2rem,1.8vw,1.55rem)}
+.prospere-about-copy>p strong{color:#8f5e38}
+.prospere-objective>p strong{color:#f4ede3}
+.prospere-application .prospere-kicker{font-size:clamp(1.25rem,2vw,1.75rem);letter-spacing:.18em;color:#8e5d38}
+.prospere-application>div>h2{font-size:clamp(3.5rem,5.8vw,6rem)}
+.prospere-readiness{margin-top:28px!important;font-size:clamp(1.2rem,1.8vw,1.55rem);color:#351827!important}
+.prospere-readiness mark{display:inline-block;margin-top:6px}
+.prospere-final>p strong{color:#f4ede3}
+@media(max-width:560px){.prospere-cta{min-width:0;min-height:62px;padding-left:22px;font-size:11px}.prospere-cta .prospere-arrow{width:48px;height:48px;flex-basis:48px}.prospere-community-note{font-size:24px}.prospere-bonus-price{font-size:3rem}.prospere-application>div>h2{font-size:clamp(2.8rem,13vw,4rem)}}

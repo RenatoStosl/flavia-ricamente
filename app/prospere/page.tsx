@@ -27,6 +27,13 @@ function CTA({ children = "Quero me candidatar" }: { children?: React.ReactNode 
   );
 }
 
+const audienceHighlights = /(dinheiro|medo|escassez|sustentar|apego|investir|gasto|investimento|tempo|pressão|mente acelerada|negativos|corpo|organizar sua vida financeira|potencial)/gi;
+const audienceHighlightTest = /^(dinheiro|medo|escassez|sustentar|apego|investir|gasto|investimento|tempo|pressão|mente acelerada|negativos|corpo|organizar sua vida financeira|potencial)$/i;
+
+function HighlightAudience({ children }: { children: string }) {
+  return <>{children.split(audienceHighlights).map((part, index) => audienceHighlightTest.test(part) ? <strong key={`${part}-${index}`}>{part}</strong> : part)}</>;
+}
+
 const receiveItems = [
   ["01", "3 semanas de mentoria guiada", "Uma imersão prática nos três pilares do Prospere C.i.M."],
   ["02", "Encontros e acompanhamento ao vivo durante a semana", "Para você não ficar sozinho entre uma aula e outra."],
@@ -74,7 +81,7 @@ export default function ProsperePage() {
             <span>Corpo. Investimentos. Mentalidade.</span>
           </p>
           <h1>Você,<br /><em>prosperando</em><br />por inteiro.</h1>
-          <p className="prospere-lead">Você sabe que pode viver uma vida diferente.</p>
+          <p className="prospere-lead"><strong>Você sabe que pode viver uma vida diferente.</strong></p>
           <CTA>Quero ter liberdade</CTA>
           <div className="prospere-proof">
             <span>Mentoria ao vivo</span><span>Aplicação prática</span><span>Comunidade vitalícia</span>
@@ -91,17 +98,17 @@ export default function ProsperePage() {
         <h2>Então, por que continua voltando para o <em>mesmo lugar?</em></h2>
         <div className="prospere-tension-grid">
           <p>Você começa. Se anima. Decide mudar. Cuida do corpo, organiza a vida financeira, tenta pensar positivo, ter uma rotina melhor. priorizar. Até que ritmo aperta e você se vê repetindo os mesmos padrões.</p>
-          <p>A ansiedade volta. O medo do amanhã aparece, aquela angústia de sempre. O dinheiro vira preocupação novamente. A mente vira barulho e agitação.</p>
-          <p>Talvez você já saiba muita coisa. Você não precisa de mais uma informação, mais um curso frio e raso, mais uma ferramenta ou mais alguém dizendo o que deveria fazer. O que falta é transformar conhecimento em prática, e prática em uma nova forma de viver.</p>
+          <p><strong>A ansiedade volta. O medo do amanhã aparece, aquela angústia de sempre.<br /><br />O dinheiro vira preocupação novamente. A mente vira barulho e agitação.</strong></p>
+          <p>Talvez você já saiba muita coisa. Você não precisa de mais uma informação, mais um curso frio e raso, mais uma ferramenta ou mais alguém dizendo o que deveria fazer. <strong>O que falta é transformar conhecimento em prática, e prática em uma nova forma de viver.</strong></p>
         </div>
-        <blockquote>Você merece viver com mais <em>liberdade.</em></blockquote>
+        <blockquote><strong>Você merece viver com mais <em>liberdade.</em></strong></blockquote>
       </section>
 
       <section className="prospere-method-intro">
         <div className="prospere-method-copy">
           <p className="prospere-kicker">O método é o autogoverno</p>
           <h2>Prospere com autonomia, constância, direção e resultados sustentáveis em todas as áreas.</h2>
-          <p>O “Prospere C.i.M.” é uma Mentoria para quem quer prosperar com AUTONOMIA, constância, direção e resultados sustentáveis em todas as áreas. No meu Método, Você se torna o Método! Porque? Porque EU SOU o meu Método. E consigo hoje ter “Governança Pessoal e Prosperar em todas as áreas da Vida”, e posso te guiar pelo mesmo caminho.</p>
+          <p><strong>O “Prospere C.i.M.”</strong> é uma Mentoria para quem quer prosperar com AUTONOMIA, constância, direção e resultados sustentáveis em todas as áreas. No meu Método, <mark>Você se torna o Método!</mark> Porque? <strong>Porque EU SOU o meu Método. E consigo hoje ter “Governança Pessoal e Prosperar em todas as áreas da Vida”, e posso te guiar pelo mesmo caminho.</strong></p>
           <p>Três semanas. Um método, para acessar os resultados que você tanto sonha, no CORPO, Bem estar, DINHEIRO E MENTALIDADE.</p>
           <p>O método é o autogoverno: a capacidade de governar, de dentro para fora, aquilo que antes governava você: seus pensamentos, suas crenças, seus hábitos, sua relação com o dinheiro, o consumismo, a procrastinação com suas finanças, seu corpo, e toda a forma como você responde à vida.</p>
           <p>Para romper ciclos que se repetem, sustentar novas escolhas e acessar a sua Frequência da Prosperidade.</p>
@@ -120,8 +127,8 @@ export default function ProsperePage() {
           <p className="prospere-kicker">De onde nasceu o método</p>
           <h2>Prosperidade não é apenas ter mais dinheiro.</h2>
           <p>Eu percebi na prática atendendo pessoas e clientes há mais de 25 anos, que elas precisam um sistema que faça tudo isso funcionar junto.</p>
-          <p>Deixa eu te contar: Eu sempre lidei com 2 públicos: 1 – Pessoas com muito dinheiro, meus clientes grandes Investidores, mas uma vida em caos, stress, ansiedade, hábitos ruins, conflitos internos e externos.</p>
-          <p>2 – Pessoas com uma relação ruim com dinheiro, que decidiram aprender a Investir porque se viam sempre preocupados demais, trabalhando duro, gerando renda, mas aprisionados na escassez.</p>
+          <p>Deixa eu te contar: <strong>Eu sempre lidei com 2 públicos:</strong> <strong>1 – Pessoas com muito dinheiro</strong>, meus clientes grandes Investidores, mas uma vida em caos, stress, ansiedade, hábitos ruins, conflitos internos e externos.</p>
+          <p><strong>2 – Pessoas com uma relação ruim com dinheiro</strong>, que decidiram aprender a Investir porque se viam sempre preocupados demais, trabalhando duro, gerando renda, mas aprisionados na escassez.</p>
           <p>Prosperidade não é apenas ter mais dinheiro. Ele é muito bem vindo, e é por isso eu quero te ajudar a conquistar a vida que você tanto visualiza!</p>
           <p>Mas prosperar, tem a ver com utilizar esse dinheiro que entra de forma Inteligente, a serviço do seu bem estar, de uma vida CHEIA DE PAZ, LEVEZA, CONFIANÇA, SAÚDE E QUE FAÇA SENTIDO PARA QUEM VOCÊ É.</p>
           <CTA>Quero me candidatar</CTA>
@@ -133,8 +140,8 @@ export default function ProsperePage() {
         <h2>Quem é Próspero, tem hábitos prósperos. A pessoa Vive a PROSPERIDADE.</h2>
         <div className="prospere-tension-grid">
           <p>Já viu aquela pessoa que sempre tem energia alta, disposição? Tem postura, uma imagem Magnética que atrai, vive uma vida interessante, conquista as pessoas, clientes, e passa segurança? Essa pessoa acessou a “Frequência da Prosperidade”.</p>
-          <p>Essa nova versão sua vai viver uma relação madura com o dinheiro, e não ficar pensando, preocupando o tempo todo. Dinheiro é algo natural, que simplesmente flui para você. A pessoa próspera também investe com inteligência. Essa pessoa que também pode ser VOCÊ sabe identificar padrões MENTAIS que te mantêm na ESCASSEZ.</p>
-          <p>Se você está aqui você já entendeu que: “quando você muda apenas as circunstâncias externas, precisa passar a vida tentando controlar as circunstâncias.” Isso é pesado demais, e impossível! O que te ensino é retirar o que está impedindo você de viver aquilo que já existe como possibilidade dentro de você. Não é motivacional! É ATIVACIONAL!</p>
+          <p>Essa nova versão sua vai viver uma relação madura com o dinheiro, e não ficar pensando, preocupando o tempo todo. Dinheiro é algo natural, que simplesmente flui para você. A pessoa próspera também investe com inteligência. Essa pessoa que também pode ser VOCÊ sabe identificar padrões MENTAIS que te mantêm na <strong>ESCASSEZ.</strong></p>
+          <p>Se você está aqui você já entendeu que: “quando você muda apenas as circunstâncias externas, precisa passar a vida tentando controlar as circunstâncias.” Isso é pesado demais, e impossível! O que te ensino é retirar o que está impedindo você de viver aquilo que já existe como possibilidade dentro de você. <strong>Não é motivacional! É <mark>ATIVACIONAL!</mark></strong></p>
         </div>
         <blockquote>É aí que começa a verdadeira prosperidade.</blockquote>
         <CTA>Quero aplicar</CTA>
@@ -163,7 +170,7 @@ export default function ProsperePage() {
           <p>Durante três semanas, eu vou transferir para você tudo aquilo que eu mesma pratico.</p>
           <p>Meu método, ferramentas, práticas, rotina, minha forma de pensar. Minha forma de me relacionar com o dinheiro, com o corpo e com a vida.</p>
           <p>Você não vai receber apenas conteúdo. Eu vou pegar na sua mão e te guiar na aplicação.</p>
-          <p>Eu vi de perto que essa é a maior dificuldade das pessoas. Porque saber é uma coisa. Fazer é outra.</p>
+          <p><strong>Eu vi de perto que essa é a maior dificuldade das pessoas. Porque saber é uma coisa. Fazer é outra.</strong></p>
           <CTA>Quero tentar minha vaga</CTA>
           <p>Os encontros são online e ao vivo! Você faz do conforto de sua casa, e cada sessão é transformadora, justamente por essa sinergia do ao vivo comigo e da comunidade que se forma.</p>
           <p><strong>E A SUA JORNADA PRÓSPERA NASCE, MAS NÃO TERMINA NAS TRÊS SEMANAS.</strong></p>
@@ -183,9 +190,9 @@ export default function ProsperePage() {
           ))}
         </div>
         <div className="prospere-centered-cta"><CTA>Quero tentar minha vaga</CTA></div>
-        <p className="prospere-community-note">Você continua conectado mesmo depois do encerramento da mentoria. Porque, “JUNTOS PROSPERAMOS MAIS”!</p>
+        <p className="prospere-community-note">Você continua conectado mesmo depois do encerramento da mentoria. Porque, <strong>“JUNTOS PROSPERAMOS MAIS”!</strong></p>
         <div className="prospere-receive-grid prospere-bonus-grid">
-          <article className="prospere-bonus"><span>+</span><small>Bônus</small><h3>Investidor de Propósito + Investir é Simples</h3><p>R$ 1.997,00 de Presente pra vida toda na sua jornada de crescimento como Investidor. Dois dos meus cursos online completos. Acesso pelo Hotmart.</p></article>
+          <article className="prospere-bonus"><span>+</span><small>Bônus</small><h3>Investidor de Propósito + Investir é Simples</h3><p><strong><span className="prospere-bonus-price">R$ 1.997,00</span> de Presente pra vida toda na sua jornada de crescimento como Investidor.</strong> Dois dos meus cursos online completos. Acesso pelo Hotmart.</p></article>
         </div>
       </section>
 
@@ -197,9 +204,9 @@ export default function ProsperePage() {
           <CTA>Quero minha liberdade</CTA>
         </div>
         <ul>
-          {audience.map((item) => <li key={item}><span aria-hidden="true" />{item}</li>)}
+          {audience.map((item) => <li key={item}><span aria-hidden="true" /><HighlightAudience>{item}</HighlightAudience></li>)}
         </ul>
-        <p className="prospere-audience-note">Se você se reconhece em alguns desses itens, o que falta é alguém que consiga enxergar aqueles “Pontos Cegos”, que sozinho é quase possível de você enxergar. Eu mesma investi centenas de milhares de reais em grandes Mestres mundo afora! Você Precisa de alguém que vai caminhar com você até que aquilo se torne prática. E principalmente, alguém que sabe o caminho, porque o trilhou, e já vive essa realidade.</p>
+        <p className="prospere-audience-note"><strong>Se você se reconhece em alguns desses itens</strong>, o que falta é alguém que consiga enxergar aqueles <strong>“Pontos Cegos”</strong>, que sozinho é quase possível de você enxergar. Eu mesma investi centenas de milhares de reais em grandes Mestres mundo afora! Você Precisa de alguém que <strong>vai caminhar com você até que aquilo se torne prática. E principalmente, alguém que sabe o caminho, porque o trilhou, e já vive essa realidade.</strong></p>
       </section>
 
       <section className="prospere-about">
@@ -212,12 +219,12 @@ export default function ProsperePage() {
           <h2>Porque eu não ensino uma vida que eu não vivo.</h2>
           <p>O Prospere C.i.M. nasceu da minha própria trajetória.</p>
           <p>Eu fui integrando, ao longo da minha vida, conhecimentos e práticas de diferentes áreas: Mercado Financeiro e Investimentos, comportamento, neurociência, metacognição, PNL, meditação, yoga, metafísica e desenvolvimento humano, Experiência no mercado Financeiro, centenas Países e Mentores Internacionais, Milhares de Livros, imersões e Mentorias, etc.</p>
-          <p>É essa experiência que eu transfiro para você.</p>
+          <p><strong>É essa experiência que eu transfiro para você.</strong></p>
           <h3>MAIS DE 25 ANOS ENTRE DINHEIRO, COMPORTAMENTO E TRANSFORMAÇÃO</h3>
           <p>Sou Assessora de Investimentos CERTIFICADA pela CVM, mentora, treinadora e palestrante, com mais de 25 anos de experiência no mercado financeiro e passagem por grandes instituições nacionais e internacionais.</p>
           <p>Conquistei minha independência financeira aos 33 anos.</p>
-          <p>Mas, ao longo da minha própria jornada, entendi uma coisa ainda mais importante: ter dinheiro não significa necessariamente prosperar.</p>
-          <p>Prosperidade é conseguir viver bem aquilo que você construiu. É ter dinheiro sem ser governado pelo dinheiro. É cuidar do corpo sem abandonar a vida. É construir patrimônio sem perder a paz. Sentir que pode crescer, sem precisar viver em estado permanente de alerta. E aprender a governar a si mesmo.</p>
+          <p>Mas, ao longo da minha própria jornada, entendi uma coisa ainda mais importante: ter dinheiro não significa necessariamente <strong>prosperar.</strong></p>
+          <p><strong>Prosperidade</strong> é conseguir viver bem aquilo que você construiu. É ter dinheiro sem ser governado pelo dinheiro. É cuidar do corpo sem abandonar a vida. É construir patrimônio sem perder a paz. Sentir que pode crescer, sem precisar viver em estado permanente de alerta. E aprender a governar a si mesmo.</p>
           <CTA>Quero viver essa prosperidade</CTA>
           <div className="prospere-signature">Flávia RicaMente</div>
         </div>
@@ -228,9 +235,9 @@ export default function ProsperePage() {
         <h2>Elevar a sua frequência no nível da <em>prosperidade sustentável.</em></h2>
         <p>Ao descobrir que você tem ferramentas para acessar a PROSPERIDADE, você não sai mais dela. Ninguém te tira isso, não importa as condições externas, entende?</p>
         <p>Não precisa controlar tudo para se sentir seguro.</p>
-        <p>Não precisa esperar o próximo salário, o próximo investimento, a loteria, a herança, a promoção no trabalho, o próxima meta, para finalmente sentir que está tudo bem, e que a vida é abundante. Você se torna isso, e ao emitir esse sinal, tudo isso se alinha até você!</p>
+        <p>Não precisa esperar o próximo salário, o próximo investimento, a loteria, a herança, a promoção no trabalho, o próxima meta, para finalmente sentir que está tudo bem, e que a vida é abundante. <strong>Você se torna isso, e ao emitir esse sinal, tudo isso se alinha até você!</strong></p>
         <p>Você começa a construir dentro de si a capacidade de sustentar aquilo que deseja viver.</p>
-        <p className="prospere-script">É isso que eu chamo de Frequência da Prosperidade.</p>
+        <p className="prospere-script"><strong>É isso que eu chamo de Frequência da Prosperidade.</strong></p>
         <CTA>Quero me candidatar</CTA>
       </section>
 
@@ -244,8 +251,7 @@ export default function ProsperePage() {
           <h3>É SE CANDIDATAR!</h3>
           <p>Você responde ao formulário de aplicação e eu vou conhecer o seu momento, seus desafios e seus objetivos.</p>
           <p>Se houver alinhamento com a proposta da Mentoria, você recebe as orientações para entrar na próxima turma.</p>
-          <p>Você não precisa estar pronto.</p>
-          <p>Mas precisa estar disposto a fazer diferente.</p>
+          <p className="prospere-readiness"><strong>Você não precisa estar pronto.</strong><br /><mark>Mas precisa estar disposto a fazer diferente.</mark></p>
           <CTA>Quero me candidatar à mentoria</CTA>
         </div>
         <ol>
@@ -258,9 +264,9 @@ export default function ProsperePage() {
       <section className="prospere-final">
         <p className="prospere-kicker">A pergunta agora é</p>
         <h2>“Quanto tempo mais você vai passar procurando fora aquilo que precisa começar a transformar <em>dentro?</em>”</h2>
-        <p>O Prospere C.i.M. é o meu convite para você parar de apenas desejar uma vida diferente — e começar a governá-la e VIVER essa PROSPERIDADE.</p>
-        <p>Vamos juntos ATIVAR sua Nova IDENTIDADE QUE PROSPERA POR INTEIRO!</p>
-        <p>Eleve sua Frequência da Prosperidade. Toda a abundância da vida espera por você acessá-la!</p>
+        <p>O <strong>Prospere C.i.M.</strong> é o meu convite para você parar de apenas desejar uma vida diferente — e começar a governá-la e VIVER essa PROSPERIDADE.</p>
+        <p><strong>Vamos juntos ATIVAR sua Nova IDENTIDADE QUE PROSPERA POR INTEIRO!</strong></p>
+        <p><strong>Eleve sua Frequência da Prosperidade. Toda a abundância da vida espera por você acessá-la!</strong></p>
         <CTA>Essa vaga é minha</CTA>
       </section>
 
