@@ -116,12 +116,12 @@ export const applicationFormQuestions = [
   },
   {
     id: "investment-readiness",
-    title: "O investimento para participar da mentoria é de 12x de R$ 129,99 ou à vista, com desconto, por R$ 1.333,00. Você está disposta(o) a investir em você neste momento?",
+    title: "O investimento para participar da mentoria é de 12x de R$ 137,00 ou à vista, com desconto, por R$ 1.333,00. Você está disposta(o) a investir em você neste momento?",
     type: "single",
     options: [
-      "Sim, posso fazer o investimento parcelado.",
-      "Sim, posso fazer o investimento à vista.",
-      "Gostaria muito, porém mais uma vez eu não vou me priorizar.",
+      "Sim, escolho INVESTIR em MIM. E essa parcela cabe no meu planejamento.",
+      "Sim, eu ESCOLHO me priorizar e APROVEITO o desconto à vista.",
+      "Gostaria muito, porém, neste momento, escolho não me priorizar.",
     ],
   },
 ] as const satisfies readonly ApplicationFormQuestion[];
