@@ -90,7 +90,7 @@ export const texts = {
       scarcity: "a sensação de escassez",
     },
     ctaLabel: "QUERO MEU PROXIMO PASSO",
-    ctaUrl: "#",
+    ctaUrl: "/prospere",
     unavailableLabel: "Link de acesso em breve",
   },
   errors: {

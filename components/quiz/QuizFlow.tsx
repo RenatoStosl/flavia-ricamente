@@ -340,13 +340,13 @@ export function QuizFlow() {
                       {section.bullets && <ul className="mt-5 space-y-3 text-[#f8eee5]/90">{section.bullets.map((bullet) => <li key={bullet} className="flex gap-3 leading-6"><span className="text-[#d8af7a]">✦</span><span>{bullet}</span></li>)}</ul>}
                     </section>
                     {index === Math.ceil(result.sections.length / 2) - 1 && (
-                      <a href="#prospere-cim" className="quiz-gold-button mx-auto my-7 flex w-fit rounded-full px-7 py-4 text-center text-sm font-medium uppercase tracking-[0.1em] text-[#28101d] transition focus:outline-none focus:ring-2 focus:ring-[#e6c18a] focus:ring-offset-2 focus:ring-offset-[#452338]">{result.ctaLabel}</a>
+                      <a href="/prospere" className="quiz-gold-button mx-auto my-7 flex w-fit rounded-full px-7 py-4 text-center text-sm font-medium uppercase tracking-[0.1em] text-[#28101d] transition focus:outline-none focus:ring-2 focus:ring-[#e6c18a] focus:ring-offset-2 focus:ring-offset-[#452338]">{result.ctaLabel}</a>
                     )}
                   </div>
                 ))}
               </div>
               <p className="mt-8 rounded-[16px] border border-[#d8af7a]/45 bg-[#2b1020]/50 p-6 text-left text-base leading-7 text-[#f8eee5]">{texts.result.finalMessage}</p>
-              <a href="#prospere-cim" className="quiz-gold-button mt-9 inline-flex rounded-full px-7 py-4 text-sm font-medium uppercase tracking-[0.1em] text-[#28101d] transition focus:outline-none focus:ring-2 focus:ring-[#e6c18a] focus:ring-offset-2 focus:ring-offset-[#452338]">{result.ctaLabel}</a>
+              <a href="/prospere" className="quiz-gold-button mt-9 inline-flex rounded-full px-7 py-4 text-sm font-medium uppercase tracking-[0.1em] text-[#28101d] transition focus:outline-none focus:ring-2 focus:ring-[#e6c18a] focus:ring-offset-2 focus:ring-offset-[#452338]">{result.ctaLabel}</a>
               <div id="prospere-cim" className="scroll-mt-6 pt-12">
                 <div className="mx-auto flex max-w-40 items-center gap-4 text-[#d8af7a]" aria-hidden="true"><span className="h-px flex-1 bg-current/70" /><span>✦</span><span className="h-px flex-1 bg-current/70" /></div>
                 <img
@@ -358,7 +358,7 @@ export function QuizFlow() {
                 <p className="mx-auto mt-6 max-w-2xl text-sm leading-6 text-[#f8eee5]/90 sm:text-base sm:leading-7">{texts.manualOffer.descriptionPrefix}<em>{texts.manualOffer.descriptionMethod}</em>{texts.manualOffer.descriptionSuffix}</p>
                 <p className="mt-9 rounded-[18px] border border-[#d8af7a]/45 bg-black/10 p-6 text-left text-base leading-7 text-[#f8eee5]">{texts.manualOffer.highlight}</p>
                 <p className="mt-6 text-base italic leading-7 text-[#d8af7a]">{manualPersonalization}</p>
-                {texts.manualOffer.ctaUrl ? <a href={texts.manualOffer.ctaUrl} target="_blank" rel="noreferrer" className="quiz-gold-button mt-9 inline-flex rounded-full px-8 py-4 text-sm font-medium uppercase tracking-[0.12em] text-[#28101d]">{texts.manualOffer.ctaLabel}</a> : <button type="button" disabled className="quiz-gold-button mt-9 inline-flex cursor-not-allowed rounded-full px-8 py-4 text-sm font-medium uppercase tracking-[0.12em] text-[#28101d] opacity-60">{texts.manualOffer.unavailableLabel}</button>}
+                {texts.manualOffer.ctaUrl ? <a href={texts.manualOffer.ctaUrl} className="quiz-gold-button mt-9 inline-flex rounded-full px-8 py-4 text-sm font-medium uppercase tracking-[0.12em] text-[#28101d]">{texts.manualOffer.ctaLabel}</a> : <button type="button" disabled className="quiz-gold-button mt-9 inline-flex cursor-not-allowed rounded-full px-8 py-4 text-sm font-medium uppercase tracking-[0.12em] text-[#28101d] opacity-60">{texts.manualOffer.unavailableLabel}</button>}
               </div>
               <button type="button" onClick={restartQuiz} className="mt-8 block w-full text-sm text-[#f8eee5]/55 underline-offset-4 transition hover:text-[#e6c18a] hover:underline focus:outline-none focus:underline">{texts.result.restartLabel}</button>
             </div>
