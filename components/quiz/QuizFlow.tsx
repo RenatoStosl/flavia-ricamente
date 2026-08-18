@@ -81,6 +81,16 @@ export function QuizFlow() {
     return () => window.clearTimeout(timeout);
   }, [step]);
 
+  useEffect(() => {
+    if (step !== "result") return;
+
+    const fbq = (window as typeof window & {
+      fbq?: (action: "track", eventName: string) => void;
+    }).fbq;
+
+    fbq?.("track", "Quiz");
+  }, [step]);
+
   function advanceQuestion() {
     const isLastQuestion = questionIndex === questions.length - 1;
 
